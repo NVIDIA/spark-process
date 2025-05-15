@@ -1,0 +1,47 @@
+"-gnatwA
+-gnatw.A
+-gnatw_A
+-gnatwB
+-gnatw.B
+-gnatwC
+-gnatw.C
+-gnatw_C
+-gnatwF
+-gnatwG
+-gnatwI
+-gnatw.I
+-gnatwJ
+-gnatwK
+-gnatwM
+-gnatw.M
+-gnatwP
+-gnatw.P
+-gnatw_P
+-gnatwQ
+-gnatwR
+-gnatw.R
+-gnatw.T
+-gnatwU
+-gnatwV
+-gnatw.V
+-gnatwW
+-gnatwX
+-gnatwY
+-gnatwZ
+-gnatw.Z",Would suppress warnings enabled by -gnatwa
+-gnatw.D,Would suppress effects of -gnatw.d
+-gnatwH,Would suppress effects of -gnatwh
+-gnatw.H,Would suppress effects of -gnatw.h
+-gnatw.J,Would suppress effects of -gnatw.j
+-gnatw.K,Would suppress effects of -gnatw.k
+-gnatwL,Would suppress effects of -gnatwl
+-gnatwn,Would suppress effects of -gnatwe
+-gnatwO,Would disable some warnings that are enabled by default
+-gnatw.O,Would suppress effects of -gnatw.o
+-gnatw_R,Would suppress effects of -gnatw_r
+-gnatws,Would disable all warnings
+-gnatw.S,Would suppress effects of -gnatw.s
+-gnatwT,Would suppress effects of -gnatwt
+-gnatw.W,Would suppress effects of -gnatw.w
+-gnatw.x,Would undo effects of -gnatw.X
+-w,Would undo effects of -Wall

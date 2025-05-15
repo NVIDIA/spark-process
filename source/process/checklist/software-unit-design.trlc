@@ -1,0 +1,575 @@
+/*
+ * Copyright (C) 2024 - 2025 NVIDIA CORPORATION & AFFILIATES
+ * Copyright (C) 2021 - 2024 AdaCore
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3 or
+ * any later version published by the Free Software Foundation; with the
+ * Invariant Sections being "Attribution", with no Front-Cover
+ * Texts, and no Back-Cover Texts.  A copy of the license is included in
+ * the section entitled "GNU Free Documentation License".
+ */
+
+package Checklist
+import Steps
+
+Item item_2_1_1 {
+  automatable = true
+  step        = Steps.ID.Identify_Activity_Scope
+  scope       = Scope.All
+
+  text = '''
+    Does the software unit have a corresponding Software Unit
+    Verification Plan work product that states that the
+    software unit is verified according to this process and
+    that the verification plan for the software unit
+    includes everything stated in this process concerning
+    verification planning?
+  '''
+}
+
+Item item_2_1_2 {
+  automatable = true
+  step        = Steps.ID.Identify_Activity_Scope
+  scope       = Scope.All
+
+  text = """
+    Consult the software architectural design's list of software
+    interfaces to be provided/used by the software unit, and consult
+    the corresponding software interface specifications. Does the
+    Software Unit Verification Plan correctly identify the set of
+    external non-nested packages that the software unit must implement,
+    and the corresponding ADS file name for each such package per the
+    GNAT default file naming scheme?
+  """
+}
+
+Item item_2_1_3 {
+  automatable = true
+  step        = Steps.ID.Identify_Activity_Scope
+  scope       = Scope.All
+
+  text = """
+    If the software unit has a corresponding Software Unit
+    Verification Specification work product, does that Software
+    Unit Verification Specification include the software unit
+    within its scope, reference the software unit's Software Unit
+    Verification Plan, and state that the verification specification
+    for the software unit includes everything stated in this process
+    concerning verification specification?
+  """
+}
+
+Item item_2_1_4 {
+  manual      = true
+  step        = Steps.ID.Identify_Activity_Scope
+  scope       = Scope.All
+
+  text = '''
+    If the software unit interacts with third-party safety-related
+    software components, are all applicable constraints from
+    third-party-supplied safety manuals captured as unit requirements?
+  '''
+}
+
+Item item_2_1_5 {
+  manual      = true
+  step        = Steps.ID.Identify_Activity_Scope
+  scope       = Scope.All
+
+  text = '''
+    If the software unit interacts with hardware, are all
+    applicable constraints from hardware/software interface
+    specifications captured as unit requirements?
+  '''
+}
+
+Item item_2_1_6 {
+  manual      = true
+  step        = Steps.ID.Identify_Activity_Scope
+  scope       = Scope.All
+
+  text = '''
+    If the software unit is safety-related, are the safety
+    measures resulting from safety-oriented analyses captured
+    as unit requirements?
+  '''
+}
+
+Item item_2_2_1 {
+  automatable = true
+  step        = Steps.ID.Create_Project_File
+  scope       = Scope.All
+
+  text = '''
+    Is the set of unit GPR files, and the GPR files they directly
+    or indirectly depend on via project with keywords, clearly
+    identifiable for the software unit?
+  '''
+}
+
+Item item_2_2_2 {
+  automatable = true
+  step        = Steps.ID.Create_Project_File
+  scope       = Scope.All
+
+  text = """
+    Does each unit GPR file (combined with any other GPR files
+    recursively included via with keywords) do all the following?
+
+    * Set attributes ``Runtime ("Ada")``, Target, and
+      ``Builder'Global_Configuration_Pragmas``, with values that
+      satisfy the restrictions specified by the :ref:`step-create-project-file`
+      step
+    * Refrain from including a ``Naming`` package
+  """
+}
+
+Item item_2_2_3 {
+  automatable = true
+  step        = Steps.ID.Create_Project_File
+  scope       = Scope.All
+
+  text = '''
+    Does each unit GPR file (combined with any other GPR
+    files recursively included via with keywords) include a
+    Compiler package that specifies switches that comply
+    with all the following?
+
+    * The Requirements Concerning Compiler Warning Switches section
+    * The Requirements Concerning Non-Warning-Related Compiler
+      Switches section
+    * Any restrictions in the Ada/SPARK Guidelines concerning style
+      checking switches
+  '''
+}
+
+Item item_2_2_4 {
+  automatable = true
+  step        = Steps.ID.Create_Project_File
+  scope       = Scope.All
+
+  text = '''
+    Does each unit GPR file (combined with any other GPR files
+    recursively included via with keywords) with a Prove package
+    refrain from specifying any GNATprove switches prohibited by
+    the Requirements Concerning GNATprove Switches section?
+  '''
+}
+
+Item item_2_2_5 {
+  automatable = true
+  step        = Steps.ID.Create_Project_File
+  scope       = Scope.All
+
+  text = '''
+    Does each unit GPR file (combined with any other GPR files
+    recursively included via with keywords) with a Check package
+    refrain from specifying any GNATcheck switches prohibited by
+    the Requirements Concerning GNATcheck Switches and Rules section?
+  '''
+}
+
+Item item_2_2_6 {
+  automatable = true
+  step        = Steps.ID.Create_Project_File
+  scope       = Scope.All
+
+  text = '''
+    Does each unit GPR file (combined with any other GPR files
+    recursively included via with keywords) avoid all
+    non-safety-qualified tool switches in the Compiler, Prove,
+    and Check packages?
+  '''
+}
+
+Item item_2_3_1 {
+  automatable = true
+  step        = Steps.ID.Create_Configuration_Pragmas
+  scope       = Scope.All
+
+  text = """
+    For each unit GPR file (combined with any other GPR files
+    recursively included via with keywords), does the ADC file
+    specified by the Builder'Global_Configuration_Pragmas
+    attribute contain the exact definition of the Forward_Progress
+    user aspect specified in the :ref:`step-create-configuration-pragmas` step?
+
+    (Note: There is a bug relating to this in the 24.1 tools that
+    is fixed in the 24.2 tools; this rule does not apply in this case.)
+  """
+}
+
+Item item_2_4_1 {
+  automatable = true
+  step        = Steps.ID.Identify_Internal_Packages
+  scope       = Scope.All
+
+  text = '''
+    Does the Software Unit Verification Plan clearly identify
+    what internal non-nested packages are part of the software
+    unit, and the corresponding ADS file name for each such
+    package per the GNAT default file naming scheme?
+  '''
+}
+
+Item item_2_4_2 {
+  automatable = true
+  step        = Steps.ID.Identify_Internal_Packages
+  scope       = Scope.All
+
+  text = '''
+    For each external interface package that is an ancestor of any
+    internal package identified as part of the software unit, if
+    the external interface package is not implemented by the
+    software unit, is it part of a software interface specification
+    that forbids the external interface package from having a
+    private part?
+  '''
+}
+
+Item item_2_5_1 {
+  automatable = true
+  step        = Steps.ID.Create_Internal_ADS
+  scope       = Scope.All
+
+  text = '''
+    For each internal package identified in the Software
+    Unit Verification Plan, is the corresponding internal
+    ADS file included in at least one of the unit GPR files
+    (whether it is included directly or via the containing
+    directory)?
+  '''
+}
+
+Item item_2_6_1 {
+  automatable = true
+  manual      = true
+  step        = Steps.ID.Declare_Internal_Types_States_And_Subprograms
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    For each software interface the software unit provides or
+    uses, for each code fragment of the software interface
+    specification that is not part of an ADS file but expresses
+    a responsibility of the software unit, does the software unit
+    design include one or more equivalent Ada declarations?
+
+    Note: For software units that do not provide any non-ADS
+    software interfaces, this checklist item can be satisfied
+    with automation. For other software units, manual
+    verification is required.
+  '''
+}
+
+Item item_2_6_2 {
+  step        = Steps.ID.Declare_Internal_Types_States_And_Subprograms
+  scope       = Scope.Automated
+
+  text = '''
+    During the :ref:`step-write-tests` step, the sufficiency of the unit
+    design to justify all the unit test cases is verified.
+  '''
+}
+
+Item item_2_7_1 {
+  step        = Steps.ID.Capture_Unit_Design_Constraints
+  scope       = Scope.Automated
+
+  text = '''
+    During the :ref:`step-inspect-unit-design` step, the sufficiency of
+    the unit design constraints and documentation fragments
+    to satisfy all non-formally-verified unit specification
+    fragments is verified.
+  '''
+}
+
+Item item_2_7_2 {
+  manual      = true
+  step        = Steps.ID.Capture_Unit_Design_Constraints
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Does each non-formally-verified unit design constraint
+    have its own unique ID as described in the Traceability
+    Model section?
+
+    Note: It is also acceptable to assign unique IDs to all
+    unit design constraints, whether formally-verified or not.
+  '''
+}
+
+Item item_2_7_3 {
+  manual      = true
+  step        = Steps.ID.Capture_Unit_Design_Constraints
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    For each formally-verified unit design constraint that
+    supports one or more non-formally-verified unit specification
+    fragments, does the formally-verified unit design constraint
+    have its own unique ID as described in the Traceability Model
+    section?
+
+    Note: It is also acceptable to assign unique IDs to all unit
+    design constraints, whether formally-verified or not.
+  '''
+}
+
+Item item_2_8_1 {
+  manual      = true
+  step        = Steps.ID.Document_Design_Solutions
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Does each design documentation fragment in an ADS or ADB
+    file have its own unique ID as described in the
+    Traceability Model section?
+  '''
+}
+
+Item item_2_8_2 {
+  manual      = true
+  step        = Steps.ID.Document_Design_Solutions
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Is each design documentation fragment not in an ADS or
+    ADB file documented in accordance with the Ada/SPARK
+    Process Binding?
+  '''
+}
+
+Item item_2_8_3 {
+  manual      = true
+  step        = Steps.ID.Document_Design_Solutions
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    If the cleanliness-adjusted ASIL of the software unit
+    is ASIL C or ASIL D, for each design documentation fragment
+    that describes control flow or data flow between more than
+    three entities, is the control flow or data flow specified
+    using semi-formal or formal notation with the methods and
+    syntax required by the Ada/SPARK Process Binding?
+  '''
+}
+
+Item item_2_8_4 {
+  manual      = true
+  step        = Steps.ID.Capture_Unit_Design_Constraints
+  step_also   = Steps.ID.Document_Design_Solutions
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Does each software unit design fragment trace to each
+    non-formally-verified software unit specification fragment
+    it directly supports?
+  '''
+}
+
+Item item_2_8_5 {
+  manual      = true
+  step        = Steps.ID.Document_Design_Solutions
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Does each software unit design documentation fragment
+    trace (e.g., by name) to each subprogram it directly
+    depends on?
+  '''
+}
+
+Item item_2_8_6 {
+  step        = Steps.ID.Document_Design_Solutions
+  scope       = Scope.Automated
+
+  text = '''
+    During the :ref:`step-inspect-unit-design` step, the sufficiency of
+    the unit design constraints and documentation fragments
+    to satisfy all non-formally-verified unit specification
+    fragments is verified.
+  '''
+}
+
+Item item_2_9_1 {
+  manual      = true
+  step        = Steps.ID.Inspect_Unit_Design
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Is the unit design (including internal types, states,
+    and subprograms, unit design constraints, and design
+    documentation fragments) free of contradictions with
+    all the non-formally-verified unit requirements?
+
+    Note: This verifies that the unit design is correct with
+    respect to the non-formally-verified unit requirements.
+    No analogous inspection is required for formally-verified
+    unit requirements, because in the :ref:`step-verify-project` step,
+    GNATprove will be used to verify the unit design is
+    correct with respect to the formally-verified unit requirements.
+  '''
+}
+
+Item item_2_9_2 {
+  manual      = true
+  step        = Steps.ID.Inspect_Unit_Design
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    For each non-formally-verified unit specification fragment, is the
+    set of supporting unit design fragments and/or unit requirements
+    (as determined via trace links) sufficiently comprehensive that a
+    test developer can determine the PASS/FAIL criteria for each test
+    case without consulting the implementation, considering the
+    structural coverage obligations associated with the
+    cleanliness-adjusted ASIL of the unit?
+
+    Note: This verifies that the unit design is complete with respect
+    to the non-formally-verified requirements. No analogous inspection
+    is required for formally-verified unit requirements, because in
+    the :ref:`step-verify-project` step, GNATprove will be used to verify the unit
+    design is complete with respect to the formally-verified unit
+    requirements.
+  '''
+}
+
+Item item_2_9_3 {
+  manual      = true
+  step        = Steps.ID.Inspect_Unit_Design
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Is each non-formally-verified unit design constraint and
+    documentation fragment consistent with the rest of the unit
+    design?
+
+    Note: No analogous inspection of internal consistency is required
+    between two formally-verified unit design constraints, because in
+    the :ref:`step-verify-project` step, GNATprove will be used to verify that all
+    the formally-verified unit design constraints are consistent with
+    one another.
+  '''
+}
+
+Item item_2_9_4 {
+  manual      = true
+  step        = Steps.ID.Inspect_Unit_Design
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Is each unit design constraint and each unit design documentation
+    fragment necessary to support the unit requirements or the rest of
+    the unit design?
+  '''
+}
+
+Item item_2_9_5 {
+  manual      = true
+  step        = Steps.ID.Inspect_Unit_Design
+  scope       = Scope.All
+
+  text = '''
+    Does the entirety of the unit design fully observe the fragments
+    of the Ada/SPARK Guidelines identified therein as manually
+    enforced?
+  '''
+}
+
+Item item_2_9_6 {
+  manual      = true
+  step        = Steps.ID.Inspect_Unit_Design
+  scope       = Scope.All
+
+  text = '''
+    Is the unit design in-context-comprehensible (see the Terminology
+    section)?
+  '''
+}
+
+Item item_2_9_7 {
+  manual      = true
+  step        = Steps.ID.Inspect_Unit_Design
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    If the cleanliness-adjusted ASIL of the unit is ASIL C or ASIL D,
+    for each design documentation fragment that describes control flow
+    or data flow between more than three entities, was control flow
+    and data flow analysis performed in accordance with the Ada/SPARK
+    Process Binding and did the analysis yield a passing result?
+  '''
+}
+
+Item item_2_9_8 {
+  manual      = true
+  step        = Steps.ID.Inspect_Unit_Design
+  scope       = Scope.All
+
+  text = """
+    For each with clause in the unit's internal ADS files, is the
+    referenced package either an internal package of the unit or an
+    external package of a software interface that per the software
+    architectural design is provided/used by the software unit?
+  """
+}
+
+Item item_2_9_9 {
+  manual      = true
+  step        = Steps.ID.Inspect_Unit_Design
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    If the unit supports different states, do the unit requirements,
+    unit design constraints, and unit design documentation fragments
+    collectively specify those states and the state transitions?
+  '''
+}
+
+Item item_2_9_10 {
+  manual      = true
+  step        = Steps.ID.Inspect_Unit_Design
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Do the unit requirements, unit design constraints, and unit design
+    documentation fragments collectively specify the error handling
+    responsibilities of the unit?
+  '''
+}
+
+Item item_2_9_11 {
+  manual      = true
+  step        = Steps.ID.Inspect_Unit_Design
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Do the unit requirements, unit design constraints, and unit design
+    documentation fragments collectively specify the timing and
+    concurrency-related responsibilities of the unit?
+  '''
+}
+
+Item item_2_10_1 {
+  step        = Steps.ID.Verify_Unit_Design
+  scope       = Scope.Automated
+
+  text = '''
+    During the :ref:`step-verify-project` step, GNATprove will be re-executed, but
+    with more strict criteria for passing verification than what is
+    required by the :ref:`step-verify-unit-design` step.
+  '''
+}
+
+Item item_2_11_1 {
+  manual      = true
+  step        = Steps.ID.ALL
+  scope       = Scope.All
+
+  text = '''
+    What is the PASS/FAIL outcome of unit design verification?
+
+    Note: Only enter PASS if the answers to all earlier questions is "Yes".
+  '''
+}

@@ -1,0 +1,48 @@
+"-gnatw.a
+-gnatw_a
+-gnatwb
+-gnatw.b
+-gnatwc
+-gnatw.c
+-gnatw_c
+-gnatwf
+-gnatwg
+-gnatwi
+-gnatw.i
+-gnatwj
+-gnatwk
+-gnatwm
+-gnatw.m
+-gnatwp
+-gnatw.p
+-gnatw_p
+-gnatwq
+-gnatwr
+-gnatw.r
+-gnatw.t
+-gnatwu
+-gnatwv
+-gnatw.v
+-gnatww
+-gnatwx
+-gnatwy
+-gnatwz
+-gnatw.z",Would have no effect (already enabled by required switch -gnatwa)
+"-gnatwd
+-gnatwD",Enabling the warnings would disallow a common idiom in Ada that is prevalent even among Ada examples
+-gnatwE,All warnings enabled by this switch are already enabled by -gnatwe
+-gnatw.e,"AdaCore documentation warns that this switch is ""almost certain"" to cause ""large numbers of useless warnings"""
+-gnatw.g,"Entirely redundant with other warning options, and AdaCore warns that its effect may change in the future without advanced notice"
+"-gnatw.l
+-gnatw.L","This switch merely causes the compiler to emit a list of aspects that are inherited, which is purely informational, rather than a list of things that are wrong."
+"-gnatw.n
+-gnatw.N","Enabling the warning would interfere with the use of Atomic variables, which some lower-level software needs to use"
+-gnatwo,Warnings enabled by this switch are enabled by default
+"-gnatw.q
+-gnatw.Q",Warnings enabled by this switch concern performance and space efficiency but not code correctness.
+"-gnatw.u
+-gnatw.U",Using comparisons of enumerated values is a common idiom for determining whether a given enumerated value is within a certain range of enumerated values. It should not be required that this be explicitly allowed in the definition of the enumerated type.
+"-gnatw.y
+-gnatw.Y",This switch controls verbose informational messages that typically do not indicate errors
+"-Wunused
+-Wuninitialized","Entities that are declared but not referenced, or uninitialized, from a back end perspective but not from a front end perspective are more likely to be indicative of the effects of optimizations than real errors"

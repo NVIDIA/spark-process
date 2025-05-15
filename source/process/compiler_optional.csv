@@ -1,0 +1,16 @@
+"-gnato
+-gnaton
+-gnatomn","The -gnato family of switches is permitted but not recommended.
+
+The -gnato0 switch suppresses overflow checks (except where explicitly unsuppressed in the code, such as for all non-SPARK code). Overflow checks are just one of the kinds of checks suppressed by the -gnatp switch. The -gnato0 switch is permitted for the same reasons that the -gnatp switch is permitted. However, for performance reasons, it is preferable to use the -gnatp switch instead, as it suppresses more unnecessary checks.
+
+The -gnato, -gnato1, and -gnato11 switches all have the effect of enabling overflow checking (even in SPARK code), without changing the overflow mode from the default (STRICT both inside and outside of contracts). This can undo the beneficial performance effects of -gnatp.
+
+The -gnato2, -gnato3, -gnato12, -gnato13, -gnato21, -gnato22, -gnato23, and -gnato33 switches unnecessarily widen intermediate subexpressions in SPARK code (where GNATprove already formally verifies the absence of overflow even without the widening), potentially hurting performance of SPARK code. These switches can also make it more difficult to determine whether a non-SPARK Ada code computation will complete successfully or trigger a language-defined check, reducing the clarity of non-SPARK Ada code.
+
+Note: The Verify_Dynamic_Assumptions and Run_Integration_Tests steps require rebuilding tests without the -gnato0 switch."
+-gnatp (except for non-production builds),"The -gnatp switch disables unnecessary language-defined checks in SPARK code and may thereby improve the performance of SPARK code. The checks are unnecessary because GNATprove formally verifies that SPARK code never violates any of the properties checked by the language-defined checks. This switch is not required, but it is recommended by this process for performance reasons.
+
+Note: This process requires all non-SPARK code to be contained within pragma Unsuppress(All_Checks) regions. Therefore, in software units that comply with this process, non-SPARK code is not affected by the presence or absence of the -gnatp switch.
+
+Note: The Verify_Dynamic_Assumptions and Run_Integration_Tests steps require rebuilding tests without the -gnatp switch."

@@ -1,0 +1,6 @@
+--checks-as-errors=on,"In this process, GNATprove check messages are reviewed via diagnostic justifications, not via gnatprove output. This switch ensures that any check message will result in gnatprove not exiting without an error code."
+--warnings=error,"Some GNATprove warnings are used to identify potential violations of GNATprove assumptions, each of which requires manual review to ensure the violations will not lead to GNATprove false negatives. This switch ensures that any such potential violation will result in gnatprove not exiting without an error code."
+-P <project-file.gpr>,The use of -P is part of every documented method for specifying which compilation units to analyze.
+-U,"Without -U, GNATprove will not necessarily analyze all the units that are part of the project. GNATprove specifically behaves as follows when invoked without -U:
+If specific source files are identified on the command line, then GNATprove will only analyze the units containing those source files, even if source files from other units are included in the project file. (GNATprove will additionally analyze their dependencies if also invoked with -u, but this still leaves open the possibility that some of the units will be missed).
+If specific source files are not identified on the command line, then GNATprove will only analyze main units and the units they depend on."

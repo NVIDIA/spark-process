@@ -1,0 +1,16 @@
+--counterexamples,"Though this switch is not safety-qualified with the on setting, its use is nevertheless permitted because this switch cannot lead to false negatives in verification results. In a worst-case scenario, verification does not complete successfully and a faulty counterexample is provided that does not explain the verification failure. This scenario still does not have a safety impact."
+--info,This switch can provide additional information but its presence or absence cannot lead to false negatives in verification results.
+-j,"This switch affects proof performance, but its presence or absence cannot lead to false negatives in verification results."
+--level,"This switch can control when GNATprove determines that it is unable to complete verification, but cannot lead to false negatives in verification results.
+
+This switch can control which provers are used, but cannot be used to select a non-safety-qualified prover.
+
+This switch can control whether counterexamples are produced, but see above for why that is not of concern."
+--quiet,This switch hides some output but will not mask a verification failure.
+"--memlimit
+--steps
+--timeout","These switches can control when GNATprove determines that it is unable to complete verification, but these switches cannot lead to false negatives in verification results."
+--mode=all,"This switch requests the default behavior of GNATprove, which is to do full checking for compliance with SPARK restrictions, full flow analysis, and full proof."
+--output,This switch affects the format of the output but will not mask a verification failure.
+"--prover=altergo,cvc5,z3 (or any subset of these)","GNATprove's use of the Alt-Ergo, CVC5, and Z3 provers is safety-qualified, and GNATprove does not use any other provers unless specifically directed to do so with the --prover=... switch."
+--verbose,This switch reports some additional output but will not mask a verification failure.

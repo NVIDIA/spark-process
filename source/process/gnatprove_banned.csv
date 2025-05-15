@@ -1,0 +1,43 @@
+--assumptions,This switch is not safety-qualified.
+--clean,"This switch directs GNATprove not to attempt to prove anything.
+NOTE: This switch is required, not prohibited, during the cleaning part of the Verify_Project step."
+--cwe,This switch is not safety-qualified.
+"--help
+-h",This switch is not safety-qualified.
+--list-categories,This switch prevents GNATprove from fulfilling its intended function. This switch is also not safety-qualified.
+"--mode=bronze
+--mode=check
+--mode=check_all
+--mode=flow
+--mode=prove
+--mode=stone","--mode=check would partially disable checks that SPARK_Mode => On packages and subprograms are within the SPARK subset of Ada.
+
+--mode=check, --mode=check_all, --mode=prove, and --mode=stone would partially or fully disable flow analysis, which is needed to verify initialization of variables before use and compliance with some contracts.
+
+--mode=flow and --mode=bronze would disable verification of functional contracts and of the absence of run-time errors.
+
+These switches are also not safety-qualified."
+"--mode=gold
+--mode=silver","Though these switches are equivalent to --mode=all, they are not safety-qualified (where --mode=all is safety-qualified)."
+"--limit-line=...
+--limit-region=...
+--limit-subp=...
+--no-subprojects","With any of these options, GNATprove will not necessarily analyze all of the code within each analyzed unit. These switches are also not safety-qualified."
+--output-msg-only,This switch is not safety-qualified.
+--proof,This switch is not safety-qualified.
+--prover=colibri (or any superset of this),GNATprove's use of the Colibri prover is not safety-qualified.
+--replay,This switch is not safety-qualified.
+--RTS=<dir>,"Per the Create_Project_File step, a safety-qualified runtime is already specified in the project file using the Runtime(""Ada"") attribute. This ensures the various tools use a consistent runtime."
+--subdirs=...,This switch is not safety-qualified.
+--version,This switch prevents GNATprove from fulfilling its intended function. This switch is also not safety-qualified.
+"--warnings=off
+--warnings=continue",This switch would interfere with the effect of -warnings=error. These switches are also not safety-qualified.
+-aP=...,This switch is not safety-qualified.
+-f,This switch is not safety-qualified. Note that this switch is not needed to ensure correct results.
+-gnateT=<target.atp>,This switch could result in an inconsistency between the target configuration used by the compiler and the target configuration used by GNATprove.
+-k,This switch is not safety-qualified.
+-m,This switch is not safety-qualified.
+-q,"This switch is not safety-qualified. (Note however that a synonym, --quiet, is safety-qualified.)"
+-u,Would conflict with -U. This switch is also not safety-qualified.
+-v,"This switch is not safety-qualified. (Note however that a synonym, --verbose, is safety-qualified.)"
+All switches not covered in this section,These switches are not safety-qualified.

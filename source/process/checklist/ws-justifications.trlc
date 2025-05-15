@@ -1,0 +1,377 @@
+/*
+ * Copyright (C) 2024 - 2025 NVIDIA CORPORATION & AFFILIATES
+ * Copyright (C) 2021 - 2024 AdaCore
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3 or
+ * any later version published by the Free Software Foundation; with the
+ * Invariant Sections being "Attribution", with no Front-Cover
+ * Texts, and no Back-Cover Texts.  A copy of the license is included in
+ * the section entitled "GNU Free Documentation License".
+ */
+
+package Worksheet
+import Checklist
+
+section "Non-formally-verified assumptions" {
+
+  Item assume_minimal {
+    scope = Checklist.Scope.Not_Platinum
+    text = """
+      Is each pragma Assume's condition parameter a minimal
+      Boolean expression (does it refrain from expressing
+      properties that have already been proven or which are
+      not needed for any proof)?
+    """
+  }
+
+  Item assume_justified {
+    scope = Checklist.Scope.Not_Platinum
+    text = """
+      Does each pragma Assume include a justification parameter whose
+      value is a string that provides a justification for why the
+      assumption is valid (why the condition will always be true)?
+
+      Note: The justification may also be used to explain challenges
+      that may have led to GNATprove being unable to prove the
+      condition, but this is not required.
+    """
+  }
+
+  Item assume_tracing {
+    scope = Checklist.Scope.Not_Platinum
+    text = """
+      Does each pragma Assume have its own unique ID as described in
+      the Traceability Model section?
+    """
+  }
+
+}
+
+section "GNATprove warning suppressions" {
+
+  Item terminated_warnings_suppression {
+    scope = Checklist.Scope.Not_Platinum
+    text = """
+      Is each GNATprove warning suppression expressed with two pragma
+      Warnings lines with identical warning values, the first with Off
+      and the second with On, that bracket the region of code for
+      which the warning is to be suppressed?
+    """
+  }
+
+  Item minimal_warnings_suppression {
+    scope = Checklist.Scope.Not_Platinum
+    text = """
+      Is each bracketed region of code minimal (is the first pragma
+      Warnings line immediately before the code that causes the
+      warning, and is the second pragma Warnings line immediately
+      after the code that causes the warning)?
+    """
+  }
+
+  Item precise_warnings_suppression {
+    scope = Checklist.Scope.Not_Platinum
+    text = """
+      Does each pragma Warnings include a warning value long enough to
+      avoid inadvertently suppressing other warnings?
+    """
+  }
+
+  Item justified_warnings_suppression {
+    scope = Checklist.Scope.Not_Platinum
+    text = """
+      Does the first pragma Warnings line of each pair include a
+      Reason => justification parameter where the justification is a
+      string that provides a justification for why the warning does
+      not mask a bug?
+
+      Note: The justification may also be used to explain why the
+      warning occurs, but this is not required.
+    """
+  }
+
+  Item traced_warnings_suppression {
+    scope = Checklist.Scope.Not_Platinum
+    text = """
+      Does the first pragma Warnings line of each pair have its own
+      unique ID as described in the Traceability Model section?
+    """
+  }
+
+  Item justified_partial_termination {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATprove warning suppression that suppresses "assumed
+      Always_Terminates" warnings, does the supplied justification
+      explain why the code does not violate GNATprove assumption
+      [PARTIAL_TERMINATION]?
+    '''
+  }
+
+  Item justified_partial_global {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATprove warning suppression that suppresses "assumed
+      Global null" warnings, does the supplied justification explain
+      why the code does not violate GNATprove assumption
+      [PARTIAL_GLOBAL]?
+    '''
+  }
+
+  Item justified_address_clause {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATprove warning suppression that suppresses
+      "imprecisely supported address specification" warnings, does the
+      supplied justification explain why the code does not violate
+      GNATprove assumptions [SPARK_EXTERNAL],
+      [SPARK_ALIASING_ADDRESS], and [SPARK_EXTERNAL_VALID]?
+    '''
+  }
+
+}
+
+section "GNATprove direct justifications" {
+
+  Item precise_gnatprove_pattern {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      Does each GNATprove direct justification include a check_message
+      value long enough to avoid inadvertently suppressing other check
+      messages?
+    '''
+  }
+
+  Item justified_gnatprove_false_alarm {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      Does each False_Positive GNATprove direct justification include
+      a justification parameter that is a string that provides a
+      justification for why the error condition identified by the
+      check message will never actually occur?
+
+      Note: The justification may also be used to explain why the
+      check message occurs, but this is not required.
+    '''
+  }
+
+  Item justified_gnatprove_intentional {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      Does each Intentional GNATprove direct justification include a
+      justification parameter that is a string that provides a
+      justification for why the check message does not mask a bug?
+
+      Note: The justification may also be used to explain why the
+      check message occurs, but this is not required.
+    '''
+  }
+
+  Item justified_gnatprove_tracing {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      Does each GNATprove direct justification have its own unique ID
+      as described in the Traceability Model section?
+    '''
+  }
+
+}
+
+section "GNATcheck rule exemptions" {
+
+  Item terminated_gnatcheck_exemption {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      Is each GNATcheck rule exemption expressed with two pragma
+      Annotate lines with identical rule_name values, the first with
+      Exempt_On and the second with Exempt_Off, that bracket the
+      region of code for which the rule is to be suppressed?
+    '''
+  }
+
+  Item minimal_gnatcheck_exemptions {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      Is each bracketed region of code minimal (is the first pragma
+      Annotate line immediately before the code that violates the
+      rule, and is the second pragma Annotate line immediately after
+      the code that violates the rule)?
+    '''
+  }
+
+  Item justified_gnatcheck_exemptions {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      Does the first pragma Annotate line of each pair include a
+      justification parameter where the justification is a string that
+      provides a justification for why the rule violation does not
+      mask a bug and why the code needs to violate the rule?
+    '''
+  }
+
+  Item traced_gnatcheck_exemptions {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      Does the first pragma Annotate line of each pair have its own
+      unique ID as described in the Traceability Model section?
+    '''
+  }
+
+  Item justified_gnatcheck_initialized_spark {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Forbidden_Attributes:Initialized rule in SPARK code, does the
+      supplied justification explain why the code does not violate
+      GNATprove assumption [SPARK_INITIALIZED_ATTRIBUTE]?
+    '''
+  }
+
+  Item justified_gnatcheck_protected_entries {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Restrictions:Max_Protected_Entries=>0 rule in SPARK code, does
+      the protected entry have an informal precondition that prohibits
+      the protected entry from being called (directly or indirectly)
+      from a dispatching call?
+
+      Rationale: This facilitates compliance with GNATprove assumption
+      [SPARK_OVERRIDING_AND_TASKING].
+    '''
+  }
+
+  Item justified_gnatcheck_float {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Restrictions:No_Floating_Point rule in SPARK code, does the
+      supplied justification explain why the code does not violate
+      GNATprove assumption [SPARK_FLOATING_POINT]?
+    '''
+  }
+
+  Item justified_gnatcheck_protected_types {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Restrictions:No_Protected_Types rule in SPARK code, does the
+      supplied justification explain why the code does not violate
+      GNATprove assumption [SPARK_OVERRIDING_AND_TASKING]?
+    '''
+  }
+
+  Item justified_gnatcheck_iterable {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Restrictions:No_Specification_Of_Aspect=>Iterable rule in SPARK
+      code, does the supplied justification explain why the code does
+      not violate GNATprove assumptions [SPARK_ITERABLE] and
+      [SPARK_ITERABLE_FOR_PROOF]?
+    '''
+  }
+
+  Item justified_gnatcheck_current_task {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Restrictions:No_Use_Of_Entity=>Ada.Task_Identification.Current_Task
+      rule in SPARK code, does the supplied justification explain why
+      the code does not violate GNATprove assumption
+      [SPARK_OVERRIDING_AND_TASKING]?
+    '''
+  }
+
+  Item justified_gnatcheck_initialized_tasking {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Forbidden_Attributes:Initialized rule in SPARK code, does the
+      supplied justification explain why the code does not violate
+      GNATprove assumption [SPARK_OVERRIDING_AND_TASKING]?
+    '''
+  }
+
+  Item justified_gnatcheck_ada2022 {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Ada_2022_Outside_Of_Contracts rule, does the supplied
+      justification explain why the violation will not result in
+      unsafe compiler behavior?
+
+      Rationale: Ada 2022 compiler features are not qualified for safety.
+    '''
+  }
+
+  Item justified_gnatcheck_validity_checks {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Forbidden_Pragmas:Validity_Checks rule, does the supplied
+      justification explain why the violation will not result in
+      unsafe compiler behavior?
+
+      Rationale: pragma Validity_Checks is not qualified for safety.
+    '''
+  }
+
+  Item justified_gnatcheck_assertion_policy {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Forbidden_Pragmas:Assertion_Policy rule, does the supplied
+      justification explain why the violation will not result in
+      unsafe compiler behavior?
+
+      Rationale: This pragma could be used to enable assertions in
+      production code, assertions can use Ada 2022 features, and Ada
+      2022 compiler features are not qualified for safety.
+    '''
+  }
+
+  Item justified_gnatcheck_ignore_pragma {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Forbidden_Pragmas:Ignore_Pragma rule, does the supplied
+      justification explain why the violation will not result in
+      import pragmas (e.g., SPARK_Mode) being ignored?
+    '''
+  }
+
+  Item justified_gnatcheck_complexity {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Metrics_Cyclomatic_Complexity:10 rule in non-proven code, does
+      the supplied justification explain why the increased complexity
+      does not mask a bug, and is the non-proven code
+      in-context-comprehensible to the reviewer in spite of the
+      elevated complexity?
+    '''
+  }
+
+  Item justified_gnatcheck_no_globals {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      Procedures_Without_Globals rule in SPARK code, does the supplied
+      justification explain why the absence of Global contracts does
+      not mask unintended behavior?
+    '''
+  }
+
+  Item justified_gnatcheck_goto {
+    scope = Checklist.Scope.Not_Platinum
+    text = '''
+      For each GNATcheck rule exemption that disables the
+      ``Goto_Statements:Only_Unconditional`` rule, does the supplied
+      justification explain why the conditional goto does not mask a
+      bug?
+    '''
+  }
+
+}

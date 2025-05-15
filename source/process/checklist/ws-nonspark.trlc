@@ -1,0 +1,205 @@
+/*
+ * Copyright (C) 2024 - 2025 NVIDIA CORPORATION & AFFILIATES
+ * Copyright (C) 2021 - 2024 AdaCore
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3 or
+ * any later version published by the Free Software Foundation; with the
+ * Invariant Sections being "Attribution", with no Front-Cover
+ * Texts, and no Back-Cover Texts.  A copy of the license is included in
+ * the section entitled "GNU Free Documentation License".
+ */
+
+package Worksheet
+import Checklist
+
+section "Justification and Scope" {
+
+  Item compilation_unit_spark_off_justification {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each compilation unit that has neither a ``SPARK_Mode``
+      aspect with default value nor a ``SPARK_Mode => On`` aspect, is
+      there a comment justifying the decision to disable SPARK for the
+      entire compilation unit?
+    '''
+  }
+
+  Item scoped_spark_off_justification {
+    scope = Checklist.Scope.Ada
+    text = '''
+      Is each aspect or pragma that disables ``SPARK_Mode`` and each
+      ``Annotate => (GNATprove, Skip_Proof)`` or ``Annotate =>
+      (GNATprove, Skip_Flow_And_Proof)`` annotation preceded with a
+      comment justifying the decision to disable SPARK, reduce the
+      SPARK level to Bronze, or reduce the SPARK level to Stone,
+      respectively?
+    '''
+  }
+
+  Item spark_off_minimal_scope {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each justification for disabling SPARK, proof, or flow and
+      proof, is the scope of the disabling minimized? (Is all code
+      that should have SPARK, proof, or flow and proof enabled,
+      respectively, outside the range of code for which it is
+      disabled?)
+    '''
+  }
+
+}
+
+section "Packages" {
+
+  Item assumption_ada_elaboration {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each package specification and each package body that is at
+      least partly non-proven, does the package must comply with all
+      parts of GNATprove assumption [ADA_ELABORATION]?
+    '''
+  }
+
+  Item assumption_state {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each private part of a package specification and each
+      package body that is at least partly non-proven, does the
+      private part of package body comply with all parts of GNATprove
+      assumptions [ADA_EXTERNAL_ABSTRACT_STATE] and
+      [ADA_STATE_ABSTRACTION]?
+    '''
+  }
+
+}
+
+section "Data and Types" {
+
+  Item global_justification {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each global variable accessed by non-proven code, is there a
+      comment justifying the usage of a global variable? (ISO
+      26262-6:2018, Table 6, row 1e)
+    '''
+  }
+
+  Item assumption_externals {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each object shared between non-proven code and proven SPARK
+      code, does the non-proven code comply with GNATprove assumptions
+      [ADA_EXTERNAL] and [ADA_EXTERNAL_NAME]?
+    '''
+  }
+
+  Item assumption_private_parts {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each type completion in non-proven code for a type that was
+      declared in proven SPARK code, does the completion comply with
+      all parts of GNATprove assumption [ADA_PRIVATE_TYPES]?
+    '''
+  }
+
+  Item assumption_tagged_types {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each type defined by non-proven code as an extension of a
+      type declared in proven SPARK code, does the type definition
+      comply with GNATprove assumption [ADA_TAGGED_TYPES]?
+    '''
+  }
+
+  Item assumption_recursive_types {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each value assigned by non-proven code to an object of
+      recursive type, does the value comply with GNATprove assumption
+      [ADA_RECURSIVE_TYPES]?
+    '''
+  }
+
+}
+
+section "Subprograms" {
+
+  Item assumptions_on_nonspark_calls {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each non-proven subprogram called from proven SPARK code,
+      does the subprogram comply with all parts of GNATprove
+      assumption [ADA_SUBPROGRAMS], [ADA_OBJECT_ADDRESSES],
+      [ADA_LOGICAL_EQUAL], and [ADA_INLINE_FOR_PROOF]?
+   '''
+  }
+
+  Item assumption_on_spark_calls {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each call from non-proven code to a subprogram with a proven
+      body, does the call comply with all parts of GNATprove
+      assumption [ADA_CALLS]?
+    '''
+  }
+
+  Item assumption_allocations {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each non-proven subprogram whose declaration is annotated
+      with the ``No_Heap_Allocations`` or ``No_Secondary_Stack`` local
+      restriction (whether directly, or indirectly via a
+      ``Forward_Progress`` user aspect), does the subprogram and all
+      subprograms called from it (whether directly or indirectly)
+      refrain from heap allocations or secondary stack allocations,
+      respectively?
+    '''
+  }
+
+  Item use_returned_values {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each call from non-proven code, does the caller either
+      consume all the outputs and return values or explicitly discard
+      them, and are all documented error cases handled by the caller?
+      (ISO 26262-6:2018 8.4.5f)
+    '''
+  }
+
+}
+
+section "Pragmas" {
+
+  Item enabled_runtime_checks {
+    scope = Checklist.Scope.Ada
+    text = '''
+      Is all non-proven code contained within ``pragma
+      Unsuppress (All_Checks)`` regions?
+    '''
+  }
+
+  Item defensive_code_instead_of_rtc {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each check suppression (i.e., ``pragma Suppress``, ``pragma
+      Suppress_All``, or ``pragma Assertion_Policy`` with the
+      ``Ignore`` parameter) in ASIL C or ASIL D non-proven code, does
+      the non-proven code include comparable defensive checks to
+      compensate for the disabled language-defined checks and
+      test-time assertions?
+    '''
+  }
+
+  Item rtc_supression_tracing {
+    scope = Checklist.Scope.Ada
+    text = '''
+      For each check suppression in non-proven code, if the non-proven
+      code does not include comparable defensive checks to compensate
+      for the disabled language-defined checks and test-time
+      assertions, does the check suppression have its own unique ID as
+      described in the Traceability Model section?
+    '''
+  }
+
+}

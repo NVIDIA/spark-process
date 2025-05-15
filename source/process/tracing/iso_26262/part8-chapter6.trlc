@@ -1,0 +1,1127 @@
+/*
+ * Copyright (C) 2024 - 2025 NVIDIA CORPORATION & AFFILIATES
+ * Copyright (C) 2021 - 2024 AdaCore
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3 or
+ * any later version published by the Free Software Foundation; with the
+ * Invariant Sections being "Attribution", with no Front-Cover
+ * Texts, and no Back-Cover Texts.  A copy of the license is included in
+ * the section entitled "GNU Free Documentation License".
+ */
+
+/*
+ * The fields 'text', 'row', and 'applies' are all:
+ *   (C)ISO. This material is reproduced from ISO 26262, with permission of
+ *   the American National Standards Institute (ANSI) on behalf of the
+ *   International Organization for Standardization. All rights reserved.
+ */
+
+package ISO_26262_Tracing
+import Steps
+
+Tracing p8_c6_1_a {
+  ref = 8 @ 6:1
+  subref = "a"
+  text = """
+    The objectives of this clause are:
+
+    a) to ensure the correct specification of safety requirements
+       with respect to their attributes and characteristics; and
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Verify_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Non_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Requirement_Correctness_And_Completeness]
+
+  just = """
+    The process requires to split unit requirements into non-formal
+    and formal ones. These requirements have to be specified in public
+    part of external ADS file at step :ref:`step-capture-requirements`
+
+    Formal requirements consistency is ensured at step
+    :ref:`step-verify-formal-requirement-consistency` (both internal and across
+    all formal requirements). This step is performed automatically.
+
+    Non-formal requirements consistency of individual requirements and
+    across all requirements is ensured at step
+    :ref:`step-verify-non-formal-requirement-consistency`. This is done by manual
+    review with an independent reviewer.
+  """
+}
+
+Tracing p8_c6_1_b {
+  ref = 8 @ 6:1
+  subref = "b"
+  text = """
+    b) to ensure consistent management of safety requirements
+       throughout the entire safety lifecycle.
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Assign_Requirement_Unique_IDs]
+
+  just = """
+    The process requires assignment of unique ids to the requirements
+    and establish traceability.
+  """
+}
+
+Tracing p8_c6_2_p1 {
+  ref = 8 @ 6:2
+  subref = "paragraph 1"
+  text = """
+    Safety requirements are requirements aimed at achieving and ensuring
+    the required level of functional safety.
+  """
+
+  just = """
+    This statement is considered in the below analysis of the rest of
+    ISO 26262-8:2018, Part 6.
+  """
+}
+
+Tracing p8_c6_2_p2 {
+  ref = 8 @ 6:2
+  subref = "paragraph 2"
+  text = """
+    During the safety lifecycle, safety requirements are
+    specified and detailed in a hierarchical structure.
+    The structure and dependencies of safety requirements
+    used in the ISO 26262 series of standards are
+    illustrated in Figure 2. The safety requirements are
+    allocated or distributed among the elements.
+  """
+
+  just = """
+    The process only concerns with development of software safety
+    requirements (6-6). And only those of them which are allocated to
+    software units
+  """
+}
+
+Tracing p8_c6_2_p3 {
+  ref = 8 @ 6:2
+  subref = "paragraph 3"
+  text = """
+    The management of safety requirements includes obtaining
+    agreement on them, obtaining commitments from those
+    implementing the safety requirements, and maintaining
+    traceability.
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Document_Design_Solutions]
+
+  just = """
+    (The only applicable part is "maintaining traceability".)
+
+    The process requires bidirectional trace links between the unit
+    requirements and the corresponding claims in the software
+    architectural design, responsibilities stated by interface
+    specifications, and/or official requirements in software
+    requirement management tools.
+
+    For non-formally-verified requirements, the process requires trace
+    links to the documentation for how the unit design satisfies the
+    requirement.
+  """
+}
+
+Tracing p8_c6_2_p4 {
+  ref = 8 @ 6:2
+  subref = "paragraph 4"
+  text = """
+    In order to support the management of safety requirements,
+    the use of suitable requirements management tools is recommended.
+  """
+
+  alt_steps = '''See section entitled "Assumptions About Change Management"'''
+
+  just = """
+    The process mandates to use configuration management tools to
+    manage requirements status.
+
+    According to step :ref:`step-capture-requirements`, the manner in which
+    traceability information is recorded is outside the scope of this
+    process.
+  """
+}
+
+Tracing p8_c6_2_p5 {
+  ref = 8 @ 6:2
+  subref = "paragraph 5"
+  text = """
+    The specific requirements concerning the content of the
+    safety requirements at different hierarchical levels are
+    listed in ISO 26262-3, ISO 26262-4, ISO 26262-5 and ISO 26262-6.
+  """
+
+  alt_steps = '''
+    See section entitled "ISO 26262-6:2018, Clause 6: Specification
+    of software safety requirements"
+  '''
+
+  just = '''
+    See section entitled "ISO 26262-6:2018, Clause 6: Specification
+    of software safety requirements"
+  '''
+}
+
+Tracing p8_c6_4_1 {
+  ref = 8 @ 6:4:1
+  text = """
+    To achieve the characteristics of safety requirements listed
+    in 6.4.2.4, safety requirements shall be specified by an
+    appropriate combination of:
+
+    a) natural language; and
+    b) methods listed in Table 1.
+
+    An appropriate selection of methods for the specification of
+    safety requirement considers their adequacy to achieve the
+    characteristics of safety requirement according to 6.4.2 for
+    a specific issue to be specified, its complexity or the knowledge
+    of the persons specifying or managing safety requirements.
+    Examples include the use of state graphs or diagrams for
+    specifying the complex behaviour of software or hardware
+    including many states or/and complex transitions.
+  """
+
+  steps = [Steps.ID.Capture_Requirements]
+
+  just = """
+    According to the process, requirements are:
+
+    * Formally-specified in form of SPARK annotations
+    * Non-formal in form SPARK comments in ADS files
+
+    Non-formal requirements with ASIL C or D must be specified in
+    semi-formal notation.
+  """
+}
+
+Tracing p8_c6_4_1_t1_1a {
+  ref = 8 @ 6:4:1
+  subref = "Table 1, 1a"
+  row = """
+    Informal notations for requirements specification
+
+    For higher level safety requirements (e.g. safety goals,
+    functional and technical safety requirements) natural language
+    and other types of informal notations are the most appropriate
+    forms, though some requirements may be better handled
+    with semi-formal notations.
+  """
+  applies = "ABcd"
+
+  steps = [Steps.ID.Capture_Requirements]
+
+  just = """
+    Non-formal requirements can be specified with informal notation if
+    their ASIL is ASIL B, ASIL A or QM.
+  """
+}
+
+Tracing p8_c6_4_1_t1_1b {
+  ref = 8 @ 6:4:1
+  subref = "Table 1, 1b"
+  row = """
+    Semi-formal notations for requirements specification
+
+    For higher level safety requirements (e.g. safety goals,
+    functional and technical safety requirements) natural language
+    and other types of informal notations are the most appropriate
+    forms, though some requirements may be better handled
+    with semi-formal notations.
+
+    Semi-formal notation formulates requirements using natural
+    language that is supplemented by mathematical or graphical
+    elements such as equations, graphs, diagrams, flow charts,
+    timing diagrams, and many other forms of representation
+    (e.g. UML (R) and SysML (TM)). Examples include model-based
+    techniques and applying templates and controlled
+    vocabulary for requirement sentences in natural language.
+
+    For lower-level safety requirements where precise hardware
+    and software behaviours and capabilities may be specified,
+    semi-formal notations are more appropriate due to greater
+    clarity. However, even here it may not be possible or
+    necessary to use semi-formal techniques for every requirement.
+  """
+  applies = "abCD"
+
+  steps = [Steps.ID.Capture_Requirements]
+
+  just = """
+    According to the process, non-formal safety requirements must be
+    specified in semi-formal notation (EARS) if their ASIL is ASIL C
+    or ASIL D.
+
+    It is recommended to use semi-formal notation for all
+    requirements.
+  """
+}
+
+Tracing p8_c6_4_1_t1_1c {
+  ref = 8 @ 6:4:1
+  subref = "Table 1, 1c"
+  row = "Formal notations for requirements specification"
+  applies = "abcd"
+
+  steps = [Steps.ID.Capture_Requirements]
+
+  just = """
+    The process enables use of requirements, expressed in formal
+    notation: SPARK contracts. Step :ref:`step-capture-requirements` asks to
+    transform as many software requirements as possible into
+    appropriate SPARK annotations.
+
+    Formal notation is superior to informal and semi-formal, because
+    it features fully specified syntax and semantics and enables
+    rigorous automatic reasoning about them. So formal notation can be
+    used in lieu of informal and semi-formal notations for any ASIL.
+  """
+}
+
+Tracing p8_c6_4_2_1 {
+  ref = 8 @ 6:4:2:1
+  text = """
+    Safety requirements shall be unambiguously identifiable
+    as safety requirements.
+
+    NOTE: In order to comply with this requirement, safety
+    requirements can be listed in a separate document.
+    If safety requirements and other requirements are
+    administered in the same document, safety requirements can
+    be identified explicitly by using a special attribute as
+    described in 6.4.2.5.
+  """
+
+  steps = [Steps.ID.Declare_Types_States_And_Subprograms,
+	   Steps.ID.Capture_Requirements]
+
+  just = """
+    The process requires each subprogram declared in an ADS file in a
+    software interface specification to be explicitly assigned a
+    specific ASIL or QM. If an ASIL is assigned, this is the ASIL of
+    each requirement related to the subprogram, except for type
+    predicates, type invariants, preconditions, and postconditions
+    that are explicitly assigned lower ASILs.
+
+    This process requires each non-formal requirement to be explicitly
+    assigned a specific ASIL or QM.
+  """
+}
+
+Tracing p8_c6_4_2_2 {
+  ref = 8 @ 6:4:2:2
+  text = """
+    Safety requirements shall inherit the ASIL from the safety
+    requirements from which they are derived, except if ASIL
+    decomposition is applied in accordance with ISO 26262-9.
+
+    NOTE: As safety goals are the top level safety requirements,
+    the inheritance of ASILs starts at the safety goal level.
+  """
+
+  just = """
+    This process explicitly assumes that all requirements related to a
+    software unit (including those specified in interfaces to other
+    software units) have the same ASIL as the software unit
+    itself. This assumption implies all ASILs are being inherited
+    correctly.
+  """
+}
+
+Tracing p8_c6_4_2_3 {
+  ref = 8 @ 6:4:2:3
+  text = """
+    Safety requirements shall be allocated to the item or
+    element which implements them.
+  """
+
+  steps = [Steps.ID.Capture_Requirements]
+
+  just = """
+    According to step :ref:`step-capture-requirements`, software requirements
+    allocated to the unit must include every claim about the unit in
+    the SWAD, every responsibility imposed by interface specifications
+    the unit must comply with, every official requirement allocated to
+    the unit.
+
+    Note: unit requirements are allocated to the unit if they are
+    specified in public part of external ADS file
+    (:ref:`step-capture-requirements`)
+  """
+}
+
+Tracing p8_c6_4_2_4_a {
+  ref = 8 @ 6:4:2:4
+  subref = "a"
+  text = """
+    Safety requirements shall have the following characteristics:
+
+    NOTE 1: The characteristics for safety requirements enable
+    clear communication to the stakeholders. They are the principle
+    means of communicating the safety requirements to those who must
+    implement them. The characteristics cited below are consistent
+    with those referenced by ISO/IEC/IEEE 29148 (see Reference [8]).
+
+    a) unambiguous;
+
+       NOTE 2: A requirement is unambiguous if there is a common
+       understanding of the meaning of the requirement
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Verify_Non_Formal_Requirement_Consistency]
+
+  just = """
+    SPARK contracts are expressed in SPARK language, which has precise
+    syntax and semantics. That means that every unit requirement
+    expressed in SPARK has the only interpretation and thus is
+    unambiguous.
+
+    For non-formal requirements with ASIL C and ASIL D, the process
+    requires semi-formal notation, which facilitates unambiguity of
+    the requirements.
+
+    Unambiguity of the non-formal requirements are verified by the
+    inspection using the verification checklist.
+  """
+}
+
+Tracing p8_c6_4_2_4_b {
+  ref = 8 @ 6:4:2:4
+  subref = "b"
+  text = """
+    b) comprehensible;
+
+    NOTE 3: A requirement is comprehensible if the stakeholders
+    and the consumers of that requirement understand its meaning.
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Verify_Non_Formal_Requirement_Consistency]
+
+  just = """
+    Formal requirements are expressed using formal notation (SPARK
+    annotations). Formal notation improves comprehensibility, because
+    it has fully defined syntax and semantics.
+
+    For non-formal requirements with ASIL C or ASIL D,
+    comprehensibility is facilitated by using semi-formal notation
+
+    Out-of-context-comprehensibility is verified at step
+    :ref:`step-verify-requirement-correctness-and-completeness`
+  """
+}
+
+Tracing p8_c6_4_2_4_c {
+  ref = 8 @ 6:4:2:4
+  subref = "c"
+  text = """
+    c) atomic (singular);
+
+    NOTE 4: Safety requirements at one hierarchical level are atomic
+    when they are formulated in such a way that they cannot be divided
+    into at least two independent safety requirements at the considered
+    level. The achievement of this characteristic could contradict the
+    achievement of the other essential characteristics of safety
+    requirements. In such a case, atomicity can be considered as having
+    less importance.
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Verify_Non_Formal_Requirement_Consistency]
+
+  just = """
+    For formally-verified requirements, atomicity is not strictly
+    necessary, because the risk that a non-atomic requirement is not
+    consistent with other requirements and the unit design is largely
+    mitigated by GNATprove formal proofs.
+
+    For non-formal safety requirements the process requires them to be
+    atomic if it does not contradict other objectives
+    (:ref:`step-capture-requirements`). This is verified by the inspection using
+    the verification checklist (:ref:`step-verify-formal-requirement-consistency`)
+  """
+}
+
+Tracing p8_c6_4_2_4_d {
+  ref = 8 @ 6:4:2:4
+  subref = "d"
+  text = """
+    d) internally consistent;
+
+    NOTE 5: A requirement is internally consistent if it
+    contains no contradictions within itself.
+  """
+
+  steps = [Steps.ID.Verify_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Non_Formal_Requirement_Consistency]
+
+  just = """
+    Formal requirements internal consistency is verified automatically
+    at step :ref:`step-verify-formal-requirement-consistency` by GNATprove.
+
+    Internal consistency of non-formal requirements are verified by
+    manual review with a local peer review at step
+    :ref:`step-verify-non-formal-requirement-consistency`.
+  """
+}
+
+Tracing p8_c6_4_2_4_e {
+  ref = 8 @ 6:4:2:4
+  subref = "e"
+  text = """
+    e) feasible and achievable;
+
+    NOTE 6: A requirement is feasible if it can be implemented
+    within the constraints of the item development (resources,
+    state-of-the-art, etc.).
+
+    NOTE 7: A requirement can be accomplished technically, [if] it
+    does not require major technology advances, and fits within
+    item constraints (e.g., cost schedule, technical, legal,
+    regulatory, etc.) acceptably.  """
+
+  steps = [Steps.ID.Inspect_Unit_Design]
+
+  just = """
+    Feasibility is verified during design inspection at step
+    :ref:`step-inspect-unit-design`.
+  """
+}
+
+Tracing p8_c6_4_2_4_f {
+  ref = 8 @ 6:4:2:4
+  subref = "f"
+  text = """
+    f) verifiable;
+
+    NOTE 8: A requirement is verifiable if means, at the level
+    where it is specified, are available to check that the
+    requirement is fulfilled.
+
+    NOTE 9: Collected evidence pertaining to an item shows the
+    corresponding requirement has been satisfied. Verifiability
+    is enhanced when the requirement is measureable.
+  """
+
+  steps = [Steps.ID.Implement_SPARK_Package,
+	   Steps.ID.Document_Design_Solutions,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Review_Deactivated_SPARK,
+	   Steps.ID.Inspect_Implementation,
+	   Steps.ID.Write_Tests,
+	   Steps.ID.Review_Tests]
+
+  just = """
+
+    According to the process following means are available to verify
+    that the requirements are fulfilled:
+
+    * GNATprove to formally prove that formal requirements in form of
+      SPARK contracts are indeed fulfilled by the SPARK implementation
+      at steps :ref:`step-implement-spark-package`, :ref:`step-verify-project`.
+
+    * Global peer review with deactivated SPARK mode to ensure that
+      they do respect SPARK rules (e.g. pointer aliasing is absent,
+      postconditions are honored) at step :ref:`step-review-deactivated-spark`.
+
+    * Traceability between a non-formal requirement and the
+      documentation for how the unit design satisfies the requirement
+      at step :ref:`step-document-design-solutions`.
+
+    * Inspection of the unit implementation according to an
+      appropriate inspection checklist to ensure that it satisfies all
+      the non-formally-verified unit requirements at step
+      :ref:`step-inspect-implementation`.
+
+    * Development and verification of unit tests, which provide
+      evidence that every non-formally-verified unit requirement is
+      satisfied. This is done at steps :ref:`step-write-tests` and :ref:`step-review-tests`.
+  """
+}
+
+Tracing p8_c6_4_2_4_g {
+  ref = 8 @ 6:4:2:4
+  subref = "g"
+  text = """
+    g) necessary;
+
+    NOTE 10: The requirement defines an essential capability,
+    characteristic, constraint, and/or quality factor. If it
+    is removed or deleted, a deficiency will exist which is
+    not fulfilled by other capabilities of the product or
+    process.
+
+    NOTE 11: The requirement is currently applicable and has
+    not been made obsolete by the passage of time. Requirements
+    with planned expiration dates or applicability dates are
+    clearly identified.
+  """
+
+  steps = [Steps.ID.Verify_Requirement_Necessity]
+
+  just = """
+    Necessity of the specified requirements is verified at step
+    :ref:`step-verify-requirement-necessity`. This is done by manual review with a
+    local peer review.
+  """
+}
+
+Tracing p8_c6_4_2_4_h {
+  ref = 8 @ 6:4:2:4
+  subref = "h"
+  text = """
+    h) implementation free;
+
+    NOTE 12: The requirement, while addressing what is necessary
+    and sufficient for the item, avoids placing unnecessary
+    constraints on the architectural design. The objective is to
+    be implementation independent. The requirement states what is
+    required, not how the requirement should be met.
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Verify_Non_Formal_Requirement_Consistency]
+
+  just = """
+    The formal requirements are specified in the public part of
+    external ADS files in form of pre/post-conditions, return policy
+    and dependency specification. These constraints are inherently
+    implementation free: they do not specify how outcomes are
+    obtained.
+
+    The non-formal requirements are required to be implementation free
+    at step :ref:`step-capture-requirements`.
+
+    Step :ref:`step-verify-non-formal-requirement-consistency` ensures that no
+    unnecessary constraints were imposed. This is done by manual
+    review with a local peer review.
+  """
+}
+
+Tracing p8_c6_4_2_4_i {
+  ref = 8 @ 6:4:2:4
+  subref = "i"
+  text = """
+    i) complete; and
+
+    NOTE 13: The stated requirement is clear without further
+    amplification because it is measureable and sufficiently
+    describes the capability and characteristics required to
+    meet the stakeholder's need.
+  """
+
+  steps = [Steps.ID.Verify_Requirement_Correctness_And_Completeness,
+	   Steps.ID.Inspect_Unit_Design]
+
+  just = """
+    Completeness of the specified requirements is verified at step
+    :ref:`step-verify-requirement-correctness-and-completeness` and
+    :ref:`step-inspect-unit-design`. This is done by manual review with a local
+    peer review.
+  """
+}
+
+Tracing p8_c6_4_2_4_j {
+  ref = 8 @ 6:4:2:4
+  subref = "j"
+  text = """
+    j) conforming.
+
+    NOTE 14: The stated requirement conforms to applicable
+    government, automotive industry and product standards,
+    specifications and interfaces for which compliance is required.
+  """
+
+  steps = [Steps.ID.Verify_Requirement_Correctness_And_Completeness,
+	   Steps.ID.Inspect_Unit_Design]
+
+  just = """
+    This process is designed to fulfill the ISO 26262 and industry
+    standards.
+
+    Compliance with Ada/SPARK Guidelines is checked at
+    :ref:`step-verify-requirement-correctness-and-completeness` and
+    :ref:`step-inspect-unit-design` by manual review with a local peer review.
+  """
+}
+
+Tracing p8_c6_4_2_5_a {
+  ref = 8 @ 6:4:2:5
+  subref = "a"
+  text = '''
+    Safety requirements shall have the following attributes:
+
+    a) a unique identification remaining unchanged throughout
+       the safety lifecycle;
+
+       EXAMPLE 1: A unique identification of a requirement can
+       be achieved in a variety of ways, such as subscripting
+       each instance of the word "shall", e.g. "The system shall9782
+       check...", or numbering consecutively each sentence containing
+       the word "shall", e.g. "9782 In the case of ... the system
+       shall check ...".
+  '''
+
+  steps = [Steps.ID.Assign_Requirement_Unique_IDs]
+
+  just = """
+    As part of the :ref:`step-assign-requirement-unique-ids` step, for each
+    requirement (whether safety or non-safety) that is either (a)
+    non-formally-verified or (b) depended upon by some other
+    non-formally-verified requirement, a unique ID is assigned to the
+    requirement.
+
+    An exception is made for formally-verified requirements that are
+    only depended upon by other formally-verified requirements. A
+    unique ID is not needed for such a requirement, even if it is a
+    safety requirement, because:
+
+    #. No explicit traceability is needed, because the sufficiency of
+       the ASIL of the requirement and of any requirements it depends
+       upon is formally verified.
+
+    #. Any corruption of the safety requirement that has any impact on
+       compliance with higher-level safety requirements would result
+       in formal verification detecting the anomaly.
+  """
+}
+
+
+Tracing p8_c6_4_2_5_b {
+  ref = 8 @ 6:4:2:5
+  subref = "b"
+  text = '''
+    b) a status; and
+
+    EXAMPLE 2: A status of a safety requirement can be "proposed",
+    "assumed", "accepted", "reviewed", "delivered" or "verified".
+  '''
+
+  steps = [Steps.ID.Assign_Requirement_Unique_IDs]
+
+  just = """
+    The status of each safety requirement is defined via change
+    management as explained in the :ref:`step-assign-requirement-unique-ids` step.
+  """
+}
+
+Tracing p8_c6_4_2_5_c {
+  ref = 8 @ 6:4:2:5
+  subref = "c"
+  text = "c) an ASIL."
+
+  steps = [Steps.ID.Declare_Types_States_And_Subprograms,
+	   Steps.ID.Capture_Requirements //,
+	   //Steps.ID.Check_ASILs
+	   // TODO: this step doesn't exist
+	  ]
+
+  just = """
+    This process explicitly assumes that all requirements related to a
+    software unit (including those specified in interfaces to other
+    software units) have the same ASIL as the software unit itself
+    (or, for availability requirements, either ASIL B or the ASIL of
+    the software unit, whichever is lower). Therefore an ASIL does not
+    need to be explicitly specified for each requirement.
+
+    Note: Availability requirements are limited to ASIL B because ISO
+    26262 highly recommends defensive measures for complying with ASIL
+    C and ASIL D requirements, which would entail expensive fault
+    recovery from any corruption. Safety software typically uses
+    redundancy to minimize the amount of software with ASIL C/D
+    availability requirements.
+  """
+}
+
+Tracing p8_c6_4_3_1_a {
+  ref = 8 @ 6:4:3:1
+  subref = "a"
+  text = """
+    The set of safety requirements for an item, an element, which
+    are derived from one or more safety goals shall have the
+    following properties:
+
+    a) hierarchical structure;
+
+       NOTE 1: Hierarchical structure means that safety requirements
+       are structured in several successive levels as presented in
+       Figure 2. These levels are always aligned to comply with the
+       corresponding design phases. It is possible that there could
+       be several levels of hierarchy within any of the design phases
+       of Figure 2.
+  """
+
+  steps = [Steps.ID.Capture_Requirements]
+
+  just = """
+    The process requires bidirectional trace links between the unit
+    requirements and the corresponding claims in the software
+    architectural design, responsibilities stated by interface
+    specifications, and/or official requirements in software
+    requirement management tools. Transitively, all the safety
+    requirements (formal or not) are linked to higher level safety
+    requirements, forming the hierarchy.
+  """
+}
+
+Tracing p8_c6_4_3_1_b {
+  ref = 8 @ 6:4:3:1
+  subref = "b"
+  text = """
+    b) organizational structure according to an appropriate
+       grouping scheme;
+
+       NOTE 2: Organization of safety requirements means that
+       safety requirements within each level are grouped together,
+       usually corresponding to the architecture.
+  """
+
+  steps = [Steps.ID.Capture_Requirements]
+
+  just = """
+    According to the process, all the unit requirements are specified
+    within the public part of external ADS files, which relate to the
+    unit. This way the requirements are grouped together. More fine
+    grained grouping is achievable by grouping data type declarations,
+    functions, procedures and associated SPARK annotations in
+    subpackages if needed.
+  """
+}
+
+Tracing p8_c6_4_3_1_c {
+  ref = 8 @ 6:4:3:1
+  subref = "c"
+  text = """
+    c) completeness;
+
+       NOTE 3: Completeness means that the safety requirements at
+       one level fully implement all safety requirements of the
+       previous level.
+  """
+
+  steps = [Steps.ID.Verify_Requirement_Correctness_And_Completeness]
+
+  just = """
+    The process requires for each software unit, to verify (manually
+    with a local peer review) that the public parts of the external
+    ADS files collectively fully encapsulate every required property
+    of the unit as specified in the unit requirements and SWAD.
+  """
+}
+
+Tracing p8_c6_4_3_1_d {
+  ref = 8 @ 6:4:3:1
+  subref = "d"
+  text = """
+    d) external consistency;
+
+       NOTE 4: Unlike internal consistency, in which an
+       individual safety requirement does not contradict itself,
+       external consistency means that multiple safety
+       requirements do not contradict each other.
+  """
+
+  steps = [Steps.ID.Verify_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Non_Formal_Requirement_Consistency,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Project]
+
+  just = """
+    External consistency of formal unit requirements within a single
+    software interface is verified at step
+    :ref:`step-verify-formal-requirement-consistency` by GNATprove.
+
+    External consistency of all unit requirements within a single
+    software interface is verified by manual review with a local peer
+    review at step :ref:`step-verify-non-formal-requirement-consistency` (assuming
+    that the formal requirements subset has been already proved to be
+    consistent in the :ref:`step-verify-formal-requirement-consistency` step as
+    described above).
+
+    External consistency of non-formally-verified requirements from
+    different sources is verified in the :ref:`step-inspect-unit-design` step.
+
+    External consistency of formally-verified requirements from
+    different software interfaces is verified in the :ref:`step-verify-project`
+    step.
+  """
+}
+
+Tracing p8_c6_4_3_1_e {
+  ref = 8 @ 6:4:3:1
+  subref = "e"
+  text = """
+    e) no duplication of information within any level of the
+       hierarchical structure; and
+
+       NOTE 5: No duplication of information means that the
+       content of safety requirements is not repeated in any
+       other safety requirement at one single level of the
+       hierarchical structure and this is true at each
+       hierarchical level.
+  """
+
+  steps = [Steps.ID.Verify_Non_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Project]
+
+  just = """
+    The process does not require the absence of duplication of
+    information across formally-verified requirements
+    (:ref:`step-verify-project`), because the risk of introducing inconsistencies
+    is small.
+
+    Absence of duplication within the set of non-formal requirements
+    and between formal and non-formal requirements is verified at step
+    :ref:`step-verify-non-formal-requirement-consistency` and confirmed by the
+    inspection verification checklist.
+  """
+}
+
+Tracing p8_c6_4_3_1_f {
+  ref = 8 @ 6:4:3:1
+  subref = "f"
+  text = """
+    f) maintainability.
+
+       NOTE 6: Maintainability means that the set of requirements
+       can be modified or extended, e.g. by the introduction of
+       new versions of requirements or by adding/removing
+       requirements to the set of requirements.
+
+       NOTE 7: Maintainability is facilitated when each requirement
+       meets all of the points of 6.4.2.4, and the set of requirements
+       meets 6.4.3.1.
+  """
+
+  steps = [Steps.ID.Capture_Requirements]
+  alt_steps = '''See section entitled "Assumptions about Change Management"'''
+
+  just = """
+    All the unit requirements are specified in SPARK ADS files either
+    in form of SPARK annotations (formal) or in form of comments
+    (non-formal). Therefore the requirements can be modified,
+    extended, added or removed by changing corresponding ADS files.
+
+    This must be done according to the existing change management
+    process (see section entitled "Assumptions About Change
+    Management").
+  """
+}
+
+Tracing p8_c6_4_3_2_a {
+  ref = 8 @ 6:4:3:2
+  subref = "a"
+  text = """
+    Safety requirements shall be traceable with a reference
+    being made to:
+
+    a) each source of a safety requirement at the next
+       upper hierarchical level;
+  """
+
+  steps = [Steps.ID.Assign_Requirement_Unique_IDs]
+
+  just = """
+    The process requires establishing trace links between the unit
+    requirements and the corresponding claims in the software
+    architectural design, responsibilities stated by interface
+    specifications, and/or official requirements in software
+    requirement management tools.
+  """
+}
+
+Tracing p8_c6_4_3_2_b {
+  ref = 8 @ 6:4:3:2
+  subref = "b"
+  text = """
+    b) each derived safety requirement at the next lower
+       hierarchical level, or to its realisation in the
+       design; and
+  """
+
+  steps = [Steps.ID.Document_Design_Solutions]
+
+  just = """
+    For non-formally-verified requirements, the process requires trace
+    links to the documentation for how the unit design satisfies the
+    requirement. If this documentation depends on any requirements
+    allocated to other software units, the process requires trace
+    links from the documentation to those requirements.
+
+    This process does not mandate analogous unit design and unit
+    implementation traceability for formally-verified requirements,
+    because the risk that a formally-verified design and
+    implementation will fail to comply with its formally-specified
+    requirements is sufficiently small that there is minimal benefit
+    in establishing such traceability.
+  """
+}
+
+Tracing p8_c6_4_3_2_c {
+  ref = 8 @ 6:4:3:2
+  subref = "c"
+  text = """
+    c) the verification specification in accordance with 9.4.2.
+
+    NOTE 1: Various types of traceability records such as
+    requirement management system, electronic materials,
+    etc., can be used.
+
+    NOTE 2: Traceability supports:
+
+    * the achievement of consistency between a requirement, its
+      realisation and verification,
+
+    * the effectiveness of an impact analysis if changes are
+      made to particular safety requirements, and
+
+    * the execution of confirmation measures (e.g. functional
+      safety assessment to evaluate the achieved functional
+      safety).
+  """
+
+  steps = [Steps.ID.Verify_Project,
+	   Steps.ID.Write_Tests]
+
+  just = """
+    For formally-verified requirements, there is no need to create
+    tests and test specifications. Formal verification is performed at
+    at steps :ref:`step-verify-formal-requirement-consistency` and :ref:`step-verify-project`.
+
+    For non-formally-verified requirements, the process requires to
+    create trace links between each unit test and the unit
+    requirements (:ref:`step-write-tests`).
+  """
+}
+
+Tracing p8_c6_4_3_3 {
+  ref = 8 @ 6:4:3:3
+  subref = ""
+  text = """
+    An appropriate combination of the verification methods listed
+    in Table 2 shall be applied to verify that the safety
+    requirements comply with the requirements in this clause and
+    that they comply with the specific requirements on the
+    verification of safety requirements within the respective
+    parts of the ISO 26262 series of standards where safety
+    requirements are derived.
+  """
+
+  steps = [Steps.ID.Verify_Non_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Requirement_Correctness_And_Completeness,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Project]
+
+  just = """
+    The process requires combination of two methods:
+
+    * Verification by inspection for all unit requirements according
+      to verification checklist
+
+    * Formal verification for the formally specified unit requirement
+  """
+}
+
+Tracing p8_c6_4_3_3_t2_1a {
+  ref = 8 @ 6:4:3:3
+  subref = "Table 2, 1a"
+  row = "Verification by walk-through"
+  applies = "Ab"
+
+  just = "N/A"
+}
+
+Tracing p8_c6_4_3_3_t2_1b {
+  ref = 8 @ 6:4:3:3
+  subref = "Table 2, 1b"
+  row = "Verification by inspection"
+  applies = "aBCD"
+
+  steps = [Steps.ID.Verify_Non_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Requirement_Correctness_And_Completeness]
+  alt_steps = '''See section entitled "Software unit verification checklist"'''
+
+  just = """
+    Verification by inspection is applied to non-formal requirements
+    at steps :ref:`step-verify-non-formal-requirement-consistency`.
+
+    Verification by inspection is applied to all captured requirements
+    at step :ref:`step-verify-requirement-correctness-and-completeness` and during
+    the review according to the verification checklist.
+  """
+}
+
+Tracing p8_c6_4_3_3_t2_1c {
+  ref = 8 @ 6:4:3:3
+  subref = "Table 2, 1c"
+  row = """
+    Semi-formal verification
+
+    Verification can be supported by executable models.
+  """
+  applies = "abCD"
+
+  just = "N/A"
+}
+
+Tracing p8_c6_4_3_3_t2_1d {
+  ref = 8 @ 6:4:3:3
+  subref = "Table 2, 1d"
+  row = """
+    Formal verification
+
+    Verification can be supported by executable models.
+  """
+  applies = "bcd"
+
+  steps = [Steps.ID.Verify_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Unit_Design,
+	   Steps.ID.Verify_Project]
+
+  just = """
+    The formally-verified unit requirements are checked by GNATprove
+    at the following process steps:
+
+    * :ref:`step-verify-formal-requirement-consistency`: To verify the consistency
+      of the formally-specified fragments of software interface
+      specifications.
+
+    * :ref:`step-verify-unit-design`: To verify the consistency of the
+      formally-specified fragments of the unit design with one another
+      and with the formally-specified requirements.
+
+    * :ref:`step-verify-project`: To verify the consistency of all SPARK content in
+      the ADS and ADB files and to verify all SPARK implementations
+      fulfill all their contracts.
+  """
+}
+
+Tracing p8_c6_4_3_4 {
+  ref = 8 @ 6:4:3:4
+  text = """
+    Safety requirements shall be placed under configuration
+    management in accordance with Clause 7 to maintain
+    consistency throughout the safety lifecycle.
+
+    EXAMPLE: When the safety requirements at a lower level are
+    consistent with the higher level safety requirements, the
+    configuration management can define a baseline as the basis
+    for subsequent phases of the safety lifecycle.
+  """
+
+  alt_steps = '''See section entitled "General Assumptions"'''
+
+  just = """
+    Safety requirements are specified in SPARK ADS files, which are
+    subject to configuration management.
+  """
+}

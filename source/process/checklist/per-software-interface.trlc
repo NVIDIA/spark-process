@@ -1,0 +1,423 @@
+/*
+ * Copyright (C) 2024 - 2025 NVIDIA CORPORATION & AFFILIATES
+ * Copyright (C) 2021 - 2024 AdaCore
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3 or
+ * any later version published by the Free Software Foundation; with the
+ * Invariant Sections being "Attribution", with no Front-Cover
+ * Texts, and no Back-Cover Texts.  A copy of the license is included in
+ * the section entitled "GNU Free Documentation License".
+ */
+
+package Checklist
+import Steps
+
+Item item_1_1_3 {
+  automatable = true
+  step        = Steps.ID.Identify_External_Packages
+  scope       = Scope.All
+
+  text = '''
+    Is this instance of this checklist clearly associated
+    with the set of software interfaces to be verified using
+    this checklist?
+  '''
+}
+
+Item item_1_1_4 {
+  automatable = true
+  step        = Steps.ID.Identify_External_Packages
+  scope       = Scope.All
+
+  text = '''
+    Does the software interface specification clearly indicate
+    all the non-nested packages whose package specifications will
+    specify the software interface?
+  '''
+}
+
+Item item_1_1_5 {
+  automatable = true
+  step        = Steps.ID.Identify_External_Packages
+  scope       = Scope.All
+
+  text = '''
+    For each non-nested package identified in response to checklist
+    question 1.1.4, does the software interface specification
+    clearly indicate:
+
+    * Whether the package specification to be specified in an ADS file...
+
+      * must be implemented, or
+      * consists of public specification only.
+
+    * For each of the packages to be implemented:
+
+      * Whether the package specification is allowed to have a private part.
+      * Whether the package is to be implemented by
+
+        * (typically) each provider of the software interface, or
+        * (rarely) each user of the software interface?
+  '''
+}
+
+Item item_1_1_6 {
+  automatable = true
+  step        = Steps.ID.Identify_External_Packages
+  scope       = Scope.All
+
+  text = '''
+    For each child package that must be implemented by the provider
+    or user software unit(s), is each proper ancestor of that package
+    (the parent package and their recursive parents, if any) that is
+    allowed to have a private part either
+
+    * to be implemented by the same software unit, or
+    * not to be implemented by any software unit?
+  '''
+}
+
+Item item_1_2_1 {
+  automatable = true
+  step        = Steps.ID.Create_External_ADS
+  scope       = Scope.All
+
+  text = '''
+    For each non-nested package identified in response to checklist
+    question 1.1.4, is there a corresponding ADS file named according
+    to the naming convention specified in the :ref:`step-create-external-ads` step?
+  '''
+}
+
+Item item_1_2_2 {
+  automatable = true
+  step        = Steps.ID.Create_External_ADS
+  scope       = Scope.All
+
+  text = '''
+    For each non-nested package identified in response to checklist
+    question 1.1.4, if the package specification has a private part, then
+    does the software interface specification allow the package
+    specification to have a private part?
+  '''
+}
+
+Item item_1_3_1 {
+  step        = Steps.ID.Declare_SPARK_Package
+  scope       = Scope.Automated
+
+  text = '''
+    During the :ref:`step-compile-project` step, the compiler will verify that the
+    correct package is declared in each external ADS file.
+  '''
+}
+
+Item item_1_4_1 {
+  step        = Steps.ID.Identify_Dependencies
+  scope       = Scope.Automated
+
+  text = """
+    During the :ref:`step-compile-project` step, the compiler will verify that
+    all necessary dependencies are with'd by each external ADS file.
+  """
+}
+
+Item item_1_5_1 {
+  automatable = true
+  manual      = true
+  step        = Steps.ID.Declare_Types_States_And_Subprograms
+  scope       = Scope.All
+
+  text = '''
+    Is each type, constant, variable, and subprogram
+    declaration in the public part of each external ADS file
+    necessary, i.e., does each such declaration satisfy at
+    least one of the following conditions?
+
+    * The declared entity is intended to be referenced
+      directly by providers and/or users of the interface.
+    * The declared entity is referenced by another
+      declaration within the public part of an external ADS
+      file of the interface, where the latter declaration is
+      recursively necessary by these criteria.
+
+    Note: Automation could be used to support this, by
+    identifying declarations that are not referenced by the
+    interface or the software units. Review could then be
+    focused on evaluating whether those declarations are
+    necessary.
+  '''
+}
+
+Item item_1_6_1 {
+  step        = Steps.ID.Capture_Requirements
+  scope       = Scope.Automated
+
+  text = '''
+    During the :ref:`step-verify-requirement-correctness-and-completeness`
+    step and during unit design and implementation, the completeness
+    of the captured requirements is verified.
+  '''
+}
+
+Item item_1_6_2 {
+  manual      = true
+  step        = Steps.ID.Capture_Requirements
+  scope       = Scope.All
+
+  text = '''
+    Is each formal requirement preceded by a comment that explains
+    the requirement in natural language?
+
+    Note: Multiple formal requirements can be preceded by a single
+    comment that explains them all.
+  '''
+}
+
+Item item_1_6_3 {
+  automatable = true
+  step        = Steps.ID.Capture_Requirements
+  scope       = Scope.All
+
+  text = '''
+    Does each declaration in an external ADS file have the Ghost
+    aspect if the declaration is only used in formal requirements?
+  '''
+}
+
+Item item_1_6_4 {
+  manual      = true
+  step        = Steps.ID.Capture_Requirements
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Is each ASIL C and ASIL D non-formal requirement in the
+    software interface specification expressed in some form
+    of semi-formal notation (e.g., EARS)?
+  '''
+}
+
+Item item_1_6_5 {
+  manual      = true
+  step        = Steps.ID.Capture_Requirements
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Is each non-formal requirement in the software interface
+    specification unambiguous (that is, lending itself to a
+    single interpretation) and free from internal contradictions?
+  '''
+}
+
+Item item_1_6_6 {
+  manual      = true
+  step        = Steps.ID.Capture_Requirements
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Is each non-formal requirement in the software interface
+    specification implementation free (see the Terminology section)?
+  '''
+}
+
+Item item_1_6_7 {
+  manual      = true
+  step        = Steps.ID.Capture_Requirements
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Is each non-formal safety requirement in the software
+    interface specification atomic, to the extent that this
+    is reasonably possible without interfering with compliance
+    with other items in this checklist?
+  '''
+}
+
+Item item_1_7_1 {
+  automatable = true
+  step        = Steps.ID.Assign_Requirement_Unique_IDs
+  scope       = Scope.All
+
+  text = """
+    Does each of the following requirements in the public
+    parts of the interface's ADS files have its own unique
+    ID as described in the Traceability Model section?
+
+    * Non-formal type/subprogram/package contracts
+    * Formal type contracts
+
+      * Scalar constraints
+
+        * range constraints
+        * digits constraints
+        * delta constraints
+
+      * Composite constraints
+
+        * Index constraints
+        * Discriminant constraints
+
+      * Null exclusions
+      * Type predicates
+      * Default initial conditions
+
+    * Formal subprogram-only contracts
+
+      * Top-level and'ed conditions of:
+
+        * Preconditions
+
+          * Pre aspects
+          * Pre'Class aspects
+
+        * Postconditions
+
+          * Post aspects
+          * Post'Class aspects
+          * Refined_Post aspects
+
+        * Cases of Contract_Cases aspects
+        * Global aspects
+        * Depends aspects (or each dependency_clause thereof,
+          at the developers' discretion)
+        * No_Return aspects
+
+      * Formal subprogram/package contracts
+
+        * ``Forward_Progress`` user aspects
+        * ``Always_Terminates`` aspects
+        * ``Local_Restrictions (No_Secondary_Stack, No_Heap_Allocations)``
+          aspects
+  """
+}
+
+Item item_1_7_2 {
+  automatable = true
+  manual      = true
+  step        = Steps.ID.Assign_Requirement_Unique_IDs
+  scope       = Scope.All
+
+  text = '''
+    For each requirement in the software interface
+    specification that has a unique ID, does the requirement
+    trace to all the non-unit-level work product fragments
+    (if any) that directly motivate the requirement?
+
+    Note: Automation of this checklist item would require
+    formalization of all non-unit-level work products
+    capable of motivating requirements in the software interface
+    specification.
+  '''
+}
+
+Item item_1_8_1 {
+  step        = Steps.ID.Verify_Formal_Requirement_Consistency
+  scope       = Scope.Automated
+
+  text = '''
+    During the :ref:`step-compile-project` and :ref:`step-verify-project` steps,
+    the commands specified in this step will be re-executed,
+    but with more strict criteria for passing verification
+    than what is required by the :ref:`step-verify-formal-requirement-consistency`
+    step.
+  '''
+}
+
+Item item_1_9_1 {
+  manual      = true
+  step        = Steps.ID.Verify_Non_Formal_Requirement_Consistency
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Does each of the non-formal requirements in the software
+    interface specification have both of the following properties?
+
+    * Consistent with all other requirements (formal and non-formal)
+      in the software interface specification
+
+    * Does not duplicate content from any other requirements (formal
+      and non-formal) in the software interface specification
+  '''
+}
+
+Item item_1_10_1 {
+  manual      = true
+  step        = Steps.ID.Verify_Requirement_Correctness_And_Completeness
+  scope       = Scope.All
+
+  text = '''
+    Is the entirety of the software interface specification
+    out-of-context comprehensible (see the Terminology
+    section)?
+  '''
+}
+
+Item item_1_10_2 {
+  manual      = true
+  step        = Steps.ID.Verify_Requirement_Correctness_And_Completeness
+  scope       = Scope.All
+
+  text = '''
+    Does the entirety of the public parts of the ADS files
+    fully observe the fragments of the Ada/SPARK Guidelines
+    identified therein as manually enforced?
+  '''
+}
+
+Item item_1_10_3 {
+  automatable = true
+  manual      = true
+  step        = Steps.ID.Verify_Requirement_Correctness_And_Completeness
+  scope       = Scope.All
+
+  text = '''
+    Are the requirements in the software interface correct and
+    complete with respect to the non-unit-level work products,
+    and is this completeness supported by traceability? (Does
+    each non-unit-level work product fragment that constrains
+    the software interface trace to requirements in the software
+    interface that are correct and complete with respect to that
+    non-unit-level work product fragment?)
+
+    Note: Automation of this checklist item would require
+    formalization of all non-unit-level work products capable
+    of motivating requirements in the software interface specification.
+  '''
+}
+
+Item item_1_11_1 {
+  automatable = true
+  step        = Steps.ID.Verify_Requirement_Necessity
+  scope       = Scope.All
+
+  text = '''
+    For each requirement in the software interface
+    specification that has a unique ID, is at least
+    one of the following true?
+
+    #. The requirement traces to at least one work product
+       fragment that motivates the requirement.
+    #. The requirement is a formal requirement on a package,
+       subprogram, or type that is leveraged by a proven subprogram.
+
+    Note: It is typically necessary to defer this checklist
+    question until after the completion of the software unit
+    designs of the software units that provide or use this
+    software interface. For example, the :ref:`step-document-design-solutions`
+    step of this process can create trace links from requirements
+    to unit design decisions that motivate those requirements.
+  '''
+}
+
+Item item_1_12_1 {
+  manual      = true
+  step        = Steps.ID.ALL
+  scope       = Scope.All
+
+  text = '''
+    What is the PASS/FAIL outcome of software interface verification?
+
+    Note: Only enter PASS if the answers to all earlier questions is "Yes".
+  '''
+}

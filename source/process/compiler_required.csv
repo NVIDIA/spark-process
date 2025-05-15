@@ -1,0 +1,2 @@
+"-fcallgraph-info=su,da",Necessary to ensure that GNATstack produces correct output in the Check_Stack_Usage step.
+-gnatyr,"Unique IDs (see section Traceability Model) are case sensitive and built from local IDs sometimes derived from identifiers. To remove ambiguity concerning the correct local ID (and thus the correct unique ID) for a comment or syntactic construct, all references to the same entity must agree about the case of the associated identifiers."

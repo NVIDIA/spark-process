@@ -1,0 +1,8 @@
+-Xname=value,Configuration data is allowed.
+-o <report_file>,Has no effect on reporting of rule violations on stdout / stderr.
+--show-rule,Has no effect on whether the number of rule violations reported on stdout / stderr is zero or non-zero.
+--include-file=<file>,Has no effect on reporting of rule violations on stdout / stderr.
+--no-objects-dir,"The GNATcheck output files are not significant to this process, since the existence of rule violations is reported on the command line."
+--no-subprojects,"This switch does not control the processing of ADS/ADB files from the project specified with -P (the ""argument project""). This switch only controls the processing of ADS/ADB files from other projects recursively included in the argument project."
+--rules-dir=<dir>,This is a valid way to specify the locations of custom rules.
+-j,Has no effect on reporting of rule violations.

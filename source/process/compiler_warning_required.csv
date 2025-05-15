@@ -1,0 +1,21 @@
+"-gnatwa
+-Wall","Enables warnings that are not ""controversial"".
+Note: The use of -Wall includes all the effects of -gnatwa, but this process requires both options so as to be explicit."
+-gnatw.d,"Expected to provide greater clarity to warnings. (Also, other compilers do this by default.)"
+"-gnatwe
+-Werror","Treating warnings as errors results in warnings being taken seriously and results in cleaner build output
+Note: The use of -Werror includes all the effects of -gnatwe, but this process requires both options so as to be explicit."
+-gnatwh,"Implicitly-hidden declarations are a potential source of confusion when reading code.
+Note: The Ada/SPARK Guidelines document is expected to provide guidance on how to mitigate the risk that adding a declaration to a package will cause another package to fail to compile due to warnings enabled by -gnatwh."
+-gnatw.h,"Record representation clauses should be complete and fully specify the layout, and that a hole might be an indication of an error."
+-gnatw.j,"Per AdaCore (see :gt:`V413-003`), the chief designer of Ada 95 believes that Ada ""should have disallowed ... adding visible operations to a tagged type after deriving a private extension from it"" due to the confusion created. The capability also does not appear to add value to the language."
+-gnatw.k,"As warned by AdaCore, redefining names in package Standard could lead to confusion."
+-gnatwl,This warning appears to prevent elaboration problems that could lead to exceptions
+-gnatw.o,"This switch enables warnings that are a straightforward extension of warnings enabled by -gnatwu/-gnatwa. For consistency, enable these warnings."
+-gnatw_r,Record representation clauses should be structurally consistent with the associated record type definitions to ensure a complete consideration of the constraints on representation.
+-gnatw.s,Record representation clauses should not contradict the associated record type definitions.
+-gnatwt,It is expected that every code path within a compilation unit will be reachable without modification of the compilation unit so that every code path can be tested using the same object code as what ships to customers
+-gnatw.w,Enables useful warnings about misuse of Warnings Off pragmas.
+-gnatw.X,"Necessary when using
+pragma Restrictions (No_Exception_Propagation)
+to avoid spurious warnings compiling SPARK code (see :gt:`V223-002`)"

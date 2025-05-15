@@ -1,0 +1,370 @@
+/*
+ * Copyright (C) 2024 - 2025 NVIDIA CORPORATION & AFFILIATES
+ * Copyright (C) 2021 - 2024 AdaCore
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3 or
+ * any later version published by the Free Software Foundation; with the
+ * Invariant Sections being "Attribution", with no Front-Cover
+ * Texts, and no Back-Cover Texts.  A copy of the license is included in
+ * the section entitled "GNU Free Documentation License".
+ */
+
+package Tracing
+import Gnatprove_Assumptions
+import Steps
+
+Argument SPARK_JUSTIFICATION {
+  assumption = Gnatprove_Assumptions.SPARK_JUSTIFICATION
+  process    = [Steps.ID.Review_Diagnostic_Justifications]
+  text = '''
+    The :ref:`step-review-diagnostic-justifications` step requires peer
+    review of direct justifications and indirect
+    justifications.
+  '''
+}
+
+Argument SPARK_EXTERNAL {
+  assumption = Gnatprove_Assumptions.SPARK_EXTERNAL
+  process    = [Steps.ID.Review_Diagnostic_Justifications]
+  text = '''
+    "Guaranteed" GNATprove warning imprecisely supported
+    address specification
+  '''
+}
+
+Argument SPARK_ALIASING_ADDRESS {
+  assumption = Gnatprove_Assumptions.SPARK_ALIASING_ADDRESS
+  process    = [Steps.ID.Review_Diagnostic_Justifications]
+  text = '''
+    "Guaranteed" GNATprove warning imprecisely supported
+    address specification
+  '''
+}
+
+Argument SPARK_VALID {
+  assumption  = Gnatprove_Assumptions.SPARK_VALID
+  deferred_to = [Gnatprove_Assumptions.SPARK_VALID,
+		 Gnatprove_Assumptions.SPARK_EXTERNAL_VALID,
+	 	 Gnatprove_Assumptions.ADA_EXTERNAL]
+}
+
+Argument SPARK_EXTERNAL_VALID {
+  assumption = Gnatprove_Assumptions.SPARK_EXTERNAL_VALID
+  process    = [Steps.ID.Review_Diagnostic_Justifications]
+  text = '''
+    "Guaranteed" GNATprove warning imprecisely supported
+    address specification
+  '''
+}
+
+Argument SPARK_STORAGE_ERROR {
+  assumption = Gnatprove_Assumptions.SPARK_STORAGE_ERROR
+  process    = [Steps.ID.Capture_Requirements,
+	        Steps.ID.Check_Stack_Usage_Unit,
+	        Steps.ID.Check_Stack_Usage_Integration]
+  text = """
+    The :ref:`step-capture-requirements` step mandates that for each subprogram
+    that is required to return, the ``No_Heap_Allocations`` and
+    ``No_Secondary_Stack`` local restrictions must be specified in the
+    subprogram's declaration (optionally through the ``Forward_Progress``
+    user aspect). This causes the tools to ensure that the subprogram
+    and its callees can only cause storage errors through primary
+    stack allocations.
+
+    The ``:ref:`step-check-stack-usage-unit``` and ``:ref:`step-check-stack-usage-integration```
+    steps specify measures used to ensure that primary stack allocations
+    always succeed.
+  """
+}
+
+Argument SPARK_TARGET_AND_RUNTIME {
+  assumption = Gnatprove_Assumptions.SPARK_TARGET_AND_RUNTIME
+  process    = [Steps.ID.Create_Project_File]
+  text = '''
+    The :ref:`step-create-project-file` step requires that the ``Runtime ("Ada")`` and
+    Target values be set in the project file, and (via the
+    "Requirements Concerning GNATprove Switches") prohibits the use of
+    the ``-gnateT=<target.atp>`` and ``--RTS=<dir>`` GNATprove switches that
+    could override the settings.
+
+    This ensures consistency between the target configuration and
+    runtime library used by the compiler and those used by GNATprove.
+  '''
+}
+
+Argument SPARK_FLOATING_POINT {
+  assumption = Gnatprove_Assumptions.SPARK_FLOATING_POINT
+  process    = [Steps.ID.Create_Project_File,
+	        Steps.ID.Review_Diagnostic_Justifications]
+  text = '''
+    GNATcheck rule ``Restrictions:No_Floating_Point``
+
+    SPARK cannot depend on the semantics of floating point operations
+    if the source code does not directly use floating point.
+  '''
+}
+
+Argument SPARK_COMPILATION_SWITCHES {
+  assumption = Gnatprove_Assumptions.SPARK_COMPILATION_SWITCHES
+  process    = [Steps.ID.Compile_Project]
+  text = '''
+    Compilation is done using a gprbuild command that does not include
+    any compiler switches. Compiler switches are therefore obtained
+    from the project file, the same place GNATprove obtains the
+    compiler switches, ensuring consistency of compiler switches
+    between the compiler and GNATprove.
+  '''
+}
+
+Argument SPARK_ITERABLE {
+  assumption = Gnatprove_Assumptions.SPARK_ITERABLE
+  process    = [Steps.ID.Create_Project_File,
+	        Steps.ID.Review_Diagnostic_Justifications]
+  text = '''
+    GNATcheck rule ``Restrictions:No_Specification_Of_Aspect=>Iterable``
+  '''
+}
+
+Argument SPARK_ITERABLE_FOR_PROOF {
+  assumption = Gnatprove_Assumptions.SPARK_ITERABLE_FOR_PROOF
+  process    = [Steps.ID.Create_Project_File,
+	        Steps.ID.Review_Diagnostic_Justifications]
+  text = '''
+    GNATcheck rule ``Restrictions:No_Specification_Of_Aspect=>Iterable``
+
+    Each Iterable_For_Proof annotation can only be used to annotate a
+    function whose first parameter is a type with the Iterable aspect.
+  '''
+}
+
+Argument SPARK_OVERRIDING_AND_TASKING {
+  assumption = Gnatprove_Assumptions.SPARK_OVERRIDING_AND_TASKING
+  process    = [Steps.ID.Create_Project_File,
+	        Steps.ID.Review_Diagnostic_Justifications]
+  text = '''
+    * GNATcheck rule ``Restrictions:Max_Protected_Entries=>0``
+
+    * GNATcheck rule ``Restrictions:No_Use_Of_Entity=>Synchronous_Task_Control``
+
+    * GNATcheck rule ``Restrictions:No_Protected_Types``
+
+    * GNATcheck rule ``Restrictions:No_Use_Of_Entity=>Ada.Task_Identification.Current_Task``
+  '''
+}
+
+Argument SPARK_INITIALIZED_ATTRIBUTE {
+  assumption = Gnatprove_Assumptions.SPARK_INITIALIZED_ATTRIBUTE
+  process    = [Steps.ID.Create_Project_File,
+		Steps.ID.Review_Diagnostic_Justifications]
+  text = '''
+    GNATcheck rule: ``Forbidden_Attributes:Initialized``
+  '''
+}
+
+Argument ADA_TASKING {
+  assumption = Gnatprove_Assumptions.ADA_TASKING
+  via_process_assumptions = true
+  text = '''
+    This GNATprove assumption is delegated to the software
+    architectural design via the Concurrency Assumptions section of
+    this process.
+  '''
+}
+
+
+Argument ADA_EXTERNAL {
+  assumption = Gnatprove_Assumptions.ADA_EXTERNAL
+  via_process_assumptions = true
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+
+    For non-Ada code, this GNATprove assumption is delegated to the
+    software architectural design via the Data Sharing Assumptions
+    section of this process.
+  '''
+}
+
+Argument ADA_EXTERNAL_ABSTRACT_STATE {
+  assumption = Gnatprove_Assumptions.ADA_EXTERNAL_ABSTRACT_STATE
+  via_process_assumptions = true
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+
+    For non-Ada code, this GNATprove assumption is delegated to the
+    software architectural design via the Package Contracts section of
+    this process.
+  '''
+}
+
+Argument ADA_EXTERNAL_NAME {
+  assumption = Gnatprove_Assumptions.ADA_EXTERNAL_NAME
+  via_process_assumptions = true
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+
+    For non-Ada code, this GNATprove assumption is delegated to the
+    software architectural design via the Data Contracts section of
+    this process.
+  '''
+}
+
+Argument ADA_PRIVATE_TYPES {
+  assumption = Gnatprove_Assumptions.ADA_PRIVATE_TYPES
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+  '''
+}
+
+Argument ADA_TAGGED_TYPES {
+  assumption = Gnatprove_Assumptions.ADA_TAGGED_TYPES
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+  '''
+}
+
+Argument ADA_RECURSIVE_TYPES {
+  assumption = Gnatprove_Assumptions.ADA_RECURSIVE_TYPES
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+  '''
+}
+
+Argument ADA_ELABORATION {
+  assumption = Gnatprove_Assumptions.ADA_ELABORATION
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+  '''
+}
+
+Argument ADA_SUBPROGRAMS {
+  assumption = Gnatprove_Assumptions.ADA_SUBPROGRAMS
+  via_process_assumptions = true
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+
+    For non-Ada code, this GNATprove assumption is delegated to the
+    software architectural design via the Non-SPARK Ada Assumptions
+    section of this process.
+  '''
+}
+
+Argument ADA_CALLS {
+  assumption = Gnatprove_Assumptions.ADA_CALLS
+  via_process_assumptions = true
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+
+    For non-Ada code, this GNATprove assumption is delegated to the
+    software architectural design via the Non-SPARK Ada Assumptions
+    section of this process.
+  '''
+}
+
+Argument ADA_OBJECT_ADDRESSES {
+  assumption = Gnatprove_Assumptions.ADA_OBJECT_ADDRESSES
+  via_process_assumptions = true
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+
+    For non-Ada code, this GNATprove assumption is delegated to the
+    software architectural design via the Function Purity Assumptions
+    section of this process.
+  '''
+}
+
+Argument ADA_STATE_ABSTRACTION {
+  assumption = Gnatprove_Assumptions.ADA_STATE_ABSTRACTION
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+  '''
+}
+
+Argument ADA_LOGICAL_EQUAL {
+  assumption = Gnatprove_Assumptions.ADA_LOGICAL_EQUAL
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+  '''
+}
+
+Argument ADA_INLINE_FOR_PROOF {
+  assumption = Gnatprove_Assumptions.ADA_INLINE_FOR_PROOF
+  process    = [Steps.ID.Review_Deactivated_SPARK]
+  text = '''
+    Peer review of non-SPARK Ada
+  '''
+}
+
+Argument PARTIAL_GLOBAL {
+  assumption = Gnatprove_Assumptions.PARTIAL_GLOBAL
+  process    = [Steps.ID.Review_Diagnostic_Justifications]
+  text = '''
+    "Guaranteed" GNATprove warning assumed Global null
+  '''
+}
+
+Argument PARTIAL_TERMINATION {
+  assumption = Gnatprove_Assumptions.PARTIAL_TERMINATION
+  process    = [Steps.ID.Review_Diagnostic_Justifications]
+  text = '''
+    "Guaranteed" GNATprove warning assumed Always_Terminates
+  '''
+}
+
+Argument PARTIAL_TASKING {
+  assumption = Gnatprove_Assumptions.PARTIAL_TASKING
+  via_process_assumptions = true
+  text = '''
+    This GNATprove assumption is delegated to the software
+    architectural design via the Concurrency Assumptions section of
+    this process.
+  '''
+}
+
+Argument PARTIAL_ACYCLIC_ANALYSIS {
+  assumption = Gnatprove_Assumptions.PARTIAL_ACYCLIC_ANALYSIS
+  process    = [Steps.ID.Check_For_Circular_Dependencies]
+  text = '''
+    This assumption is fully satisfied by the verification done in the
+    :ref:`step-check-for-circular-dependencies` step.
+  '''
+}
+
+Argument GNAT_SPARKLIB_LEMMAS {
+  assumption = Gnatprove_Assumptions.GNAT_SPARKLIB_LEMMAS
+  process    = [Steps.ID.Compile_Project]
+  text = '''
+    The Compile_Package step requires the use of the GNAT
+    compiler via GPRbuild.
+  '''
+}
+
+Argument GNAT_PEDANTIC {
+  assumption = Gnatprove_Assumptions.GNAT_PEDANTIC
+  process    = [Steps.ID.Compile_Project]
+  text = '''
+    The Compile_Package step requires the use of the GNAT
+    compiler via GPRbuild.
+  '''
+}
+
+Argument GNAT_PORTABILITY {
+  assumption = Gnatprove_Assumptions.GNAT_PORTABILITY
+  process    = [Steps.ID.Compile_Project]
+  text = '''
+    The Compile_Package step requires the use of the GNAT
+    compiler via GPRbuild.
+  '''
+}

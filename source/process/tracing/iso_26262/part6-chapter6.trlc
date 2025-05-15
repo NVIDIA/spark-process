@@ -1,0 +1,476 @@
+/*
+ * Copyright (C) 2024 - 2025 NVIDIA CORPORATION & AFFILIATES
+ * Copyright (C) 2021 - 2024 AdaCore
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3 or
+ * any later version published by the Free Software Foundation; with the
+ * Invariant Sections being "Attribution", with no Front-Cover
+ * Texts, and no Back-Cover Texts.  A copy of the license is included in
+ * the section entitled "GNU Free Documentation License".
+ */
+
+/*
+ * The fields 'text', 'row', and 'applies' are all:
+ *   (C)ISO. This material is reproduced from ISO 26262, with permission of
+ *   the American National Standards Institute (ANSI) on behalf of the
+ *   International Organization for Standardization. All rights reserved.
+ */
+
+package ISO_26262_Tracing
+import Steps
+
+Tracing p6_c6_1_a {
+  ref = 6 @ 6:1
+  subref = "a"
+  text = """
+    The objectives of this sub-phase are:
+
+    a) to specify or refine the software safety requirements which
+       are derived from the technical safety concept and the system
+       architectural design specification;
+  """
+
+  just = """
+    Out of scope: Software safety requirements for software components
+    below the level of embedded software are not derived from the TSC
+    or the system architectural design specification, but rather from
+    software safety requirements at a higher level.
+
+    Note: In processes where this objective is in scope, it is fully
+    covered through 6-6.4.1, 6-6.4.7b, and 6-6.4.7c.
+  """
+}
+
+Tracing p6_c6_1_b {
+  ref = 6 @ 6:1
+  subref = "b"
+  text = """
+    b) to define the safety-related functionalities and properties of the
+       software required for the implementation;
+  """
+
+  just = """
+    Out of scope: In context, what is "required for the
+    implementation" is to avoid violating a TSR allocated to software.
+
+    Note: In processes where this objective is in scope, it is fully
+    covered through 6-6.4.1.
+  """
+}
+
+Tracing p6_c6_1_c {
+  ref = 6 @ 6:1
+  subref = "c"
+  text = """
+    c) to refine the requirements of the hardware-software interface
+       initiated in ISO 26262-4:2018, Clause 6; and
+  """
+
+  just = """
+    This objective is fully covered through 6-6.4.4.
+  """
+}
+
+Tracing p6_c6_1_d {
+  ref = 6 @ 6:1
+  subref = "d"
+  text = """
+    d) to verify that the software safety requirements and
+       the hardware-software interface requirements are suitable
+       for software development and are consistent with the
+       technical safety concept and the system architectural
+       design specification.
+  """
+
+  just = """
+    This objective is fully covered through 6-6.4.7a, 6-6.4.7b, and
+    6-6.4.7c.
+
+    However, the parts of this objective concerning the TSC and system
+    architectural design (covered through 6-6.4.7b and 6-6.4.7c) are
+    out of scope.
+  """
+}
+
+Tracing p6_c6_2 {
+  ref = 6 @ 6:2
+  text = """
+    The technical safety requirements are refined and
+    allocated to hardware and software during the system
+    architectural design phase given in ISO 26262-4:2018,
+    Clause 6. The specification of the software safety
+    requirements considers in particular constraints of the
+    hardware and the impact of these constraints on the
+    software. This sub-phase includes the specification of
+    software safety requirements to support the subsequent
+    design phases.
+  """
+
+  just = """
+    To the extent this general material introduces new process
+    expectations, it is fully covered through the specific
+    requirements below in 6-6.4.
+  """
+}
+
+Tracing p6_c6_4_1 {
+  ref = 6 @ 6:4:1
+  text = """
+    The software safety requirements shall be derived considering
+    the required safety-related functionalities and properties of
+    the software, whose failures could lead to the violation of a
+    technical safety requirement allocated to software.
+
+    NOTE 1: The software safety requirements are either derived
+    directly from the technical safety requirements allocated to
+    software or are requirements for software functions and
+    properties that, if not fulfilled, could lead to a violation
+    of the technical safety requirements allocated to software.
+
+    EXAMPLE 1: Safety-related functionality of the software can be:
+
+    * functions that enable the safe execution of a nominal function;
+
+    * functions that enable the system to achieve or maintain a
+      safe state or degraded state;
+
+    * functions related to the detection, indication and mitigation
+      of faults of safety-related hardware elements;
+
+    * self-test or monitoring functions related to the detection,
+      indication and mitigation of failures in the operating system,
+      basic software or the application software itself;
+
+    * functions related to on-board and off-board tests during
+      production, operation, service and decommissioning;
+
+    * functions that allow modifications of the software during
+      production and service; or
+
+    * functions related to performance or time-critical operations.
+
+    EXAMPLE 2: Safety-related properties include robustness
+    against erroneous inputs, independence or freedom from
+    interference between different functionalities, or fault
+    tolerance capabilities of the software.
+
+    NOTE 2: Safety-oriented analyses (see 7.4.10 or 7.4.11) can
+    be used to identify additional software safety requirements
+    or provide evidence for their achievement.
+  """
+
+  just = """
+    Out of scope: This is applicable only at the top level of software
+    safety requirements. Below the top level, higher-level software
+    safety requirements capture all safety-related functionalities and
+    properties of the software, though these may be refined per
+    6-7.4.6.
+  """
+}
+
+Tracing p6_c6_4_2_a {
+  ref = 6 @ 6:4:2
+  subref = "a"
+  text = """
+    Specification of the software safety requirements derived
+    from the technical safety requirements, the technical
+    safety concept and the system architectural design in
+    accordance with ISO 26262-4:2018, 6.4.1 and 6.4.3 shall
+    consider:
+
+    a) the specification and management of safety requirements
+       in accordance with ISO 26262-8:2018, Clause 6;
+  """
+
+  alt_steps = """
+    See section entitled "ISO 26262-8:2018, Clause 6: Specification
+    and management of safety requirements"
+  """
+  /* TODO: Is this a typo, or does it refer to this process'
+   * chapter on chapter 6?
+   */
+
+  just = """
+    See section entitled "ISO 26262-8:2018, Clause 6: Specification
+    and management of safety requirements"
+  """
+}
+
+Tracing p6_c6_4_2_b {
+  ref = 6 @ 6:4:2
+  subref = "b"
+  text = """
+    b) the specified system and hardware configurations;
+
+    EXAMPLE 1: Configuration parameters can include gain
+    control, band pass frequency and clock prescaler.
+  """
+
+  just = """
+    Out of scope: This is applicable only at the top level
+    of software safety requirements.
+  """
+}
+
+Tracing p6_c6_4_2_c {
+  ref = 6 @ 6:4:2
+  subref = "c"
+  text = """
+    c) the hardware-software interface specification;
+  """
+
+  just = """
+    Out of scope: This is applicable only at the top level
+    of software safety requirements.
+  """
+}
+
+Tracing p6_c6_4_2_d {
+  ref = 6 @ 6:4:2
+  subref = "d"
+  text = """
+    d) the relevant requirements of the hardware design specification
+  """
+
+  just = """
+    Out of scope: This is applicable only at the top level
+    of software safety requirements.
+  """
+}
+
+Tracing p6_c6_4_2_e {
+  ref = 6 @ 6:4:2
+  subref = "e"
+  text = """
+    e) the timing constraints
+
+    EXAMPLE 2 Execution or reaction time derived from the required
+    response time at the system level.
+  """
+
+  steps = [Steps.ID.Capture_Requirements]
+
+  just = """
+    The process requires to capture timing constraints at step
+    :ref:`step-capture-requirements`.
+  """
+}
+
+Tracing p6_c6_4_2_f {
+  ref = 6 @ 6:4:2
+  subref = "f"
+  text = """
+    f) the external interfaces
+
+    EXAMPLE 3 Communication and user interfaces.
+  """
+
+  steps = [Steps.ID.Identify_External_Packages,
+	   Steps.ID.Identify_Dependencies,
+	   Steps.ID.Capture_Requirements]
+
+  just = """
+    External interfaces and dependencies are identified at steps
+    :ref:`step-identify-external-packages` and :ref:`step-identify-dependencies`. Step
+    :ref:`step-capture-requirements` prescribes that requirements allocated to the
+    unit must include every responsibility of this unit stated by any
+    software interface specification that this unit is responsible for
+    complying with, as determined by the software architectural
+    design.
+  """
+}
+
+Tracing p6_c6_4_2_g {
+  ref = 6 @ 6:4:2
+  subref = "g"
+  text = """
+    g) each operating mode and each transition between the
+       operating modes of the vehicle, the system, or the
+       hardware, having an impact on the software.
+
+    EXAMPLE 4: Operating modes include shut-off or sleep,
+    initialization, normal operation, degraded and advanced
+    modes for testing or flash programming.
+  """
+
+  just = """
+    Out of scope: Software impact of operating modes and operating
+    mode transitions are encapsulated in higher-level software safety
+    requirements.
+  """
+}
+
+Tracing p6_c6_4_3 {
+  ref = 6 @ 6:4:3
+  text = """
+    If ASIL decomposition is applied to the software
+    safety requirements, ISO 26262-9:2018, Clause 5,
+    shall be complied with.
+  """
+
+  just = """
+    Out of scope: This process currently only allows ASIL
+    decomposition to occur at a higher level.
+  """
+}
+
+Tracing p6_c6_4_4 {
+  ref = 6 @ 6:4:4
+  text = """
+    The hardware-software interface specification initiated in
+    ISO 26262-4:2018, Clause 6, shall be refined sufficiently
+    to allow for the correct control and usage of the hardware
+    by the software, and shall describe  each safety-related
+    dependency between hardware and software.
+  """
+
+  just = """
+    HSI refinement is out of scope of the process.
+  """
+}
+
+Tracing p6_c6_4_5 {
+  ref = 6 @ 6:4:5
+  text = """
+    If other functions in addition to those functions for which
+    safety requirements are specified in 6.4.1 are carried out
+    by the embedded software, a specification of these functions
+    and their properties in accordance with the applied quality
+    management system shall be available.
+  """
+
+  just = """
+    Out of scope: The quality management approach assumed by this
+    process is Automotive SPICE, which does not expect any sort of
+    software requirements to be specified below top-level.
+  """
+}
+
+Tracing p6_c6_4_6 {
+  ref = 6 @ 6:4:6
+  text = """
+    The refined hardware-software interface specification shall
+    be verified jointly by the persons responsible for the system,
+    hardware and software development.
+  """
+
+  just = """
+    HSI refinement is out of scope of the process.
+  """
+}
+
+Tracing p6_c6_4_7_a {
+  ref = 6 @ 6:4:7
+  subref = "a"
+  text = """
+    The software safety requirements and the refined requirements
+    of the hardware-software interface specification shall be
+    verified in accordance with ISO 26262-8:2018, Clauses 6 and
+    9, to provide evidence for their:
+
+    a)  suitability for software development;
+  """
+
+  just = """
+    Fully covered in sections entitled "ISO 26262-8:2018, Clause 6:
+    Specification and management of safety requirements" and "ISO
+    26262-8:2018, Clause 9: Verification"
+  """
+}
+
+Tracing p6_c6_4_7_b {
+  ref = 6 @ 6:4:7
+  subref = "b"
+  text = """
+    b) compliance and consistency with the technical safety requirements;
+  """
+
+  just = """
+    Out of scope: Verification of SSRs against TSRs is only applicable
+    to top-level SSRs.
+  """
+}
+
+Tracing p6_c6_4_7_c {
+  ref = 6 @ 6:4:7
+  subref = "c"
+  text = """
+    c) compliance with the system design; and
+  """
+
+  just = """
+    Out of scope: Verification of SSRs against the system design is
+    only applicable to top-level SSRs.
+  """
+}
+
+Tracing p6_c6_4_7_d {
+  ref = 6 @ 6:4:7
+  subref = "d"
+  text = """
+    d) consistency with the hardware-software interface.
+  """
+
+  steps = [Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Project]
+
+  just = """
+    Consistency of formally-verified unit requirements with the HSI is
+    verified at step :ref:`step-verify-project`
+
+    Consistency of non-formally-verified unit requirements with the
+    HSI refinement is verified at step :ref:`step-inspect-unit-design`
+  """
+}
+
+Tracing p6_c6_5_1 {
+  ref = 6 @ 6:5:1
+  text = """
+    **Software safety requirements specification** resulting
+    from requirements 6.4.1 to 6.4.3 and 6.4.5.
+  """
+
+  steps = [Steps.ID.Capture_Requirements]
+
+  just = """
+    The set of requirements in the public part of external ADS files
+    specified at step :ref:`step-capture-requirements` is the subset of the unit
+    safety requirements specification governed by this process.
+  """
+}
+
+Tracing p6_c6_5_2 {
+  ref = 6 @ 6:5:2
+  text = """
+    **Hardware-software interface (HSI) specification (refined)**
+    resulting from requirement 6.4.4.
+
+    NOTE: This work product refers to the same work product as
+    given in ISO 26262-5:2018, 6.5.2.
+  """
+
+  just = """
+    HSI refinement is out of the process scope. The process ensures
+    consistency with HSI, but the process doesn't define (refined) HSI
+    as a work product.
+  """
+}
+
+Tracing p6_c6_5_3 {
+  ref = 6 @ 6:5:3
+  text = """
+    **Software verification report** resulting from
+    requirements 6.4.6 and 6.4.7.
+  """
+
+  alt_steps = """
+    See section entitled "Software Unit Verification Checklist"
+  """
+
+  just = """
+    Verification report exists in form of checklist, which is
+    described in section entitled "Software Unit Verification
+    Checklist"
+  """
+}

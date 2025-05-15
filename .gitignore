@@ -1,0 +1,9 @@
+build
+__pycache__
+
+*~
+\#*\#
+.\#*
+
+cvc5-Win64-static.zip
+cvc5.exe

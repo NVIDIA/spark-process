@@ -1,0 +1,556 @@
+// generated from how_to_use_gnatprove_in_a_team.rst, do not edit by hand
+
+package Gnatprove_Assumptions
+
+Gnatprove_Assumption SPARK_JUSTIFICATION {
+  kind = Kind.All
+  text = '''
+    All justifications of check messages should be reviewed (see Justifying
+    Check Messages), both when using Direct Justification with Pragma
+    Annotate and when using Indirect Justification with Pragma Assume.
+  '''
+}
+
+Gnatprove_Assumption SPARK_EXTERNAL {
+  kind = Kind.All
+  text = '''
+    The modeling of Interfaces to the Physical World needs to be reviewed
+    for objects whose value may be modified concurrently.
+
+    * They should be `effectively volatile` in SPARK (see SPARK RM 7.1.2), so
+      that GNATprove takes into account possible concurrent changes in the
+      object's value. The warning
+      `imprecisely supported address specification` is
+      guaranteed to be issued in cases where review is required.
+
+    * They should be `synchronized` in SPARK (see SPARK RM 9) to prevent race
+      conditions which could lead to reading invalid values. The warning
+      `imprecisely supported address specification` is guaranteed to be
+      issued in cases where review is required.
+
+    * They should have specified all necessary Properties of Volatile
+      Variables corresponding to their usage. The warning
+      `imprecisely supported address specification` is guaranteed
+      to be issued in cases where review is required.
+  '''
+}
+
+Gnatprove_Assumption SPARK_ALIASING_ADDRESS {
+  kind = Kind.All
+  text = '''
+    Aliases between objects with an imprecisely supported address
+    specification are ignored by GNATprove. Reviews are necessary to ensure that:
+
+    * The objects themselves are annotated with the ``Asynchronous_Writers``
+      volatile property if they can be affected by the modification of another
+      object. The warning
+      `imprecisely supported address specification` is guaranteed
+      to be issued in cases where review is required.
+
+    * Other objects visible from SPARK code which might be affected by a
+      modification of such a variable have the ``Asynchronous_Writers`` volatile
+      property set to True. The warning
+      `imprecisely supported address specification` is guaranteed to be issued
+      in cases where review is needed.
+
+    * Other objects visible from SPARK code which might be affected by a
+      modification of such a variable have valid values for their type when read.
+      The warning `imprecisely supported address specification` is guaranteed to
+      be issued in cases where review is needed.
+  '''
+}
+
+Gnatprove_Assumption SPARK_VALID {
+  kind = Kind.All
+  text = '''
+    Attribute 'Valid is currently assumed to always return True, as no invalid
+    value can be constructed in SPARK (see Data Validity).  If assumptions
+    [[SPARK_ALIASING_ADDRESS]], [[SPARK_EXTERNAL_VALID]], and [[ADA_EXTERNAL]] are
+    satisfied, then this assumption will be satisfied as well. However, it is
+    valuable to explicitly state this assumption because it highlights an
+    important consequence of compliance with the other assumptions.
+  '''
+}
+
+Gnatprove_Assumption SPARK_EXTERNAL_VALID {
+  kind = Kind.All
+  text = '''
+    Values read from objects whose address is specified are assumed to be valid
+    values. This assumption is limited to objects with an imprecisely
+    supported address (because an explicit check is emitted
+    otherwise). Currently there is no model of invalidity or undefinedness. The
+    onus is on the user to ensure that all values read from an external source
+    are valid. The use of an invalid value invalidates any proofs associated with
+    the value. The warning `imprecisely supported address specification` is
+    guaranteed to be issued in cases where review is required.
+  '''
+}
+
+Gnatprove_Assumption SPARK_STORAGE_ERROR {
+  kind = Kind.All
+  text = '''
+    As explained in section Dealing with Storage_Error, GNATprove does not
+    issue messages about possible memory exhaustion, which leads to raising
+    exception ``Storage_Error`` at runtime. The computation of suitable stack and
+    heap sizes should be performed independently.
+  '''
+}
+
+Gnatprove_Assumption SPARK_TARGET_AND_RUNTIME {
+  kind = Kind.All
+  text = '''
+    When the target configuration and runtime library for running the program are
+    different from those on the host when GNATprove is run, the target
+    configuration (see Specifying the Target Architecture and
+    Implementation-Defined Behavior) and runtime library (see Using the
+    GNAT Target Runtime Directory) should be set, so that GNATprove correctly
+    interprets the behavior of the program at runtime.
+  '''
+}
+
+Gnatprove_Assumption SPARK_FLOATING_POINT {
+  kind = Kind.All
+  text = '''
+    When using floating-point numbers, GNATprove relies on the Semantics of
+    Floating Point Operations as defined in IEEE-754. The compiler, OS, and
+    hardware should all be configured so that IEEE-754 semantics are respected.
+  '''
+}
+
+Gnatprove_Assumption SPARK_COMPILATION_SWITCHES {
+  kind = Kind.All
+  text = '''
+    Compilation switches that change the behavior of the program should be the
+    same between compilation and analysis. This is in particular the case for
+    Overflow Modes.
+  '''
+}
+
+Gnatprove_Assumption SPARK_ITERABLE {
+  kind = Kind.All
+  text = '''
+    When a type is annotated with an ``Iterable`` aspect:
+
+    * the function ``Has_Element`` shall be such that,
+      for any container object ``Container`` and cursor object ``Cursor``,
+      ``Has_Element (Container, Cursor)`` only evaluates to True if ``Cursor``
+      is accessible from ``First (Container)`` using the function ``Next``, and
+
+    * for any container object ``Container``, the iteration from
+      ``First (Container)`` through the function ``Next`` shall reach a cursor
+      ``Cursor`` for which ``Has_Element (Container, Cursor)`` evaluates to
+      False in a finite number of steps.
+  '''
+}
+
+Gnatprove_Assumption SPARK_ITERABLE_FOR_PROOF {
+  kind = Kind.All
+  text = '''
+    When a type has an ``Iterable_For_Proof`` annotation,
+
+    * the function ``Contains``
+      shall be such that, for any container object ``Container`` and any element
+      ``E``, ``Contains (Container, E)`` evaluates to True if and only
+      if there is a cursor object ``Cursor`` such that
+      ``Has_Element (Container, Cursor)`` evaluates to True and ``E`` is the
+      result of ``Element (Container, Cursor)``, or
+
+    * the function ``Model``
+      shall be such that, for any container object ``Container`` and any element
+      ``E``, there is a cursor  object ``Cursor`` such that
+      ``Has_Element (Container, Cursor)`` evaluates to True and ``E`` is the
+      result of ``Element (Container, Cursor)`` if and only if
+      there is a cursor object ``M_Cursor`` for the model type such that
+      ``Has_Element (Model (Container), M_Cursor)`` evaluates to True and ``E`` is
+      the result of ``Element (Model (Container), M_Cursor)``.
+  '''
+}
+
+Gnatprove_Assumption SPARK_INITIALIZED_ATTRIBUTE {
+  kind = Kind.All
+  text = '''
+    GNATprove assumes that the ``Initialized`` attribute is not referenced in any
+    SPARK code that is executed. This assumption is necessary because evaluation
+    of the ``Initialized`` attribute during execution is based on
+    ``Valid_Scalars``, and ``Valid_Scalars`` sometimes evaluates to True on
+    uninitialized data. Note that, despite this assumption, it can be valuable
+    during testing to execute contracts and other ghost code that references the
+    ``Initialized`` attribute, as long as the executable code of the product
+    itself does not reference the ``Initialized`` attribute.
+  '''
+}
+
+Gnatprove_Assumption SPARK_OVERRIDING_AND_TASKING {
+  kind = Kind.All
+  text = '''
+    If there are overriding operations called using a dispatching call, then
+    GNATprove assumes that the overriding operation does not have any adverse
+    tasking-related effects. In particular, GNATprove assumes that the overriding
+    operation:
+
+    * does not call protected entries,
+    * does not suspend on suspension objects,
+    * does not lock protected objects with calls to protected subprograms,
+    * does not call Ada.Task_Identification.Current_Task.
+  '''
+}
+
+Gnatprove_Assumption ADA_TASKING {
+  kind = Kind.Part
+  text = '''
+    If entry points for concurrent tasks (either OS tasks or units of
+    computations scheduled by a runtime component) are not identified as tasks in
+    SPARK, then during each invocation of a SPARK subprogram from such a task
+    such that the SPARK subprogram is not being called directly or indirectly
+    from another SPARK subprogram in the same task, the Global contract and
+    by-reference parameters of the subprogram shall not conflict with either (a)
+    the Global contract and by-reference parameters of any other such subprogram
+    executing concurrently in another such task or (b) the Global contract of any
+    concurrent task identified as a task in SPARK.
+    Two global objects and/or by-reference parameters referring to the same
+    object are said to conflict if both (1) they are not both synchronized
+    and (2) at least one can be modified by the callee.
+
+    In addition, calls from SPARK units to subprograms which are not analyzed by
+    GNATprove should not have any adverse tasking-related effects. In particular,
+    GNATprove assumes that such calls do not cause tasks visible from SPARK to:
+
+    * call protected entries that they are not calling in a way which is visible
+      from SPARK,
+    * suspend on suspension objects on which they do not suspend in a way which
+      is visible from SPARK.
+  '''
+}
+
+Gnatprove_Assumption ADA_EXTERNAL {
+  kind = Kind.Part
+  text = '''
+    Objects accessed outside of SPARK, either directly for statically allocated
+    objects, or through their address or a pointer for all objects, should comply
+    with the assumptions described in [[SPARK_EXTERNAL]], [[SPARK_ALIASING_ADDRESS]]
+    and [[SPARK_EXTERNAL_VALID]].
+  '''
+}
+
+Gnatprove_Assumption ADA_EXTERNAL_ABSTRACT_STATE {
+  kind = Kind.Part
+  text = '''
+    The modeling of Interfaces to the Physical World needs to be reviewed
+    for abstract states whose value may be modified concurrently, when their
+    refinement is not in SPARK. These abstract states should comply with the
+    assumptions described in [[SPARK_EXTERNAL]].
+  '''
+}
+
+Gnatprove_Assumption ADA_EXTERNAL_NAME {
+  kind = Kind.Part
+  text = '''
+    Objects annotated with an aspect ``External_Name`` or ``Link_Name`` should
+    comply with the assumptions described in [[SPARK_EXTERNAL]],
+    [[SPARK_ALIASING_ADDRESS]] and [[SPARK_EXTERNAL_VALID]].
+  '''
+}
+
+Gnatprove_Assumption ADA_PRIVATE_TYPES {
+  kind = Kind.Part
+  text = '''
+    Private types whose full view is not analyzed, yet are used in
+    SPARK code, need to comply with the implicit or explicit contracts used by
+    GNATprove to analyze references to these types. This concerns:
+
+    * private types and private type extensions declared in a package with a
+      ``pragma SPARK_Mode (Off);`` in its private part,
+
+    * type completions in a non-SPARK package body.
+
+    The (explicit or implicit) type contract to check is made up of:
+
+    * Default Initial Condition (explicit or implicit, no runtime error
+      shall occur during default initialization of an object of this type unless
+      its default initial condition does not refer to the current type instance
+      or only refers to its discriminants and it evaluates to False)
+
+    * Ownership annotations (implicit, if a type is not annotated with Ownership,
+      copying it around shall not create visible aliasing and if it is not
+      annotated with Needs_Reclamation, its finalization shall not leak
+      resources or memory).
+
+    In addition, the default initialization of values of the type and the
+    evaluation of its potential type invariant or subtype predicate shall not
+    access any mutable state.
+  '''
+}
+
+Gnatprove_Assumption ADA_TAGGED_TYPES {
+  kind = Kind.Part
+  text = '''
+    When a tagged type ``T`` visible in SPARK is extended outside of SPARK code,
+    extensions of ``T`` whose full view is not analyzed by GNATprove shall not
+    break the assumptions on values of type ``T'Class``. In particular, they
+    should abide by its Default Initial Condition, and should not add
+    components which require a specific handling with respect to ownership.
+  '''
+}
+
+Gnatprove_Assumption ADA_RECURSIVE_TYPES {
+  kind = Kind.Part
+  text = '''
+    Recursive data-structures accessed by SPARK code but created out of SPARK
+    should not be cyclic even if they are constant (but sharing is OK).
+  '''
+}
+
+Gnatprove_Assumption ADA_ELABORATION {
+  kind = Kind.Part
+  text = '''
+    If a package is not analyzed but is part of the application code, its
+    elaboration:
+
+    * shall not modify any global state visible from SPARK unless it is part
+      of the package's own state.
+
+    * shall always terminate normally.
+
+    In addition, if the package specification is referenced, directly or
+    indirectly, from a SPARK unit, it needs to comply with the implicit
+    or explicit contracts used by GNATprove to analyze these user packages.
+
+    The (explicit or implicit) package contract to check is made up of:
+
+    * ``Initializes`` contracts (explicit or implicitly generated by GNATprove)
+
+    * ``Initial_Condition`` (only explicit)
+
+    * the aliases constraints of SPARK (implicit - there shall not be any
+      aliases in the global state visible from SPARK after the package
+      elaboration)
+  '''
+}
+
+Gnatprove_Assumption ADA_SUBPROGRAMS {
+  kind = Kind.Part
+  text = '''
+    Subprograms that are not analyzed, yet are called from SPARK code, need to
+    comply with the implicit or explicit contracts used by GNATprove to analyze
+    calls to these subprograms. This concerns:
+
+    * subprograms whose body is not given for analysis; and
+
+    * subprograms whose body is marked ``SPARK_Mode => Off``, either explicitly
+      or implicitly (inherited from the enclosing scope).
+
+    Note that we consider here both non-generic subprograms and instantiations
+    of generic subprograms, never generic subprograms themselves.
+
+    The (explicit or implicit) subprogram contract to check is made up of:
+
+    * Type Contracts of parameters, result (for a function) and global
+      objects produced as outputs from the non-SPARK callee to the SPARK caller
+
+    * Postconditions (only explicit)
+
+    * Contract Cases (only explicit)
+
+    * Data Dependencies (explicit or implicitly generated by GNATprove)
+
+    * Flow Dependencies (explicit or implicitly generated by GNATprove)
+
+    * Exceptional contracts (explicit or implicit) - the exceptional
+      contract should list all exceptions that might be propagated by the
+      subprogram and the associated postconditions should hold whenever an
+      exception is propagated
+
+    * Subprogram Termination (only explicit except for functions which
+      should always return in SPARK) - subprograms annotated with
+      ``Always_Terminates`` should terminate (return normally or raise an
+      exception) whenever the associated boolean condition evaluates to True on
+      entry of the subprogram, assuming that primary stack, secondary stack, and
+      heap memory allocations never fail. Other subprograms are not restricted
+
+    * the aliasing constraints of SPARK (implicit - the subprogram shall not
+      introduce any visible aliases between its parameters, accessed global
+      objects, and return value if any, unless it is a traversal function, in
+      which case its return value shall be a part of its traversed parameter, or
+      unless the aliases introduced are compatible with assumption
+      [[SPARK_ALIASING_ADDRESS]])
+
+    * parameter modes - in particular, parameters of
+      mode *in* which are not considered to be variable should not be modified,
+      including the values designated by their potential access-to-variable
+      subcomponents, and parameters of mode *out* which are not subjected to
+      relaxed initialization (see Aspect Relaxed_Initialization) should be
+      entirely initialized.
+
+    Note that this also applies to subprograms which are called indirectly
+    from SPARK code, either through a dispatching call or through a call to
+    an access-to-subprogram, and to (predefined) operators like ``"="``.
+  '''
+}
+
+Gnatprove_Assumption ADA_CALLS {
+  kind = Kind.Part
+  text = '''
+    Calls to SPARK subprograms from subprograms that are not analyzed need to
+    comply with the implicit or explicit preconditions used by GNATprove to
+    analyze the called SPARK subprograms. This concerns the same subprograms as
+    considered in [[ADA_SUBPROGRAMS]].
+
+    The (explicit or implicit) precondition to check is made up of:
+
+    * Type Contracts of both parameters and global objects taken as input
+      by the SPARK callee from the non-SPARK caller
+
+    * Preconditions (explicit)
+
+    * the aliasing constraints of SPARK (implicit) - the context shall not
+      alias the callee's parameters and accessed global objects in ways that
+      are not allowed in SPARK
+
+    * the initialization of inputs (implicit) - parameters of mode *in* or *in
+      out* and global variables of mode *Input* or *In_Out* which are not
+      subjected to relaxed initialization (see Aspect
+      Relaxed_Initialization) should be entirely initialized
+  '''
+}
+
+Gnatprove_Assumption ADA_OBJECT_ADDRESSES {
+  kind = Kind.Part
+  text = '''
+    When the body of a function is not analyzed by GNATprove, its result should
+    not depend on the address of parts of its parameters or global inputs unless
+    it is annotated with ``Volatile_Function``.
+    When the body of a procedure is not analyzed by GNATprove, none of its
+    outputs should depend on the address of parts of its parameters or global
+    inputs unless the output is volatile for reading, or its value depends on an
+    input which is volatile for reading as stated in a Depends contract.
+  '''
+}
+
+Gnatprove_Assumption ADA_STATE_ABSTRACTION {
+  kind = Kind.Part
+  text = '''
+    Units whose body is not analyzed, yet are used from SPARK code, need to
+    declare suitable State Abstraction, and subprograms defining the API
+    of such a unit should have correct Data Dependencies describing how a
+    subprogram reads or writes parts of the state abstraction. The state
+    abstraction may represent program variables, but also states of the OS,
+    aspects of the file system, attributes of the underlying hardware, etc.
+
+    All entities that are part of the SPARK-compatible spec of the unit need to
+    comply with the implicit or explicit contracts used by GNATprove to analyze
+    use of these entities. This concerns:
+
+    * the package itself (see Package Contracts); and
+
+    * the API of the package.
+  '''
+}
+
+Gnatprove_Assumption ADA_LOGICAL_EQUAL {
+  kind = Kind.Part
+  text = '''
+    If the aspect or pragma ``Logical_Equal`` is used on a function whose
+    implementation is not analyzed, yet called from SPARK code, the
+    implementation of this function should correspond to the logical equality for
+    the corresponding type as used by GNATprove. See Annotation for Accessing the
+    Logical Equality for a Type for information about the logical equality. Note
+    that this assumption does not apply to functions without any implementation.
+  '''
+}
+
+Gnatprove_Assumption ADA_INLINE_FOR_PROOF {
+  kind = Kind.Part
+  text = '''
+    If the aspect or pragma ``Inline_For_Proof`` is used on a function with a
+    postcondition whose implementation is not analyzed, yet called from SPARK
+    code, and the function has a postcondition whose expression is syntactically
+    a relation using the '=' relational_operator (or an expression that
+    parenthesizes such a relation), where one side of the relation is
+    syntactically an attribute_reference to the Result attribute of the function,
+    then GNATprove assumes that the value of the postcondition expression is
+    true if and only if the function return value is logically equal to an Ada
+    copy of the value of the other side of the relation.
+  '''
+}
+
+Gnatprove_Assumption PARTIAL_GLOBAL {
+  kind = Kind.Modular
+  text = '''
+    Subprograms which are called across the boundary of those units analyzed
+    together should have a Global contract describing their effect on global
+    data, otherwise they will be assumed to have no effect on global data.
+    The warning `assumed Global null` is guaranteed to be issued in cases where
+    review is required.
+  '''
+}
+
+Gnatprove_Assumption PARTIAL_TERMINATION {
+  kind = Kind.Modular
+  text = '''
+    Procedures and entries which are called across the boundary of those units
+    analyzed together should be annotated to specify under which condition they
+    shall terminate using the ``Always_Terminates`` aspect. Otherwise, these
+    subprograms will be assumed to never terminate (if they are annotated with
+    ``No_Return``) or always terminate (otherwise). The warning
+    `assumed Always_Terminates` is guaranteed to be issued in cases where review
+    is required.
+  '''
+}
+
+Gnatprove_Assumption PARTIAL_TASKING {
+  kind = Kind.Modular
+  text = '''
+    If no single run of GNATprove analyzes all units that define tasks, then for
+    each run of GNATprove, all tasks `not` defined in units analyzed during that
+    run of GNATprove must comply with [[ADA_TASKING]] as if those tasks were not
+    SPARK tasks. Note: The environment task, which is present in every Ada
+    partition, is considered by GNATprove to be defined by the unit that defines
+    the main subprogram of that Ada partition. Note also: If an Ada partition
+    defines no tasks other than the environment task, then that Ada partition is
+    trivially in compliance with this assumption.
+  '''
+}
+
+Gnatprove_Assumption PARTIAL_ACYCLIC_ANALYSIS {
+  kind = Kind.Modular
+  text = '''
+    Consider the directed graph where the nodes are the compilation units and
+    there is an edge from a unit A to a unit B if there is a with clause for B in
+    the specification or the body of A. All (bodies of) units of a strongly
+    connected component in this graph should be analyzed as part of a single
+    analysis of GNATprove. This is so GNATprove can detect that the analyses of
+    strongly connected units depend on each other and use its internal
+    mechanism to avoid unsoundness.
+  '''
+}
+
+Gnatprove_Assumption GNAT_SPARKLIB_LEMMAS {
+  kind = Kind.Compiler
+  text = '''
+    When using lemmas from the SPARK Lemma Library, GNAT-specific lemmas
+    (e.g. on fixed-point arithmetic) should be reviewed to ensure that the same
+    semantics is used in the compiler. The name of such lemmas starts with "GNAT"
+    and the associated comment explains how it is specific to GNAT.
+  '''
+}
+
+Gnatprove_Assumption GNAT_PEDANTIC {
+  kind = Kind.Compiler
+  text = '''
+    The switch ``--pedantic`` should be used as explained in section
+    Specifying the Target Architecture and Implementation-Defined Behavior
+    to warn about possible implementation-defined behavior, and the resulting
+    warnings if any should be reviewed.
+  '''
+}
+
+Gnatprove_Assumption GNAT_PORTABILITY {
+  kind = Kind.Compiler
+  text = '''
+    The section Ensure Portability of Programs should be reviewed for
+    possible differences in implementation defined behavior between
+    GNAT/GNATprove and the chosen compiler (e.g. regarding choice of base type
+    for scalars).
+  '''
+}
+

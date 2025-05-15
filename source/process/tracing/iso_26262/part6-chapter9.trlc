@@ -1,0 +1,1095 @@
+/*
+ * Copyright (C) 2024 - 2025 NVIDIA CORPORATION & AFFILIATES
+ * Copyright (C) 2021 - 2024 AdaCore
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3 or
+ * any later version published by the Free Software Foundation; with the
+ * Invariant Sections being "Attribution", with no Front-Cover
+ * Texts, and no Back-Cover Texts.  A copy of the license is included in
+ * the section entitled "GNU Free Documentation License".
+ */
+
+/*
+ * The fields 'text', 'row', and 'applies' are all:
+ *   (C)ISO. This material is reproduced from ISO 26262, with permission of
+ *   the American National Standards Institute (ANSI) on behalf of the
+ *   International Organization for Standardization. All rights reserved.
+ */
+
+package ISO_26262_Tracing
+import Steps
+
+Tracing p6_c9_1_a {
+  ref = 6 @ 9:1
+  subref = "a"
+  text = """
+    The objectives of this sub-phase are:
+
+    a) to provide evidence that the software unit design
+       satisfies the allocated software requirements
+       and is suitable for the implementation;
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Verify_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Non_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Requirement_Correctness_And_Completeness,
+	   Steps.ID.Identify_Internal_Packages,
+	   Steps.ID.Create_Internal_ADS,
+	   Steps.ID.Declare_Internal_Types_States_And_Subprograms,
+	   Steps.ID.Capture_Unit_Design_Constraints,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Unit_Design,
+	   Steps.ID.Verify_Project]
+
+  just = """
+    Formally-proven requirements are verified against unit design that
+    specifies types, interfaces and data. They are also verified
+    against the implementation (:ref:`step-verify-project`).
+
+    When software requirements are not specified or proved in SPARK,
+    an inspection is done to verify the consistency of data specified
+    during the unit design phase with software requirements.
+  """
+}
+
+Tracing p6_c9_1_b {
+  ref = 6 @ 9:1
+  subref = "b"
+  text = """
+    b) to verify that the defined safety measures resulting from
+       safety-oriented analyses in accordance with 7.4.10 and
+       7.4.11 are properly implemented;
+  """
+
+  steps = [Steps.ID.Capture_Requirements]
+  ref_steps = [p6_c9_1_a,
+	       p6_c9_1_c]
+
+  just = """
+    According to the process, any safety measures resulting from
+    safety-oriented analyses must be captured as unit requirements in
+    ADS file (:ref:`step-capture-requirements`). See 6-9.1 a & c for how the
+    process ensures that these requirements are properly implemented
+  """
+}
+
+Tracing p6_c9_1_c {
+  ref = 6 @ 9:1
+  subref = "c"
+  text = """
+    c) to provide evidence that the implemented software unit
+       complies with the unit design and fulfils the allocated
+       software requirements with the required ASIL; and
+  """
+
+  steps = [Steps.ID.Verify_Project,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Inspect_Implementation]
+  alt_steps = '''"Dynamic Verification" section'''
+
+  just = """
+    Compliance with formally-specified requirements and
+    formally-specified claims in unit design is formally-verified by
+    GNATprove at step :ref:`step-verify-project`.
+
+    Compliance with informal requirements and informal parts of the
+    unit design is verified through the manual inspection
+    (:ref:`step-inspect-unit-design`, :ref:`step-inspect-implementation`) and testing (Dynamic
+    Verification section)
+  """
+}
+
+Tracing p6_c9_1_d {
+  ref = 6 @ 9:1
+  subref = "d"
+  text = """
+    d) to provide sufficient evidence that the software unit contains
+       neither undesired functionalities nor undesired properties
+       regarding functional safety.
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Unit_Test_Run_And_Coverage,
+	   Steps.ID.Handle_Coverage_Deviations]
+
+  just = """
+    In fully formally verified code, in order to reduce the
+    possibility of unintended functionality, the following is done:
+    effects are specified and verified automatically, so we know
+    exactly which variables are read and written; contracts express
+    fully the requirements over changes to data; proof ensures that
+    these contracts are fully respected.
+
+    If the unit is not fully formally verified, manual inspection of
+    the implementation is performed, coverage is run against
+    functional tests and deviations are addressed.
+  """
+}
+
+Tracing p6_c9_2_p1 {
+  ref = 6 @ 9:2
+  subref = "paragraph 1"
+  text = """
+    The software unit design and the implemented software units
+    are verified by using an appropriate combination of
+    verification measures such as reviews, analyses and testing.
+  """
+
+  alt_steps = '''"Unit Verification" section'''
+
+  just = """
+    Whenever reasonably possible, formal methods are used to verify
+    software implementation - together with targeted static analysis
+    and reviews.
+
+    A combination of static analysis, unit testing and reviews is
+    performed on non-formally verified software.
+  """
+}
+
+Tracing p6_c9_2_p2 {
+  ref = 6 @ 9:2
+  subref = "paragraph 2"
+  text = """
+    In order to verify a single software unit design, both software
+    safety requirements and all non-safety-related requirements are
+    considered. Hence in this sub-phase safety-related and
+    non-safety-related requirements  are  handled within one
+    development process.
+  """
+
+  steps = [Steps.ID.Capture_Requirements]
+  alt_steps = '''Section entitled "Unit Verification"'''
+
+  just = """
+    This process requires the unit design to consider both safety- and
+    non-safety related requirements (:ref:`step-capture-requirements`).
+
+    During the verification (Unit_Verification), the process does not
+    differentiate safety- and non-safety requirements.
+  """
+}
+
+Tracing p6_c9_4_1 {
+  ref = 6 @ 9:4:1
+  subref = ""
+  text = '''
+    The requirements of this sub-clause shall be complied with if the
+    software unit is a safety-related element.
+
+    NOTE 1: "Safety-related element" according to ISO 26262-1 means
+    that the unit implements safety requirements, or that the
+    criteria for coexistence (see ISO 26262-9:2018, Clause 6) of
+    the unit with other units are not satisfied.
+
+    NOTE 2: The requirements of this clause address safety-related
+    software units; other software standards (see ISO 26262-2:2018,
+    5.4.5.1) can apply for verification of other software units.
+
+    NOTE 3: For model-based software development, the corresponding
+    parts of the implementation model also represent objects for the
+    verification planning. Depending on the selected software
+    development process the verification objects can be the code
+    derived from this model, the model itself, or both.
+  '''
+
+  alt_steps = "See sections 6-9.4.2, 6-9.4.3 and 6-9.4.4"
+
+  just = """
+    6-9.4 is applicable to the process, because the process is
+    designed for safety-related units.
+
+    See subsequent sections 6-9.4.2, 6-9.4.3 and 6-9.4.4, how the
+    process complies to 6-9.4
+  """
+}
+
+Tracing p6_c9_4_2_a {
+  ref = 6 @ 9:4:2
+  subref = "a"
+  text = """
+    The software unit design and the implemented software unit
+    shall be verified in accordance with ISO 26262-8:2018,
+    Clause 9 by applying an appropriate combination of methods
+    according to Table 7 to provide evidence for:
+
+    a) compliance with the requirements regarding the unit
+       design and implementation in accordance with Clause 8;
+
+       NOTE 1: Software safety requirements include both functions
+       and properties of the software.
+
+       NOTE 2: Performing verification at the model level can
+       substitute for verification at the source code level
+       provided that the code generation preserves the properties
+       (e.g. sufficient confidence in the code generators used).
+
+       EXAMPLE: Evidence for the effective implementation of the
+       error detection and error handling mechanisms specified to
+       achieve robustness of the software unit against erroneous
+       inputs.
+  """
+
+  steps = [Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Unit_Design,
+	   Steps.ID.Verify_Project]
+  alt_steps = '''See section entitled "Unit Verification"'''
+
+  just = """
+    Compliance with formally-verified requirements is verified by
+    GNATprove in the :ref:`step-verify-unit-design` and :ref:`step-verify-project` steps.
+
+    Compliance with non-formally-verified requirements is verified in
+    the :ref:`step-inspect-unit-design` step (for the unit design) and by applying
+    procedures described in section entitled "Unit Verification",
+    including: implementation inspection, testing, static code and
+    coverage analyses
+  """
+}
+
+Tracing p6_c9_4_2_b {
+  ref = 6 @ 9:4:2
+  subref = "b"
+  text = """
+    b) the compliance of the source code with its
+       design specification;
+
+       NOTE 3: In the case of model-based development,
+       requirement b) still applies.
+  """
+
+  steps = [Steps.ID.Verify_Project]
+  alt_steps = '''See section entitled "Unit Verification"'''
+
+  just = """
+    Compliance with formally-specified parts of the unit design is
+    verified by GNATprove at step :ref:`step-verify-project`.
+
+    Compliance with informal parts of the unit design is verified by
+    applying procedures described in section entitled "Unit
+    Verification", including: implementation inspection, testing,
+    static code and coverage analyses
+  """
+}
+
+Tracing p6_c9_4_2_c {
+  ref = 6 @ 9:4:2
+  subref = "c"
+  text = """
+    c)  compliance with the specification of the hardware-software
+        interface (in accordance with 6.4.4), if applicable;
+  """
+
+  steps = [Steps.ID.Capture_Requirements]
+  ref_steps = [p6_c9_4_2_a]
+
+  just = """
+    According to :ref:`step-capture-requirements`, the requirements also include
+    those in hardware-software interface specifications applicable to
+    the software unit as determined by the software architectural
+    design. Therefore, compliance with HSI is ensured if the unit
+    design complies to all its requirements (see 6-9.4.2 (a) above).
+  """
+}
+
+Tracing p6_c9_4_2_d {
+  ref = 6 @ 9:4:2
+  subref = "d"
+  text = """
+    d) confidence in the absence of unintended functionality and properties;
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Verify_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Unit_Design,
+	   Steps.ID.Inspect_Implementation,
+	   Steps.ID.Verify_Non_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Requirement_Correctness_And_Completeness,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Review_Tests,
+	   Steps.ID.Unit_Test_Run_And_Coverage]
+
+  just = """
+    For formally-verified unit, as described in section entitled
+    "Capture Formal Requirements" [TFV13]_ gives a method on how to be
+    confident in the absence of unintended functionality and
+    properties:
+
+    * Requirements completeness is checked as part of the
+      :ref:`step-verify-formal-requirement-consistency` step
+
+    * Unintended dataflow are detected through the :ref:`step-verify-unit-design`
+      step
+
+    * the :ref:`step-verify-project` step assures that the verification evidence
+      is complete
+
+    * The manual inspection performed during the
+      :ref:`step-inspect-implementation` step to increase confidence that there is
+      no unintended functionality.
+
+    When units are not fully proven, inspections are performed at
+    different stages of the process in order to verify the
+    completeness of the requirements, the unit design fragments, and
+    the implementation, and to verify the consistency between
+    requirements and unit design, between unit design and
+    implementation. Finally, test coverage is performed at the unit
+    level that checks code is fully covered.
+  """
+}
+
+Tracing p6_c9_4_2_e {
+  ref = 6 @ 9:4:2
+  subref = "e"
+  text = """
+    e) sufficient resources to support their functionality
+       and properties; and
+  """
+
+  steps = [Steps.ID.Capture_Requirements]
+  alt_steps = '''Section entitled "Unit Verification"'''
+
+  just = """
+    According to the section entitled "Capture Requirements" necessary
+    resource constraints must be specified as unit
+    requirements. Therefore to ensure sufficiency of the resources it
+    is enough to verify the completeness and consistency of the
+    requirements and that the unit design and implementation comply
+    with the requirements (Unit_Verification).
+  """
+}
+
+Tracing p6_c9_4_2_f {
+  ref = 6 @ 9:4:2
+  subref = "f"
+  text = """
+    f) implementation of the safety measures resulting from the
+       safety-oriented analyses in accordance with 7.4.10 and 7.4.11.
+   """
+
+  just = """
+    The safety measures allocated to the software unit to implement
+    are considered software unit requirements in this process and are
+    handled accordingly.
+  """
+}
+
+Tracing p6_c9_4_2_t7_1a {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1a"
+  row = """
+    Walk-through
+
+    For model-based development this method is applied at the
+    model level, if evidence is available that justifies confidence
+    in the code generator used.
+  """
+  applies = "Ab"
+
+  steps = [Steps.ID.Verify_Non_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Requirement_Correctness_And_Completeness,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Review_Diagnostic_Justifications,
+	   Steps.ID.Review_Deactivated_SPARK,
+	   Steps.ID.Inspect_Implementation]
+  alt_steps = '''See section entitled "Assumptions About Change Management"'''
+
+  just = """
+    Specific walkthroughs and reviews are implemented in the process
+    to comply with this objective:
+
+    * Any change is reviewed by at least two persons (see section
+      entitled "Assumptions about Change Management")
+
+    * Non formally-specified requirements are verified at step
+      :ref:`step-verify-non-formal-requirement-consistency`
+
+    * Requirements correctness and completeness is checked by manual
+      review at step :ref:`step-verify-requirement-correctness-and-completeness`
+
+    * Targeted reviews to justify GNATprove diagnostics and code with
+      deactivated SPARK at steps :ref:`step-review-diagnostic-justifications`,
+      :ref:`step-review-deactivated-spark`
+
+    * Unit design and unit implementation inspections
+      (:ref:`step-inspect-unit-design`, :ref:`step-inspect-implementation`)
+  """
+}
+
+Tracing p6_c9_4_2_t7_1b {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1b"
+  row = """
+    Pair-programming
+
+    For model-based development this method is applied at the
+    model level, if evidence is available that justifies confidence
+    in the code generator used.
+  """
+  applies = "abcd"
+
+  just = """
+    While pair-programming is recommended by ISO 26262, this process
+    does not require or recommend pair-programming.
+
+    Pair-programming is typically not feasible or effective due to the
+    geographic diversity of engineers, the growing emphasis on working
+    from home, and the varying speeds at which different engineers
+    develop software or even type and read.
+  """
+}
+
+Tracing p6_c9_4_2_t7_1c {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1c"
+  row = """
+    Inspection
+
+    For model-based development this method is applied at the
+    model level, if evidence is available that justifies confidence
+    in the code generator used.
+  """
+  applies = "aBCD"
+
+  steps = [Steps.ID.Verify_Non_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Requirement_Correctness_And_Completeness,
+	   Steps.ID.Review_Deactivated_SPARK,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Inspect_Implementation]
+
+  just = """
+    For units that cannot be proven, a manual inspection is done at
+    each step of the development:
+
+    * Requirements that cannot be translated into contracts are
+      consistent.
+
+    * Non SPARK subprograms are justified and the justification
+      reviewed.
+
+    * Implementation is inspected to ensure it fulfills non-formal
+      requirements.
+
+    For each proven unit, it is manually verified that requirements
+    are fully described and correctly represented.
+
+    Implementation is inspected to check its compliance with Ada/SPARK
+    design guidelines
+  """
+}
+
+Tracing p6_c9_4_2_t7_1d {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1d"
+  row = """
+    Semi-formal verification
+  """
+  applies = "abCD"
+
+  steps = [Steps.ID.Verify_Dynamic_Assumptions,
+	   Steps.ID.Review_Deactivated_SPARK]
+
+  just = """
+    Where contracts are specified, the :ref:`step-verify-dynamic-assumptions` step
+    ensures that unless those contracts are disabled through ``pragma
+    Assertion_Policy`` with the ``Ignore`` parameter (in which case
+    the :ref:`step-review-deactivated-spark` step requires the development of
+    additional test cases), the correctness of these contracts is
+    verified during testing.
+  """
+}
+
+Tracing p6_c9_4_2_t7_1e {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1e"
+  row = """
+    Formal verification
+  """
+  applies = "cd"
+
+  steps = [Steps.ID.Verify_Project]
+
+  just = """
+    When contracts are expressed within the SPARK subset, the
+    correctness of these contracts is formally verified.
+  """
+}
+
+Tracing p6_c9_4_2_t7_1f {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1f"
+  row = """
+    Control flow analysis
+
+    This method can be applied at the source code level. This
+    methods is applicable to both to manual code development and to
+    model-based development.
+
+    This method can be part of methods 1e, 1h or 1i.
+  """
+  applies = "abCD"
+
+  steps = [Steps.ID.Document_Design_Solutions,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Static_Analysis_Unit,
+	   Steps.ID.Static_Analysis_Integration,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Verify_Dynamic_Assumptions,
+	   Steps.ID.Unit_Test_Run_And_Coverage]
+
+  just = """
+    If the cleanliness-adjusted ASIL of the unit is ASIL C or ASIL D:
+
+    * Control and data flows must be documented with diagrams
+      (:ref:`step-document-design-solutions`) and corresponding analyses are
+      performed through manual inspection (:ref:`step-inspect-unit-design`)
+
+    * CodePeer is used to detect suspicious and potentially incorrect
+      control flows, such as unreachable code, redundant conditionals,
+      loops that either run forever or fail to terminate normally, and
+      subprograms that never return; CodePeer also detects suspicious
+      and potentially incorrect data flow. (:ref:`step-static-analysis-unit`,
+      :ref:`step-static-analysis-integration`).
+
+    This analysis is completed by structural code coverage analysis
+    that detects code not exercised by tests
+    (:ref:`step-unit-test-run-and-coverage`), which are run with
+    Initialize_Scalars and additional checks to detect in run-time
+    cases of uninitialized variables.
+
+    If the unit ASIL is ASIL C or ASIL D, but the cleanliness-adjusted
+    ASIL of the unit is QM, ASIL A or ASIL B, there is no need to
+    control and data flow analyses, because the risk that a
+    formally-verified unit design and unit implementation
+    (:ref:`step-verify-project`) will fail to comply with its formally-specified
+    ASIL C or ASIL D unit requirements and unit design constraints is
+    sufficiently small (see argumentation in :ref:`step-inspect-unit-design`).
+  """
+}
+
+Tracing p6_c9_4_2_t7_1g {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1g"
+  row = """
+    Data flow analysis
+
+    This method can be applied at the source code level. This
+    methods is applicable to both to manual code development and to
+    model-based development.
+
+    This method can be part of methods 1e, 1h or 1i.
+  """
+  applies = "abCD"
+
+  same_as = p6_c9_4_2_t7_1f
+}
+
+Tracing p6_c9_4_2_t7_1h {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1h"
+  row = """
+    Static code analysis
+
+    Static analyses are a collective term which includes
+    analysis such as searching the source code text or
+    the model for patterns matching known faults or
+    compliance with modelling or coding guidelines.
+  """
+  applies = "ABCD"
+
+  steps = [Steps.ID.Static_Analysis_Unit,
+	   Steps.ID.Static_Analysis_Integration,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Automated_Check_Against_Coding_Std,
+	   Steps.ID.Automated_Check_Against_Coding_Std_Integration]
+
+  just = """
+    For non-SPARK Ada code, CodePeer is used in the
+    :ref:`step-static-analysis-unit` and :ref:`step-static-analysis-integration` steps to
+    identify potential errors via static analysis.
+
+    For SPARK code, GNATprove is used in the :ref:`step-verify-project` step to
+    prove compliance with formally-specified unit requirements and to
+    prove the absence of run-time errors.
+
+    For all Ada code, GNATcheck is used in the
+    :ref:`step-automated-check-against-coding-std` and
+    :ref:`step-automated-check-against-coding-std-integration` steps to enforce
+    coding guidelines.
+  """
+}
+
+Tracing p6_c9_4_2_t7_1i {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1i"
+  row = """
+    Static analyses based on abstract interpretation
+
+    Static analyses based on abstract interpretation are a
+    collective term for extended static analysis which includes
+    analysis such as extending the compiler parse tree by
+    adding semantic information which can be checked against violation
+    of defined rules (e.g. data-type problems, uninitialized
+    variables), control-flow graph generation and data-flow analysis
+    (e.g. to capture faults related to race conditions and deadlocks,
+    pointer misuses) or even meta compilation and abstract code or
+    model interpretation.
+  """
+  applies = "abcd"
+
+  same_as = p6_c9_4_2_t7_1h
+}
+
+Tracing p6_c9_4_2_t7_1j {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1j"
+  row = """
+    Requirements-based test
+
+    The software requirements at the unit level are the basis
+    for this requirements-based test. These include the software
+    unit design specification and the software safety requirements
+    allocated to the software unit.
+  """
+  applies = "ABCD"
+
+  steps = [Steps.ID.Verify_Project]
+  alt_steps = '''See section entitled "Dynamic Verification"'''
+
+  just = """
+    According to the process formally-specified and formally-verified
+    with GNATprove requirements are not tested, because formal proofs
+    provide enough confidence in the unit design and implementation.
+
+    Informal requirements are verified through testing. These test
+    cases are derived from requirements and run with additional
+    dynamic checking activated as described in the section entitled
+    "Dynamic Verification".
+  """
+}
+
+Tracing p6_c9_4_2_t7_1k {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1k"
+  row = """
+    Interface test
+
+    This method can be used to provide evidence for the
+    integrity of used and exchanged data.
+  """
+  applies = "ABCD"
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Run_Integration_Tests]
+  alt_steps = '''Section entitled "Dynamic Verification"'''
+
+  just = """
+    The process expects (:ref:`step-capture-requirements`) that all interface
+    constraints are captured as requirements (formal or not).
+
+    Interface constraints that are formally-proven, do not need to be
+    tested, because the risk that the unit design and implementation
+    do not meet corresponding requirements is low
+    (:ref:`step-verify-project`). Therefore a fully formally-proven unit doesn't
+    need interface tests at all.
+
+    Non formally-proven interface constraints must be tested as
+    described in section entitled "Dynamic Verification"
+
+    The process also prescribes to run integration tests in two modes:
+    normal and with full assertions on to enable additional dynamic
+    checks to ensure that these errors are identified.
+  """
+}
+
+Tracing p6_c9_4_2_t7_1l {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1l"
+  row = """
+    Fault injection test
+
+    In the context of software unit testing, fault injection test
+    means to modify the tested software unit (e.g. introduce
+    faults into the software) for the purposes described in 9.4.2.
+    Such modifications include injection of arbitrary faults (e.g.
+    by corrupting values of variables, by introducing code mutations,
+    or by corrupting values of CPU registers).
+  """
+  applies = "abcD"
+
+  steps = [Steps.ID.Handle_Coverage_Deviations]
+
+  just = """
+    The :ref:`step-handle-coverage-deviations` step forbids the use of "explained
+    coverage" at ASIL D except when the explanation consists of formal
+    verification. Where formal verification and dynamic testing do not
+    together provide sufficient coverage of an ASIL D software unit,
+    the :ref:`step-handle-coverage-deviations` step expects fault injection tests
+    to be used.
+  """
+}
+
+Tracing p6_c9_4_2_t7_1m {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1m"
+  row = """
+    Resource usage evaluation
+
+    Some aspects of the resource usage evaluation can only be
+    performed properly when the software unit tests are executed
+    on the target environment or if the emulator for the target
+    processor adequately supports resource usage tests.
+  """
+  applies = "abcD"
+
+  steps = [Steps.ID.Check_Stack_Usage_Unit,
+	   Steps.ID.Check_Stack_Usage_Integration,
+	   Steps.ID.Capture_Requirements,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Inspect_Implementation]
+  alt_steps = '''See section entitled "Dynamic Verification"'''
+
+  just = """
+    To the extent resource usage constraints are expressed as
+    requirements at :ref:`step-capture-requirements` step, fulfillment of these
+    constraints is verified by GNATprove for formally-specified
+    requirements (:ref:`step-verify-project`) or through inspection and testing
+    for informal requirements (:ref:`step-inspect-implementation`, section
+    entitled "Dynamic Verification")
+
+    Stack usage is checked in steps :ref:`step-check-stack-usage-unit` and
+    :ref:`step-check-stack-usage-integration`
+  """
+}
+
+Tracing p6_c9_4_2_t7_1n {
+  ref = 6 @ 9:4:2
+  subref = "Table 7, 1n"
+  row = """
+    Back-to-back comparison test between model and code, if applicable
+
+    This method requires a model that can simulate the
+    functionality of the software units. Here, the model
+    and code are stimulated in the same way and results
+    compared with each other.
+
+    EXAMPLE: In the case of model-based design results of
+    non-floating-point operations can be compared.
+  """
+  applies = "abCD"
+
+  just = """
+    No model is used here, so back-to-back comparison tests are not
+    applicable.
+  """
+}
+
+Tracing p6_c9_4_3_t8_1a {
+  ref = 6 @ 9:4:3
+  subref = "Table 8, 1a"
+  text = """
+    To enable the specification of appropriate test cases for
+    the software unit testing in accordance with 9.4.2, test
+    cases shall be derived using the methods as listed in Table 8.
+  """
+  row = """
+    Analysis of requirements
+  """
+  applies = "ABCD"
+
+  steps = [Steps.ID.Verify_Project,
+	   Steps.ID.Write_Tests]
+
+  just = """
+    According to the process formally-specified and formally-verified
+    with GNATprove requirements are not tested, because formal proofs
+    provide enough confidence in the unit design and implementation.
+
+    Non formally-proven requirements are analyzed in step :ref:`step-write-tests`,
+    where necessary test cases are derived and implemented.
+
+  """
+}
+
+Tracing p6_c9_4_3_t8_1b {
+  ref = 6 @ 9:4:3
+  subref = "Table 8, 1b"
+  row = """
+    Generation and analysis of equivalence classes
+
+    Equivalence classes can be identified based on the
+    division of inputs and outputs, such that a
+    representative test value can be selected for each class.
+  """
+  applies = "aBCD"
+
+  steps = [Steps.ID.Write_Tests,
+	   Steps.ID.Verify_Project]
+
+  just = """
+    According to the process formally-specified and formally-verified
+    with GNATprove requirements are not tested, because formal proofs
+    provide enough confidence in the unit design and implementation
+
+    Equivalence classes are derived from the non-formally-verified
+    unit requirements, and corresponding tests are developed in step
+    :ref:`step-write-tests`.
+  """
+}
+
+Tracing p6_c9_4_3_t8_1c {
+  ref = 6 @ 9:4:3
+  subref = "Table 8, 1c"
+  row = """
+    Analysis of boundary values
+
+    This method applies to interfaces, values approaching and
+    crossing the boundaries and out of range values.
+  """
+  applies = "aBCD"
+
+  steps = [Steps.ID.Write_Tests,
+	   Steps.ID.Verify_Project]
+
+  just = """
+    According to the process formally-specified and formally-verified
+    with GNATprove requirements are not tested, because formal proofs
+    provide enough confidence in the unit design and implementation.
+
+    For non-formally-verified unit requirements, boundary values are
+    analyzed and corresponding tests are developed in step
+    :ref:`step-write-tests`.
+  """
+}
+
+Tracing p6_c9_4_3_t8_1d {
+  ref = 6 @ 9:4:3
+  subref = "Table 8, 1d"
+  row = """
+    Error guessing based on knowledge or experience
+
+    Error guessing tests can be based on data collected through
+    a "lessons learned" process and expert judgment.
+  """
+  applies = "abcd"
+
+  just = """
+    The process does not require this test derivation method to be
+    applied, because other mandatory test derivation methods provide
+    enough confidence that non formally-verified requirements are
+    sufficiently covered.
+  """
+}
+
+Tracing p6_c9_4_4 {
+  ref = 6 @ 9:4:4
+  text = '''
+    To evaluate the completeness of verification and to
+    provide evidence that the objectives for unit testing
+    are adequately achieved, the coverage of requirements at
+    the software unit level shall be determined and the
+    structural coverage shall be measured in accordance with
+    the metrics as listed in Table 9. If the achieved
+    structural coverage is considered insufficient, either
+    additional test cases shall be specified or a rationale
+    based on other methods shall be provided.
+
+    NOTE 1: No target value or a low target value for structural
+    coverage without a rationale is considered insufficient.
+
+    EXAMPLE 1: Analysis of structural coverage can reveal
+    shortcomings in requirements-based test cases, inadequacies
+    in requirements, dead code, deactivated code or
+    unintended functionality.
+
+    EXAMPLE 2: A rationale can be given for the level of
+    coverage achieved based on accepted dead code (e.g. code
+    for debugging) or code segments depending on different
+    software configurations; or code not covered can be
+    verified using complementary methods (e.g. inspections).
+
+    EXAMPLE 3: A rationale can be based on the state of the art.
+
+    NOTE 2: The structural coverage can be determined by the use
+    of appropriate software tools.
+
+    NOTE 3: In the case of model-based development, the analysis
+    of structural coverage can be performed at the model level
+    using analogous structural coverage metrics for models.
+
+    EXAMPLE 4: The analysis of structural coverage performed at
+    the model level can replace the source code coverage metrics
+    if it is shown to be equivalent, with rationales based on
+    evidence that the coverage is representative of the code level.
+
+    NOTE 4: If instrumented code is used to determine the degree
+    of structural coverage, it can be necessary to provide evidence
+    that the instrumentation has no effect on the test results.
+    This can be done by repeating representative test cases with
+    non-instrumented code.
+  '''
+
+  steps = [Steps.ID.Unit_Test_Run_And_Coverage,
+	   Steps.ID.Handle_Coverage_Deviations]
+
+  just = """
+    Test coverage is performed when running unit tests. The coverage
+    method depends on the cleanliness-adjusted ASIL of the unit (not
+    the ASIL to which the unit is developed as described in
+    :ref:`step-unit-test-run-and-coverage`):
+
+    * ASIL A: statement coverage
+    * ASIL B/C: statement and decision coverage
+    * ASIL D: statement and MC/DC coverage
+
+    As described in :ref:`step-handle-coverage-deviations`, some types of gaps in
+    coverage are allowed, in particular
+
+    * the uncovered statement, decision, or condition is part of a
+      fully formally-verified subprogram, i.e., all the unit
+      requirements or unit design constraints applicable to the
+      subprogram are formally specified and the subprogram has SPARK
+      mode on. In this case, the objectives of structural coverage as
+      defined in ISO 26262-6:2018, 9.4.4 have already been achieved
+      for the particular subprogram and there is no need to analyze
+      the structural coverage of the subprogram
+
+    * the uncovered statement, decision, or condition is strictly
+      necessary for GNATprove to be able to prove compliance with a
+      type constraint (a range constraint or a null exclusion), an
+      expression-based contract (a type predicate, a precondition of a
+      called subprogram, or a postcondition of the
+      incompletely-covered executable body), or an assertion pragma
+      (``pragma Assert``, ``pragma Loop_Invariant``, or ``pragma
+      Loop_Variant``)
+  """
+}
+
+Tracing p6_c9_4_4_t9_1a {
+  ref = 6 @ 9:4:4
+  subref = "Table 9, 1a"
+  row = "Statement coverage"
+  applies = "ABcd"
+
+  steps = [Steps.ID.Unit_Test_Run_And_Coverage]
+
+  just = """
+    At cleanliness-adjusted ASIL A, statement coverage is used.
+  """
+}
+
+Tracing p6_c9_4_4_t9_1b {
+  ref = 6 @ 9:4:4
+  subref = "Table 9, 1b"
+  row = "Branch coverage"
+  applies = "aBCD"
+
+  steps = [Steps.ID.Unit_Test_Run_And_Coverage]
+
+  just = """
+    At cleanliness-adjusted ASIL B/C, statement and decision coverage
+    is used.
+  """
+}
+
+Tracing p6_c9_4_4_t9_1c {
+  ref = 6 @ 9:4:4
+  subref = "Table 9, 1c"
+  row = "MC/DC (Modified Condition/Decision Coverage)"
+  applies = "abcD"
+
+  steps = [Steps.ID.Unit_Test_Run_And_Coverage]
+
+  just = """
+    At cleanliness-adjusted ASIL D, statement and MC/DC coverage is
+    used.
+  """
+}
+
+Tracing p6_c9_4_5 {
+  ref = 6 @ 9:4:5
+  text = '''
+    The test environment for software unit testing shall be suitable
+    for achieving the objectives of the unit testing considering the
+    target environment. If the software unit testing is not carried
+    out in the target environment, the differences in the source and
+    object code, as well as the differences between the test environment
+    and the target environment, shall be analysed in order to specify
+    additional tests in the target environment during the subsequent
+    test phases.
+
+    NOTE 1: Differences between the test environment and the target
+    environment can arise in the source code or object code, for
+    example, due to different bit widths of data words and address
+    words of the processors.
+
+    NOTE 2: Depending on the scope of the tests, the appropriate
+    test environment for the execution of the software unit is used
+    (e.g. the target processor, a processor emulator or a development
+    system).
+
+    NOTE 3: Software unit testing can be executed in different
+    environments, for example:
+
+    * model-in-the-loop tests;
+    * software-in-the-loop tests;
+    * processor-in-the-loop tests; or
+    * hardware-in-the-loop tests.
+
+    NOTE 4: For model-based development, software unit testing can
+    be carried out at the model level followed by back-to-back
+    comparison tests between the model and the object code. The
+    back-to-back comparison tests are used to ensure that the
+    behaviour of the models with regard to the test objectives is
+    equivalent to the automatically-generated code.
+  '''
+
+  alt_steps = '''Section entitled "Process Binding"'''
+
+  just = """
+    Test environment and its suitability argument are documented in
+    the supplementary "Ada/SPARK Process Binding" document.
+  """
+}
+
+Tracing p6_c9_5_1 {
+  ref = 6 @ 9:5:1
+  text = """
+    **Software verification specification** resulting from
+    requirements 9.4.2 to 9.4.5.
+  """
+
+  steps = [Steps.ID.Identify_Activity_Scope,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Review_Deactivated_SPARK,
+	   Steps.ID.Write_Tests]
+
+  just = """
+    The Software Unit Verification Specification is a separate work
+    product that is constrained, but not defined, by this process
+    (:ref:`step-inspect-unit-design`).
+
+    Software Unit Verification Specification work product is initiated
+    in :ref:`step-identify-activity-scope` and then augmented in
+    :ref:`step-review-deactivated-spark` and :ref:`step-write-tests`.
+  """
+}
+
+Tracing p6_c9_5_2 {
+  ref = 6 @ 9:5:2
+  text = """
+    **Software verification report (refined)** resulting from
+    requirement 9.4.2.
+  """
+
+  steps = [Steps.ID.Develop_Verification_Report]
+
+  just = """
+    At the end of the unit verification steps, a report is written
+    that contains the outcome of all unit verification steps.
+  """
+}

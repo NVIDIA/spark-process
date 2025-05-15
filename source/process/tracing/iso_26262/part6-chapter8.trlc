@@ -1,0 +1,1029 @@
+/*
+ * Copyright (C) 2024 - 2025 NVIDIA CORPORATION & AFFILIATES
+ * Copyright (C) 2021 - 2024 AdaCore
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3 or
+ * any later version published by the Free Software Foundation; with the
+ * Invariant Sections being "Attribution", with no Front-Cover
+ * Texts, and no Back-Cover Texts.  A copy of the license is included in
+ * the section entitled "GNU Free Documentation License".
+ */
+
+/*
+ * The fields 'text', 'row', and 'applies' are all:
+ *   (C)ISO. This material is reproduced from ISO 26262, with permission of
+ *   the American National Standards Institute (ANSI) on behalf of the
+ *   International Organization for Standardization. All rights reserved.
+ */
+
+package ISO_26262_Tracing
+import Steps
+
+Tracing p6_c8_1_a_arch {
+  ref = 6 @ 8:1
+  subref = "a"
+  text = """
+    The objectives of this sub-phase are:
+
+    a) to develop a software unit design in accordance with
+       the **software architectural design**, ...
+  """
+
+  steps = [Steps.ID.Declare_Types_States_And_Subprograms,
+	   Steps.ID.Capture_Requirements,
+	   Steps.ID.Verify_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Non_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Requirement_Correctness_And_Completeness,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Project]
+
+  just = """
+    Every claim made in the SWAD about the unit is stated as
+
+    * Formally-stated requirement, i.e. a contract in the ADS file
+      (:ref:`step-declare-types-states-and-subprograms`, :ref:`step-capture-requirements`),
+      this is automatically verified
+      (:ref:`step-verify-formal-requirement-consistency`)
+
+    * Informal requirement (:ref:`step-capture-requirements`), this is verified
+      through manual inspection
+      (:ref:`step-verify-non-formal-requirement-consistency`)
+
+    All the requirements are manually verified for correctness and
+    completeness (:ref:`step-verify-requirement-correctness-and-completeness`).
+    The whole unit design is verified at :ref:`step-inspect-unit-design`. The
+    implementation is formally verified against the ADS file at step
+    :ref:`step-verify-project`.
+  """
+}
+
+Tracing p6_c8_1_a_design {
+  ref = 6 @ 8:1
+  subref = "a"
+  text = """
+     ..., the **design criteria** and ...
+  """
+
+  alt_steps = """
+    See 6-5.4.1 (a), 6-8.4.3 and 6-8.4.5 in the traceability tables
+  """
+
+  just = """
+    Design criteria to choose design, modeling and implementation
+    language (such as an unambiguous and comprehensible definition,
+    modularity, abstraction, encapsulation, and the use of structured
+    constructs) are addressed in 6-5.4.1 a).
+
+    Design criteria for comprehensibility, unambiguity, correctness,
+    consistency and verifiability of the unit design are addressed in
+    sections 6-8.4.3 and 6-8.4.5 of this table.
+  """
+}
+
+
+Tracing p6_c8_1_a_reqs {
+  ref = 6 @ 8:1
+  subref = "a"
+  text = """
+    ... and the **allocated software requirements** which supports
+    the implementation and verification of the software unit; and
+  """
+
+  steps = [Steps.ID.Declare_Types_States_And_Subprograms,
+	   Steps.ID.Capture_Requirements,
+	   Steps.ID.Verify_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Non_Formal_Requirement_Consistency,
+	   Steps.ID.Verify_Requirement_Correctness_And_Completeness,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Project]
+
+  just = """
+    Allocated software requirements are either:
+
+    * Formally-stated requirement, i.e. a contract in the ADS file
+      (:ref:`step-declare-types-states-and-subprograms`, :ref:`step-capture-requirements`),
+      this is automatically verified
+      (:ref:`step-verify-formal-requirement-consistency`) and manually verified
+      (:ref:`step-verify-requirement-correctness-and-completeness`), and then the
+      implementation is formally verified against the ADS file
+      (:ref:`step-verify-project`)
+
+    * Informal requirement (:ref:`step-capture-requirements`), this is verified
+      through manual inspection
+      (:ref:`step-verify-non-formal-requirement-consistency`).
+
+    All the requirements are manually verified for correctness and
+    completeness (:ref:`step-verify-requirement-correctness-and-completeness`).
+    The whole unit design is verified at :ref:`step-inspect-unit-design` to ensure
+    that the design fully implements the allocated requirements. The
+    implementation is formally verified against the ADS file at step
+    :ref:`step-verify-project`.
+  """
+}
+
+Tracing p6_c8_1_b {
+  ref = 6 @ 8:1
+  subref = "b"
+  text = """
+    b) to implement the software units as specified.
+  """
+
+  steps = [Steps.ID.Verify_Project]
+  alt_steps = """
+    See sections entitled "Unit Implementation" and "Dynamic Verification".
+  """
+
+  just = """
+    Unit implementation in ADB file is created according to the
+    section entitled "Unit Implementation". The implementation is
+    formally verified against formally-specified claims in the
+    corresponding ADS file at step
+    :ref:`step-verify-project`. Non-formally-verified requirements are verified at
+    steps :ref:`step-inspect-implementation` and tested as described in section
+    "Dynamic Verification"
+  """
+}
+
+Tracing p6_c8_2_p1 {
+  ref = 6 @ 8:2
+  subref = "paragraph 1"
+  text = """
+    Based on the software architectural design, the detailed design
+    of the software units is developed. The detailed design can be
+    represented in the form of a model.
+  """
+
+  same_as = p6_c8_1_a_arch
+}
+
+Tracing p6_c8_2_p2 {
+  ref = 6 @ 8:2
+  subref = "paragraph 2"
+  text = """
+    The implementation at the source code level can be
+    manually or automatically generated from the design in
+    accordance with the software development environment.
+  """
+
+  steps = [Steps.ID.Create_ADB,
+	   Steps.ID.Define_SPARK_Package,
+	   Steps.ID.Implement_SPARK_Package]
+
+  just = """
+    The implementation is created manually (no automatic generation
+    involved) and resides in the ADB file.
+
+    The design is the combination of the ADS file and the ADB file
+    (some aspects of the design may be captured in the ADS file).
+  """
+}
+
+Tracing p6_c8_2_p3 {
+  ref = 6 @ 8:2
+  subref = "paragraph 3"
+  text = """
+    In order to develop a single software unit design, both
+    software safety requirements and non-safety-related
+    requirements are implemented. Hence, in this sub-phase,
+    safety-related and non-safety-related requirements are
+    handled within one development process.
+  """
+
+  same_as = p6_c8_1_a_design
+}
+
+Tracing p6_c8_4_1 {
+  ref = 6 @ 8:4:1
+  text = """
+    The requirements of this sub-clause shall be complied with
+    if the software unit is a safety-related element.
+
+    NOTE: "Safety-related" means that the unit implements safety
+    requirements, or that the criteria for coexistence (see
+    ISO 26262-9:2018, Clause 6) of the unit with other units are
+    not satisfied.
+  """
+
+  steps = [Steps.ID.Identify_Activity_Scope]
+
+  just = """
+    The process is complied with for all units that elect to use this
+    process, whether safety-related or not.
+  """
+}
+
+Tracing p6_c8_4_2_a {
+  ref = 6 @ 8:4:2
+  subref = "a"
+  text = """
+    The software unit design and implementation shall:
+
+    a) be suitable to satisfy the software requirements
+       allocated to the software unit with the required ASIL;
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Capture_Unit_Design_Constraints,
+	   Steps.ID.Document_Design_Solutions,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Inspect_Implementation]
+
+  alt_steps = '''See section entitled "Dynamic Verification"'''
+
+  just = """
+    For requirements that are formally-verified, the invocation of
+    GNATprove in the :ref:`step-verify-project` step ensures that the design and
+    implementation satisfy the requirements with the required ASIL.
+
+    For requirements that are non-formally-verified, the
+    :ref:`step-capture-unit-design-constraints` and :ref:`step-document-design-solutions`
+    steps collectively ensure that each such requirement is either
+    re-specified formally or is mapped to a design documentation
+    fragment that explains how the unit design satisfies the
+    requirement with the required ASIL. The process also mandates
+    creating traceability between non-formally-verified requirements
+    and unit design. Verification is then done in the
+    :ref:`step-inspect-unit-design` and :ref:`step-inspect-implementation` steps and as
+    described in the section entitled "Dynamic Verification".
+  """
+}
+
+Tracing p6_c8_4_2_b {
+  ref = 6 @ 8:4:2
+  subref = "b"
+  text = """
+    b) be consistent with the software architectural
+       design specification; and
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Document_Design_Solutions,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Inspect_Implementation]
+
+  alt_steps = '''See section entitled "Dynamic Verification"'''
+
+  just = """
+    The :ref:`step-document-design-solutions` step mandates that the unit design
+    be correct, consistent, and complete with respect to all the
+    non-formally-verified requirements, including those in the
+    software architectural design specification, captured in
+    :ref:`step-capture-requirements`. This is verified in the :ref:`step-inspect-unit-design`
+    and :ref:`step-inspect-implementation` steps and as described in the section
+    entitled "Dynamic Verification".
+  """
+}
+
+Tracing p6_c8_4_2_c {
+  ref = 6 @ 8:4:2
+  subref = "c"
+  text = """
+    c) be consistent with the hardware-software interface
+       specification, if applicable.
+  """
+
+  steps = [Steps.ID.Document_Design_Solutions,
+	   Steps.ID.Inspect_Unit_Design]
+
+  just = """
+    Building on the previous bullet, the non-formally-verified
+    requirements also include those in hardware-software interface
+    specifications applicable to the software unit as determined by
+    the software architectural design.
+  """
+}
+
+Tracing p6_c8_4_3_a {
+  ref = 6 @ 8:4:3
+  subref = "a"
+  text = """
+    To avoid systematic faults and to ensure that the software
+    unit design achieves the following properties, the software
+    unit design shall be described using the notations listed in
+    Table 5.
+
+    a) consistency;
+  """
+
+  steps = [Steps.ID.Document_Design_Solutions,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Unit_Design,
+	   Steps.ID.Verify_Project]
+
+  just = """
+    To the extent that requirements and unit design fragments are
+    formally-verified, GNATprove (in the :ref:`step-verify-unit-design` and
+    :ref:`step-verify-project` steps) verifies the consistency of the unit design
+    and the consistency of the implementation.
+
+    The :ref:`step-document-design-solutions` and :ref:`step-inspect-unit-design` steps
+    collectively ensure consistency across all (formally-verified and
+    non-formally-verified) requirements and unit design fragments.
+  """
+}
+
+Tracing p6_c8_4_3_b {
+  ref = 6 @ 8:4:3
+  subref = "b"
+  text = """
+    b) comprehensibility;
+  """
+
+  steps = [Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Inspect_Implementation]
+
+  just = """
+    The in-context-comprehensibility of the unit design and
+    implementation is verified in the :ref:`step-inspect-unit-design` and
+    :ref:`step-inspect-implementation` steps, respectively.
+  """
+}
+
+Tracing p6_c8_4_3_c {
+  ref = 6 @ 8:4:3
+  subref = "c"
+  text = """
+    c) maintainability; and
+  """
+
+  steps = [Steps.ID.Capture_Unit_Design_Constraints,
+	   Steps.ID.Document_Design_Solutions,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Unit_Design]
+
+  just = """
+    Optionally, some or all unit design constraints are formalized
+    with SPARK (:ref:`step-capture-unit-design-constraints`), and as such, are as
+    maintainable as code itself.
+
+    Other unit design fragments are expressed non-formally in comments
+    located in the source files, which helps to maintainability.
+
+    Additional verification steps (:ref:`step-document-design-solutions`,
+    :ref:`step-inspect-unit-design`, :ref:`step-verify-unit-design`) help to maintainability.
+  """
+}
+
+Tracing p6_c8_4_3_d {
+  ref = 6 @ 8:4:3
+  subref = "d"
+  text = """
+    d) verifiability.
+  """
+
+  steps = [Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Unit_Design,
+	   Steps.ID.Verify_Project]
+
+  alt_steps = '''See section entitled "Dynamic Verification"'''
+
+  just = """
+    Formal requirements and unit design constraints are verified by
+    SPARK in step :ref:`step-verify-unit-design` and later, entire unit
+    implementation is verified in :ref:`step-verify-project`
+
+    When unit design fragments cannot be fully formally proven with
+    SPARK, the :ref:`step-inspect-unit-design` step provides a procedure to verify
+    them. All non-formally-verified claims in unit design are also
+    tested as described in section entitled "Dynamic Verification"
+  """
+}
+
+Tracing p6_c8_4_3_t5_1a {
+  ref = 6 @ 8:4:3
+  subref = "Table 5, 1a"
+  row = """
+    Natural language
+
+    Natural language can complement the use of notations for example
+    where some topics are more readily expressed in natural language
+    or provide an explanation and rationale for decisions captured in
+    the notations.
+
+    EXAMPLE To avoid possible ambiguity of natural language when
+    designing complex elements, a combination of an activity diagram
+    with natural language can be used.
+  """
+  applies = "ABCD"
+
+  steps = [Steps.ID.Document_Design_Solutions]
+
+  just = """
+    The process requires for each non-formally-verified unit
+    requirement and unit design fragment, where the unit design
+    constraints and unit implementation are not sufficient to satisfy
+    the non-formally-verified unit requirement and unit design
+    fragments, to document how the unit design satisfies the unit
+    requirement or unit design fragment at :ref:`step-document-design-solutions`
+    step.
+
+    Note: Formally-verified requirements do not have to follow the
+    same process as the risk that a formally-verified design fails to
+    comply with its formally-verified requirement is sufficiently low.
+  """
+}
+
+Tracing p6_c8_4_3_t5_1b {
+  ref = 6 @ 8:4:3
+  subref = "Table 5, 1b"
+  row = """
+    Informal notations
+  """
+  applies = "ABcd"
+
+  steps = [Steps.ID.Document_Design_Solutions]
+
+  just = """
+    Where natural language is insufficient to document a solution for
+    satisfying a requirement or constraint, the
+    :ref:`step-document-design-solutions` step requires the use of notations,
+    whether informal, semi-formal, or formal.
+  """
+}
+
+Tracing p6_c8_4_3_t5_1c {
+  ref = 6 @ 8:4:3
+  subref = "Table 5, 1c"
+  row = """
+    Semi-formal notations
+
+    Semi-formal notations can include pseudocode or modeling with
+    UML(R), SysML(R), Simulink(R) or Stateflow(R).
+
+    NOTE UML(R), SysML(R), Simulink(R) and Stateflow(R) are examples
+    of suitable products available commercially. This information is
+    given for the convenience of users of this document and does not
+    constitute an endorsement by ISO of these products.
+  """
+  applies = "abCD"
+
+  steps = [Steps.ID.Document_Design_Solutions,
+	   Steps.ID.Inspect_Unit_Design]
+
+  just = """
+    If the unit is developed to ASIL C or ASIL D, then any informal
+    argumentation must be supported with semi-formal notation
+    (e.g. UML) as specified in the :ref:`step-document-design-solutions` step and
+    verified at step :ref:`step-inspect-unit-design`.
+  """
+}
+
+Tracing p6_c8_4_3_t5_1d {
+  ref = 6 @ 8:4:3
+  subref = "Table 5, 1d"
+  row = """
+    Formal notations
+  """
+  applies = "abcd"
+
+  steps = [Steps.ID.Capture_Unit_Design_Constraints]
+
+  just = """
+    Optionally, some/all unit design constraints are formalized with
+    SPARK contracts as mentioned in the
+    :ref:`step-capture-unit-design-constraints` step.
+
+    Note that ISO 26262 recommends, but does not highly recommend, the
+    use of formal notations. Consequently, we have freedom in this
+    process to determine where it is appropriate to apply formal
+    notations, and to allow other notations to be used in other
+    contexts.
+  """
+}
+
+Tracing p6_c8_4_4 {
+  ref = 6 @ 8:4:4
+  text = """
+    The specification of the software units shall describe the
+    functional behaviour and the internal design to the level
+    of detail necessary for their implementation.
+
+    EXAMPLE: Internal design can include constraints on the use
+    of registers and storage of data.
+  """
+
+  steps = [Steps.ID.Capture_Unit_Design_Constraints,
+	   Steps.ID.Document_Design_Solutions,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Unit_Design]
+
+  just = """
+    The outcome of the unit design steps in this process is a complete
+    set of ADS files that precisely define the boundaries of each
+    library item, with a combination of formal and non-formal unit
+    requirements and unit design fragments.
+
+    The ADS files are then ready to implement with ADB files.
+  """
+}
+
+Tracing p6_c8_4_5_a {
+  ref = 6 @ 8:4:5
+  subref = "a"
+  text = """
+    Design principles for software unit design and implementation
+    at the source code level as listed in Table 6 shall be applied
+    to achieve the following properties:
+
+    a) correct order of execution of subprograms and functions
+       within the software units, based on the software
+       architectural design;
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Capture_Unit_Design_Constraints,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Inspect_Implementation]
+  alt_steps = '''See section entitled "Dynamic Verification"'''
+
+  just = """
+    Formal specifications in SPARK are attached to design elements. In
+    particular, preconditions and postconditions are attached to
+    subprogram declarations. In steps :ref:`step-capture-requirements` and
+    :ref:`step-capture-unit-design-constraints`, it is suggested to express
+    constraints (including ordering constraints) and requirements
+    formally using SPARK aspects, if possible. Correct order of
+    execution is then formally verified at :ref:`step-verify-project` step.
+
+    If an ordering constraint is not formally specified it must be
+    specified informally (:ref:`step-capture-requirements`,
+    :ref:`step-capture-unit-design-constraints`). And verified at step
+    :ref:`step-inspect-implementation` and as described in section entitled
+    "Dynamic Verification"
+  """
+}
+
+Tracing p6_c8_4_5_b {
+  ref = 6 @ 8:4:5
+  subref = "b"
+  text = """
+    b) consistency of the interfaces between the software units;
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Declare_Types_States_And_Subprograms,
+	   Steps.ID.Implement_SPARK_Package]
+
+  just = """
+    The :ref:`step-capture-requirements` step requires to correctly transcribe
+    non-SPARK interfaces from the SWAD into SPARK interfaces. SPARK
+    interfaces from the SWAD are used as-is so there is no risk of
+    inconsistency of interfaces.
+  """
+}
+
+Tracing p6_c8_4_5_c {
+  ref = 6 @ 8:4:5
+  subref = "c"
+  text = """
+    c) correctness of data flow and control flow between
+       and within the software units;
+  """
+
+  steps = [Steps.ID.Verify_Project,
+	   Steps.ID.Document_Design_Solutions,
+	   Steps.ID.Inspect_Unit_Design]
+
+  just = """
+    For formally-verified requirements, GNATprove in the
+    :ref:`step-verify-project` step formally verifies that the data flow and
+    control flow within the unit and between the units is correct,
+    complete, and consistent with respect to those formally-verified
+    requirements. These formally-verified requirements include any
+    SPARK contracts inside the public parts of external ADS files
+    concerning subprograms implemented in SPARK, if the contracts
+    constrain data flow or control flow via Global and/or Depends
+    aspects or postconditions. GNATprove additionally verifies that
+    variables are initialized before being read and that variables are
+    potentially read after being written.
+
+    For non-formally-verified requirements, the
+    :ref:`step-document-design-solutions` step requires the unit design to explain
+    how it achieves the correct flow of data and control both within
+    the software unit and between it and other software units. This is
+    then inspected in the :ref:`step-inspect-unit-design` step.
+  """
+}
+
+Tracing p6_c8_4_5_d {
+  ref = 6 @ 8:4:5
+  subref = "d"
+  text = """
+    d) simplicity;
+  """
+
+  steps = [Steps.ID.Automated_Check_Against_Coding_Std,
+	   Steps.ID.Fix_Coding_Std_Issues,
+	   Steps.ID.Review_Diagnostic_Justifications]
+
+  just = """
+    The :ref:`step-automated-check-against-coding-std`, :ref:`step-fix-coding-std-issues`, and
+    :ref:`step-review-diagnostic-justifications` steps help to keep the code
+    simple through running GNATcheck checks that monitor the
+    complexity of the code and prevent the use of overly complex
+    code. This includes limiting the McCabe cyclomatic complexity of
+    non-proven code; see 6-5.4.3 Table 1 1a). (In proven SPARK code,
+    McCabe cyclomatic complexity is not enforced, because
+    complexity-induced systematic faults in that case are already
+    sufficiently mitigated by the prover.)
+  """
+}
+
+Tracing p6_c8_4_5_e {
+  ref = 6 @ 8:4:5
+  subref = "e"
+  text = """
+    e) readability and comprehensibility;
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Declare_Types_States_And_Subprograms,
+	   Steps.ID.Capture_Unit_Design_Constraints,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Inspect_Implementation,
+	   Steps.ID.Automated_Check_Against_Coding_Std,
+	   Steps.ID.Fix_Coding_Std_Issues]
+
+  just = """
+    Specification files contain the design for a unit, while the
+    corresponding implementation is left to corresponding
+    implementation files. This helps ensure that the design can be
+    expressed in a readable and comprehensible format, free from the
+    details of implementation.
+
+    The design and implementation is reviewed to ensure that they are
+    in-context-comprehensible and observe Ada/SPARK Guidelines.
+
+    Automated checks help identifying guidelines violations to further
+    improve readability.
+  """
+}
+
+Tracing p6_c8_4_5_f {
+  ref = 6 @ 8:4:5
+  subref = "f"
+  text = """
+    f) robustness;
+
+    EXAMPLE: Methods to prevent implausible values, execution
+    errors, division by zero, and errors in the data flow and
+    control flow.
+  """
+
+  steps = [Steps.ID.Static_Analysis_Unit,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Implement_SPARK_Package,
+	   Steps.ID.Verify_Dynamic_Assumptions]
+  alt_steps = '''"Dynamic Verification" section'''
+
+  just = """
+    For non-proven units, a combination of CodePeer verifications
+    (:ref:`step-static-analysis-unit` step) and test (Dynamic Verification
+    section) identifies likely error locations in the code. This
+    supports potential software error detection and analysis
+    throughout the code.
+
+    If a subprogram calls other subprograms, all the return values
+    must be consumed and all errors must be properly handled by the
+    subprogram (for SPARK code, GNATprove is able to detect most of
+    these cases, for non-SPARK code it is done through manual
+    inspection).
+
+    CodePeer provides various verifications looking at potential
+    values and boundaries values of variables such as detection of
+    attempts to dereference a variable that could be null, values
+    outside the bounds of an Ada type or subtype, buffer overflows,
+    numeric overflows or wraparounds, and divisions by zero. It also
+    helps confirm expected boundary values of variables and parameters
+    coming from the design.
+
+    To complement static analysis findings, tests are developed
+    specifically to look at boundary values. All tests are run with
+    full Ada checks on, together with additional validity checks, to
+    catch during testing phases additional value errors that would be
+    otherwise silent (see :ref:`step-verify-dynamic-assumptions`).
+
+    When unit is proven, SPARK (:ref:`step-verify-project` step) provides an
+    exhaustive verification of various properties looking at potential
+    values and boundaries values of variables such as detection of
+    attempts to dereference a variable that could be null, values
+    outside the bounds of an Ada type or subtype, buffer overflows,
+    numeric overflows or wraparounds, and divisions by zero. It also
+    helps confirm expected boundary values of variables and parameters
+    coming from the design.
+  """
+}
+
+Tracing p6_c8_4_5_g {
+  ref = 6 @ 8:4:5
+  subref = "g"
+  text = """
+    g) suitability for software modification; and
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Declare_Types_States_And_Subprograms,
+	   Steps.ID.Capture_Unit_Design_Constraints,
+	   Steps.ID.Implement_SPARK_Package,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Inspect_Implementation]
+
+  just = """
+    Requirements, unit design constraints and unit implementation are
+    part of the code, and as such, as maintainable as code itself. In
+    particular, since the compiler ensures consistency between the
+    specification and implementation files for a unit, some
+    consistency properties between the design and its implementation
+    are maintained at all times.
+
+    When requirements are formally defined in contracts, the
+    specification is also hosted in the ADS file. The verifier then
+    ensures consistency between the specification, the design and the
+    implementation.
+
+    The unit design and implementation are inspected against the
+    Ada/SPARK Guidelines to ensure they are suitable for incremental
+    modification.
+  """
+}
+
+Tracing p6_c8_4_5_h {
+  ref = 6 @ 8:4:5
+  subref = "h"
+  text = """
+    h) verifiability.
+  """
+
+  steps = [Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Inspect_Implementation,
+	   Steps.ID.Verify_Project]
+  alt_steps = '''See section entitled "Dynamic Verification"'''
+
+  just = """
+    The implemented software shall be verified with a combination of
+    inspections, tests and formal proofs.
+
+    When requirements and unit design constraints are defined in
+    contracts, they are fully verifiable by proof.
+  """
+}
+
+Tracing p6_c8_4_5_t6_1a {
+  ref = 6 @ 8:4:5
+  subref = "Table 6, 1a"
+  row = "One entry and one exit point in subprograms and functions"
+  applies = "ABCD"
+
+  steps = [Steps.ID.Verify_Project,
+	   Steps.ID.Automated_Check_Against_Coding_Std]
+  alt_steps = '''See section entitled "Ada/SPARK Guidelines"'''
+
+  just = """
+    In Ada, a subprogram only has one entry.
+
+    One exit point recommendation is tailored in a separate document
+    as described in the section entitled "Ada/SPARK Guidelines".
+  """
+}
+
+Tracing p6_c8_4_5_t6_1b {
+  ref = 6 @ 8:4:5
+  subref = "Table 6, 1b"
+  row = """
+    No dynamic objects or variables, or else online test during their creation
+  """
+  applies = "aBCD"
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Automated_Check_Against_Coding_Std]
+
+  just = """
+    The Ada allocator doesn't return invalid state - instead it will
+    cause an explicit error, calling directly the last chance handler
+    allowing for diagnostic or recovery.
+
+    If such failures are not acceptable, allocation shall be forbidden
+    through the usage of the local restrictions ``No_Heap_Allocations``
+    and ``No_Secondary_Stack`` (see ``Forward_Progress`` user aspect).
+  """
+}
+
+Tracing p6_c8_4_5_t6_1c {
+  ref = 6 @ 8:4:5
+  subref = "Table 6, 1c"
+  row = "Initialization of variables"
+  applies = "ABCD"
+
+  steps = [Steps.ID.Verify_Project,
+	   Steps.ID.Static_Analysis_Unit,
+	   Steps.ID.Verify_Dynamic_Assumptions]
+
+  just = """
+    For a silver/gold SPARK unit, the :ref:`step-verify-project` step provides
+    exhaustive verification that all data read has been previously
+    written to.
+
+    With non-proven units, the :ref:`step-static-analysis-unit` step mandates the
+    use of Codepeer that detects references to uninitialized
+    variables.
+
+    This detection is complemented by the usage of
+    ``Initialize_Scalars`` (:ref:`step-verify-dynamic-assumptions`) which will put
+    invalid values on uninitialized variables and, together with all
+    checks enabled, will allow detection of additional cases of
+    uninitialized variables.
+  """
+}
+
+Tracing p6_c8_4_5_t6_1d {
+  ref = 6 @ 8:4:5
+  subref = "Table 6, 1d"
+  row = "No multiple use of variable names"
+  applies = "ABCD"
+
+  alt_steps = '''
+    See section entitled "Requirements Concerning Compiler
+    Warning Switches"
+  '''
+
+  just = """
+    Mandatory GNAT compiler switch ``-gnatwh`` activates warnings on
+    hiding declarations so that in a given scope, only one reference
+    to a variable name is visible.
+  """
+}
+
+Tracing p6_c8_4_5_t6_1e {
+  ref = 6 @ 8:4:5
+  subref = "Table 6, 1e"
+  row = "Avoid global variables or else justify their usage"
+  applies = "abCD"
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Implement_SPARK_Package,
+	   Steps.ID.Inspect_Implementation,
+	   Steps.ID.Verify_Project]
+
+  just = """
+    For non-SPARK subprogram bodies, the process requires providing
+    global variable usage justification
+    (:ref:`step-implement-spark-package`). This is verified through manual
+    inspection (:ref:`step-inspect-implementation`).
+
+    For SPARK subprograms, GNATprove enforces specification and
+    verification of subprograms' side effects, including usage of
+    global variables: mandatory Global aspect makes intended usage of
+    global variables explicit and easy to review, whereas GNATprove
+    formally verifies that the implementation complies with this
+    specification (:ref:`step-verify-project` step). It sufficiently reduces the
+    risk associated with the usage of global variables.
+  """
+}
+
+Tracing p6_c8_4_5_t6_1f {
+  ref = 6 @ 8:4:5
+  subref = "Table 6, 1f"
+  row = "Restricted use of pointers"
+  applies = "aBCD"
+
+  steps = [Steps.ID.Verify_Project,
+	   Steps.ID.Inspect_Implementation]
+  alt_steps = '''See section entitled "Ada/SPARK Guidelines"'''
+
+  just = """
+    In SPARK use of pointers is restricted by prohibiting
+    aliasing. This restriction enables GNATprove to formally prove
+    (step :ref:`step-verify-project`) that use of pointers cannot result in
+    runtime errors.
+
+    For non-SPARK code, use of pointers is restricted (see section
+    entitled "Ada/SPARK Guidelines"). This is verified through manual
+    inspection (:ref:`step-inspect-implementation`)
+  """
+}
+
+Tracing p6_c8_4_5_t6_1g {
+  ref = 6 @ 8:4:5
+  subref = "Table 6, 1g"
+  row = "No implicit type conversions"
+  applies = "aBCD"
+
+  steps = [Steps.ID.Compile_Project]
+
+  just = "Ada does not allow implicit type conversions."
+}
+
+Tracing p6_c8_4_5_t6_1h {
+  ref = 6 @ 8:4:5
+  subref = "Table 6, 1h"
+  row = "No hidden data flow or control flow"
+  applies = "aBCD"
+
+  steps = [Steps.ID.Declare_Types_States_And_Subprograms,
+	   Steps.ID.Implement_SPARK_Package,
+	   Steps.ID.Automated_Check_Against_Coding_Std]
+
+  just = """
+    Most cases of hidden data flow are not possible in Ada as they are
+    not part of the language definition. Notably, the absence of
+    preprocessor and the fact that case statements have a systematic
+    break at the end of each alternative.
+  """
+}
+
+Tracing p6_c8_4_5_t6_1i {
+  ref = 6 @ 8:4:5
+  subref = "Table 6, 1i"
+  row = "No unconditional jumps"
+  applies = "ABCD"
+
+  steps = [Steps.ID.Automated_Check_Against_Coding_Std]
+
+  just = """
+    Mandatory GNATcheck rule ``Unconditional_GOTO_statements`` restricts
+    the use of any GOTO statement that is not directly contained
+    within an if/then/else or case/when statement.
+
+    An EXIT statement in loop context is allowed:
+
+    * It is cleaner and less error-prone solution in comparison with
+      alternatives, when exit from nested loops is required
+
+    * Syntactic constraints make it harder to abuse
+  """
+}
+
+Tracing p6_c8_4_5_t6_1j {
+  ref = 6 @ 8:4:5
+  subref = "Table 6, 1j"
+  row = "No recursions"
+  applies = "abCD"
+
+  steps = [Steps.ID.Create_Project_File,
+	   Steps.ID.Automated_Check_Against_Coding_Std,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Inspect_Implementation,
+	   Steps.ID.Automated_Check_Against_Coding_Std_Integration]
+  alt_steps = '''
+    See section entitled "Ada/SPARK Guidelines"
+
+    See section entitled "Requirements Concerning GNATcheck
+    Switches and Rules"
+  '''
+
+  just = """
+    These rules are verified by combination of automated style checks
+    with GNATcheck and manual inspections to ensure that the code
+    complies with Ada/SPARK Guidelines (which, per the Ada/SPARK
+    Guidelines section, must specify how the organization is to comply
+    with this recommendation in ISO 26262).
+  """
+}
+
+Tracing p6_c8_5_1 {
+  ref = 6 @ 8:5:1
+  subref = ""
+  text = '''
+    **Software unit design specification** resulting from
+    requirements 8.4.2 to 8.4.5.
+
+    NOTE: In the case of model-based development, the
+    implementation model and supporting descriptive
+    documentation, using methods listed in Tables 5 and 6,
+    specifies the software units.
+  '''
+
+  steps = [Steps.ID.Identify_Internal_Packages,
+	   Steps.ID.Create_Internal_ADS,
+	   Steps.ID.Declare_Internal_Types_States_And_Subprograms,
+	   Steps.ID.Capture_Unit_Design_Constraints,
+	   Steps.ID.Document_Design_Solutions,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Unit_Design]
+
+  just = """
+    The software unit design specification is the outcome of the unit
+    design steps.
+  """
+}
+
+Tracing p6_c8_5_2 {
+  ref = 6 @ 8:5:2
+  subref = ""
+  text = '''
+    **Software unit implementation** resulting from requirement 8.4.5.
+  '''
+
+  steps = [Steps.ID.Create_ADB,
+	   Steps.ID.Define_SPARK_Package,
+	   Steps.ID.Implement_SPARK_Package,
+	   Steps.ID.Compile_Project]
+
+  just = """
+    The software unit implementation is the outcome of the unit
+    implementation.
+  """
+}

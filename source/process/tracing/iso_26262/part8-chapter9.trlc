@@ -1,0 +1,861 @@
+/*
+ * Copyright (C) 2024 - 2025 NVIDIA CORPORATION & AFFILIATES
+ * Copyright (C) 2021 - 2024 AdaCore
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3 or
+ * any later version published by the Free Software Foundation; with the
+ * Invariant Sections being "Attribution", with no Front-Cover
+ * Texts, and no Back-Cover Texts.  A copy of the license is included in
+ * the section entitled "GNU Free Documentation License".
+ */
+
+/*
+ * The fields 'text', 'row', and 'applies' are all:
+ *   (C)ISO. This material is reproduced from ISO 26262, with permission of
+ *   the American National Standards Institute (ANSI) on behalf of the
+ *   International Organization for Standardization. All rights reserved.
+ */
+
+package ISO_26262_Tracing
+import Steps
+
+Tracing p8_c9_1 {
+  ref = 8 @ 9:1
+  text = '''
+    The objective of verification is to ensure that the work
+    products comply with their requirements.
+  '''
+
+  alt_steps = '''
+    The sections entitled "Automated Static Verification",
+    :ref:`sec-uv-manual-static-verification`,
+    and "Static Verification"
+  '''
+
+  just = '''
+    For formally-proven requirements and unit constraints,
+    verification is done by means of formal proofs (the section
+    entitled "Automated Static Verification").
+
+    For non-formally-verified requirements a combination of manual
+    inspections and testing is used (sections entitled
+    :ref:`sec-uv-manual-static-verification`
+    and "Dynamic Verification").
+
+    Verification is planned, specified and executed according to ISO
+    26262:2018 Part 8 9.4 (see below).
+  '''
+}
+
+Tracing p8_c9_2 {
+  ref = 8 @ 9:2
+  text = '''
+    Verification is applicable to the following phases of
+    the safety lifecycle:
+  '''
+
+  alt_steps = '''The section entitled "Purpose of This Document"'''
+
+  just = '''
+    As stated in the section entitled "Purpose of This Document", the
+    process is only applicable to the product development phase.
+  '''
+}
+
+Tracing p8_c9_2_a {
+  ref = 8 @ 9:2
+  subref = "a"
+  text = '''
+    Verification is applicable to the following phases of
+    the safety lifecycle:
+
+    a) in the concept phase, verification ensures that the concept
+       is correct, complete and consistent with respect to the
+       boundary conditions of the item, and that the defined boundary
+       conditions themselves are correct, complete and consistent,
+       so that the concept can be realised;
+  '''
+
+  just = '''
+    As stated in the section entitled "Purpose of This Document", the
+    process is only applicable to the product development phase.
+  '''
+}
+
+Tracing p8_c9_2_b {
+  ref = 8 @ 9:2
+  subref = "b"
+  text = '''
+    b) in the product development phase, verification is conducted
+       in different forms, as described below:
+
+       * In the design phases, verification is the evaluation of
+         the work products, such as requirement specification,
+         architectural design, models, or software code, thus
+         ensuring that they comply with previously established
+         requirements for correctness, completeness and consistency.
+         Evaluation can be performed by review, simulation or
+         analysis techniques. The evaluation is planned, specified,
+         executed and documented in a systematic manner.
+
+         NOTE: Design phases are ISO 26262-4:2018, Clause 6,
+         ISO 26262-5:2018, Clause 7, ISO 26262-6:2018,
+         Clause 7 and ISO 26262-6:2018, Clause 8.
+
+       * In the test phases, verification is the evaluation of the
+         work products, items and elements within a test environment
+         to ensure that they comply with their requirements. The
+         tests are planned, specified, executed, evaluated and
+         documented in a systematic manner.
+  '''
+
+  same_as = p8_c9_1
+}
+
+Tracing p8_c9_2_c {
+  ref = 8 @ 9:2
+  subref = "c"
+  text = '''
+    c) In the production and operation phase, verification
+       ensures that:
+
+       * the safety-related special characteristics are
+         appropriately met during production,
+
+       * the safety-related information is appropriately
+         provided in the user manuals and in the repair and
+         maintenance instructions; and
+
+       * the safety-related properties of the item are met
+         by the application of control measures within
+         the production process.
+  '''
+
+  just = '''
+    As stated in the section entitled "Purpose of This Document", the
+    process is only applicable to the product development phase.
+  '''
+}
+
+Tracing p8_c9_4_1_1 {
+  ref = 8 @ 9:4:1:1
+  text = '''
+    The verification planning shall be carried out for each phase
+    and sub-phase of the safety lifecycle and shall address the
+    following:
+  '''
+
+  steps = [Steps.ID.Develop_Unit_Verification_Plan]
+
+  just = '''
+    Each software unit is covered by a Software Unit Verification
+    Plan.
+  '''
+}
+
+Tracing p8_c9_4_1_1_a {
+  ref = 8 @ 9:4:1:1
+  subref = "a"
+  text = '''
+    a) the content of the work products to be verified;
+  '''
+
+  steps = [Steps.ID.Develop_Unit_Verification_Plan]
+
+  just = '''
+    The :ref:`step-develop-unit-verification-plan` step requires the Software Unit
+    Verification Plan to identify the specific files and versions
+    thereof containing the software unit design and implementation to
+    be verified.
+  '''
+}
+
+Tracing p8_c9_4_1_1_b {
+  ref = 8 @ 9:4:1:1
+  subref = "b"
+  text = '''
+    b) the objective of the verification;
+  '''
+
+  steps = [Steps.ID.Develop_Unit_Verification_Plan]
+
+  just = '''
+    The :ref:`step-develop-unit-verification-plan` step requires the Software Unit
+    Verification Plan to state the objectives of software unit
+    verification.
+  '''
+}
+
+Tracing p8_c9_4_1_1_c {
+  ref = 8 @ 9:4:1:1
+  subref = "c"
+  text = '''
+    c) the methods used for verification;
+  '''
+
+  steps = [Steps.ID.Develop_Unit_Verification_Plan,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Inspect_Implementation,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Static_Analysis_Unit,
+	   Steps.ID.Review_Tests,
+	   Steps.ID.Handle_Coverage_Deviations,
+	   Steps.ID.Verify_Dynamic_Assumptions]
+
+  just = '''
+    The :ref:`step-develop-unit-verification-plan` step requires the Software Unit
+    Verification Plan to state that the methods of verification are
+    defined in this document.
+
+    * The :ref:`step-inspect-unit-design` and :ref:`step-inspect-implementation` steps
+      identify inspection as a verification method, and the conditions
+      under which inspection is to be used.
+
+    * The :ref:`step-verify-dynamic-assumptions` step specifies the runtime
+      verification of contracts. This is a form of semi-formal
+      verification.
+
+    * The :ref:`step-verify-project` step specifies the use of GNATprove for
+      formal verification of the SPARK code in the software unit.
+
+    * The :ref:`step-inspect-unit-design` step specifies the use of control flow
+      analysis and data flow analysis per the Ada/SPARK Process
+      Binding.
+
+    * The :ref:`step-verify-project` step specifies the use of GNATprove on SPARK
+      code, with GNATprove configured in such a way as to verify the
+      Absence of Runtime Errors. This verification requires static
+      analysis, regardless of whether any additional contracts are
+      present.
+
+    * The :ref:`step-static-analysis-unit` step specifies the use of the CodePeer
+      static analysis tool on non-SPARK code.
+
+    * The :ref:`step-verify-project` and :ref:`step-review-tests` steps in combination have
+      the effect of requirements-based test and interface test.
+
+    * The :ref:`step-handle-coverage-deviations` step specifies the use of fault
+      injection testing under certain conditions.
+  '''
+}
+
+Tracing p8_c9_4_1_1_d {
+  ref = 8 @ 9:4:1:1
+  subref = "d"
+  text = '''
+    d) the pass and fail criteria for the verification;
+  '''
+
+  ref_steps = [p8_c9_4_1_1_c]
+
+  just = '''
+    The :ref:`step-develop-unit-verification-plan` step requires the Software Unit
+    Verification Plan to state that the verification pass/fail
+    criteria are defined in this document.
+
+    Each process step related to software unit verification specifies
+    the pass/fail criteria for the process step. In addition, this
+    process compiles all these pass/fail criteria into a software unit
+    verification checklist.
+  '''
+}
+
+Tracing p8_c9_4_1_1_e {
+  ref = 8 @ 9:4:1:1
+  subref = "e"
+  text = '''
+    e) the verification environment, if applicable;
+
+    NOTE: A verification environment can be a test or
+    simulation environment.
+  '''
+
+  ref_steps = [p8_c9_4_1_1_c]
+
+  just = '''
+    The :ref:`step-develop-unit-verification-plan` step requires the Software Unit
+    Verification Plan to state that the verification environment is
+    defined in this document.
+
+    The process steps related to software unit verification specify a
+    combination of formal verification with theorem proving and
+    dynamic testing.
+  '''
+}
+
+Tracing p8_c9_4_1_1_f {
+  ref = 8 @ 9:4:1:1
+  subref = "f"
+  text = '''
+    f) the equipment used for verification, if applicable;
+
+    EXAMPLE: Test tools or measurement equipment.
+  '''
+
+  ref_steps = [p8_c9_4_1_1_c]
+
+  just = '''
+    The :ref:`step-develop-unit-verification-plan` step requires the Software Unit
+    Verification Plan to state that some of the verification tools are
+    defined in this document, and to identify any other tools or
+    equipment needed for verification of the software unit.
+
+    The process steps related to software unit verification specify
+    the particular GNAT tools that are expected to be used as part of
+    verification.
+  '''
+}
+
+Tracing p8_c9_4_1_1_g {
+  ref = 8 @ 9:4:1:1
+  subref = "g"
+  text = '''
+    g) the resources needed for verification, if applicable;
+  '''
+
+  steps = [Steps.ID.Develop_Unit_Verification_Plan]
+
+  just = '''
+    The :ref:`step-develop-unit-verification-plan` step requires the Software Unit
+    Verification Plan to identify the resources needed to verify the
+    software unit.
+  '''
+}
+
+Tracing p8_c9_4_1_1_h {
+  ref = 8 @ 9:4:1:1
+  subref = "h"
+  text = '''
+    h) the actions to be taken if anomalies are detected; and
+  '''
+
+  steps = [Steps.ID.Develop_Unit_Verification_Plan]
+
+  just = '''
+    The :ref:`step-develop-unit-verification-plan` step requires the Software Unit
+    Verification Plan to identify the actions to be taken if anomalies
+    are detected during verification of the software unit.
+  '''
+}
+
+Tracing p8_c9_4_1_1_i {
+  ref = 8 @ 9:4:1:1
+  subref = "i"
+  text = '''
+    i) the regression strategy.
+
+    NOTE: A regression strategy specifies how verification is
+    repeated after changes have been made to the item or element.
+    Verification can be repeated fully or partially and can
+    include other items or elements that might affect the
+    results of the verification.
+  '''
+
+  steps = [Steps.ID.Develop_Unit_Verification_Plan]
+
+  just = '''
+    The :ref:`step-develop-unit-verification-plan` step requires the Software Unit
+    Verification Plan to identify the incremental software unit
+    re-verification required after changes to the software unit design
+    and/or implementation.
+  '''
+}
+
+Tracing p8_c9_4_1_2a {
+  ref = 8 @ 9:4:1:2
+  subref = "a"
+  text = '''
+    The planning of verification should consider the following:
+
+    a) the adequacy of the verification methods to
+       be applied;
+  '''
+
+  just = '''
+    The adequacy of the verification methods specified by this process
+    is justified in this process itself (primarily in the traceability
+    tables for ISO 26262-6:2018, Table 7) and in the collateral from
+    the safety qualification of the GNAT tools.
+  '''
+}
+
+Tracing p8_c9_4_1_2b {
+  ref = 8 @ 9:4:1:2
+  subref = "b"
+  text = '''
+    b) the complexity of the work product to be verified;
+  '''
+
+  just = '''
+    The complexity of software unit design and implementation is
+    considered in this process itself in the determination of
+    verification methods to apply.
+  '''
+}
+
+Tracing p8_c9_4_1_2c {
+  ref = 8 @ 9:4:1:2
+  subref = "c"
+  text = '''
+    c) prior experiences related to the verification of the
+       subject material; and
+
+       NOTE: This includes service history as well as the degree
+       to which a proven in use argument has been achieved.
+  '''
+
+  just = '''
+    The verification approach defined in this process is informed by
+    experience with the strengths and weaknesses of the various
+    verification methods employed by this process.
+  '''
+}
+
+Tracing p8_c9_4_1_2d {
+  ref = 8 @ 9:4:1:2
+  subref = "d"
+  text = '''
+    d) the degree of maturity of the technologies used, or the
+       risks associated with the use of these technologies.
+  '''
+
+  just = '''
+    GNATprove is a mature verification tool, but nevertheless there
+    are risks associated with the use of GNATprove in lieu of
+    inspection and testing. These risks are analyzed as part of the
+    safety qualification of GNATprove.
+  '''
+}
+
+Tracing p8_c9_4_2_1 {
+  ref = 8 @ 9:4:2:1
+  text = '''
+    The verification specification shall specify the methods to
+    be used for the verification, and shall include:
+  '''
+
+  steps = [Steps.ID.Identify_Activity_Scope,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Write_Tests]
+  alt_steps = '''The section :ref:`sec-uv-manual-static-verification`'''
+
+  just = '''
+    The process itself specifies the parts of the Verification
+    Specification which relate to static verification. The Software
+    Unit Verification Specification work product (as described in
+    the :ref:`step-write-tests` step) covers dynamic verification.
+
+    The Software Unit Verification Specification is a separate
+    work product that is constrained, but not fully defined, by
+    this process.
+
+    The Software Unit Verification Specification work product
+    is initiated in the :ref:`step-identify-activity-scope`
+    step and then augmented during manual inspections and test
+    development. See the :ref:`sec-uv-manual-static-verification`
+    section, the :ref:`step-inspect-unit-design` step, and the
+    :ref:`step-write-tests` step.
+
+    The Software Unit Verification Specification is also
+    expected to specify tests used to provide evidence for
+    the validity of static check suppressions.  See the
+    :ref:`step-review-deactivated-spark` step.
+  '''
+}
+
+Tracing p8_c9_4_2_1_a {
+  ref = 8 @ 9:4:2:1
+  subref = "a"
+  text = '''
+    a) review or analysis checklists, or
+  '''
+
+  steps = [Steps.ID.Inspect_Unit_Design]
+  alt_steps = '''The section :ref:`sec-uv-manual-static-verification`'''
+
+  just = '''
+    The process mandates unit design inspection and
+    reviews/inspections of non-formally proven aspects of the
+    implementation. All the inspections to be performed in accordance
+    with inspection checklists.
+  '''
+}
+
+Tracing p8_c9_4_2_1_b {
+  ref = 8 @ 9:4:2:1
+  subref = "b"
+  text = '''
+    b) simulation scenarios, or
+  '''
+
+  just = "N/A"
+}
+
+Tracing p8_c9_4_2_1_c {
+  ref = 8 @ 9:4:2:1
+  subref = "c"
+  text = '''
+    c) test cases, test data and test objects.
+  '''
+
+  steps = [Steps.ID.Write_Tests]
+
+  just = '''
+    The process requires the existence of the Software Unit
+    Specification Verification work product, which includes tests
+    specifications as well as the rationale for their sufficiency.
+  '''
+}
+
+Tracing p8_c9_4_2_2 {
+  ref = 8 @ 9:4:2:2
+  text = '''
+    For testing, the specification of each test case shall
+    include the following:
+
+    a) a unique identification;
+
+    b) the reference to the version of the associated work
+       product to be verified;
+
+    c) the preconditions and configurations;
+
+       NOTE: If a complete verification of the possible
+       configurations of a work product (e.g. variants
+       of a system) is not feasible, a reasonable subset
+       is selected (e.g. minimum or maximum functionality
+       configurations of a system).
+
+    d) the environmental conditions, if appropriate;
+
+       NOTE: Environmental conditions relate to the physical
+       properties (e.g. temperature) of the surroundings in which
+       the test is conducted or is simulated as part of the test.
+
+    e) the input data, their time sequence and their values;
+
+    f) the expected behaviour which includes output data, acceptable
+       ranges of output values, time behaviour and tolerance behaviour; and
+
+       NOTE 1: When specifying the expected behaviour, it can be
+       necessary to specify the initial output data in order to
+       detect changes.
+
+       NOTE 2: It can be necessary to use an unambiguous reference
+       to avoid the redundant specification and storage of
+       preconditions, configurations and environmental conditions
+       used for various test cases.
+
+    g) the criteria to determine the test case as passed or failed.
+  '''
+
+  steps = [Steps.ID.Write_Tests]
+
+  just = '''
+    The process requires the existence of the Software Unit
+    Specification Verification work product, where every test case is
+    specified in accordance with ISO 262626-2018 Part 8, 9.4.2.2 and
+    9.4.2.3.
+  '''
+}
+
+Tracing p8_c9_4_2_3 {
+  ref = 8 @ 9:4:2:3
+  text = '''
+    For testing, test cases shall be grouped according to the
+    test methods to be applied, considering the following aspects:
+
+    a) the required test equipment or test environment;
+
+    b) the logical and temporal dependencies; and
+
+    c) the resources.
+
+       EXAMPLE: Grouping of test cases for regression
+       testing vs. full testing.
+  '''
+
+  steps = [Steps.ID.Write_Tests]
+
+  just = '''
+    The process requires the existence of the Software Unit
+    Specification Verification work product, where every test case is
+    specified in accordance with ISO 262626-2018 Part 8, 9.4.2.2 and
+    9.4.2.3.
+  '''
+}
+
+Tracing p8_c9_4_2_4 {
+  ref = 8 @ 9:4:2:4
+  text = '''
+    For testing, test cases should be reviewed by a different
+    person regarding the author(s) of the work product to be
+    verified.
+  '''
+
+  steps = [Steps.ID.Review_Tests]
+
+  just = '''
+    According to the process the tests are reviewed with a local peer
+    review.
+  '''
+}
+
+Tracing p8_c9_4_3_1 {
+  ref = 8 @ 9:4:3:1
+  text = '''
+    The verification shall be executed as planned in accordance
+    with 9.4.1 and specified in accordance with 9.4.2.
+  '''
+
+  steps = [Steps.ID.Develop_Unit_Verification_Plan,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Unit_Test_Run_And_Coverage,
+	   Steps.ID.Verify_Dynamic_Assumptions]
+  alt_steps = '''The section :ref:`sec-uv-manual-static-verification`'''
+
+  just = '''
+    As per the process, the verification is executed as planned
+    (:ref:`step-develop-unit-verification-plan`). In particular, static
+    verification is executed as described in :ref:`step-inspect-unit-design` and
+    in the section :ref:`sec-uv-manual-static-verification`. Dynamic
+    verification is executed as described in
+    :ref:`step-unit-test-run-and-coverage` and :ref:`step-verify-dynamic-assumptions`, and in
+    accordance with Software Unit Specification.
+  '''
+}
+
+Tracing p8_c9_4_3_2 {
+  ref = 8 @ 9:4:3:2
+  text = '''
+    The verification should be performed by a different person
+    regarding the author(s) of the work product to be verified.
+  '''
+
+  steps = [Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Review_Tests]
+  alt_steps = '''The section :ref:`sec-uv-manual-static-verification`'''
+
+  just = '''
+    According to the process, all the inspections and reviews must be
+    performed by a different person regarding the authors
+  '''
+}
+
+Tracing p8_c9_4_3_3 {
+  ref = 8 @ 9:4:3:3
+  text = '''
+    The evaluation of the verification results shall contain
+    the following information:
+  '''
+
+  steps = [Steps.ID.Automated_Check_Against_Coding_Std,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Unit_Test_Run_And_Coverage,
+	   Steps.ID.Static_Analysis_Unit,
+	   Steps.ID.Develop_Verification_Report]
+
+  just = '''
+    The process requires that the dynamic verification results are
+    evaluated in accordance with ISO 26262:2018 Part 8 9.4.3.3 and
+    9.4.3.4.
+
+    The results of static and dynamic verification are summarized in
+    the Verification Report (:ref:`step-develop-verification-report`).
+  '''
+}
+
+Tracing p8_c9_4_3_3_a {
+  ref = 8 @ 9:4:3:3
+  subref = "a"
+  text = '''
+    a) the unique identification of the verified work product;
+  '''
+
+  steps = [Steps.ID.Develop_Unit_Verification_Plan,
+	   Steps.ID.Develop_Verification_Report]
+
+  just = '''
+    The verification report must include reference to the Verification
+    Plan (:ref:`step-develop-verification-report`), which contains the unique
+    identification of the verified work product
+    (:ref:`step-develop-verification-report`).
+  '''
+}
+
+Tracing p8_c9_4_3_3_b {
+  ref = 8 @ 9:4:3:3
+  subref = "b"
+  text = '''
+    b) the reference to the verification plan and
+       verification specification;
+  '''
+
+  steps = [Steps.ID.Develop_Verification_Report]
+
+  just = '''
+    The verification report must reference the Software Unit
+    Verification Specification and the Unit Verification Plan
+    (:ref:`step-develop-verification-report`).
+  '''
+}
+
+Tracing p8_c9_4_3_3_c {
+  ref = 8 @ 9:4:3:3
+  subref = "c"
+  text = '''
+    c) the configuration of the verification environment and
+       verification tools used and the calibration data used
+       during the evaluation, if applicable;
+  '''
+
+  steps = [Steps.ID.Develop_Unit_Verification_Plan,
+	   Steps.ID.Unit_Test_Run_And_Coverage,
+	   Steps.ID.Develop_Verification_Report]
+
+  just = '''
+    The process requires that the dynamic verification results are
+    evaluated in accordance with ISO 26262:2018 Part 8 9.4.3.3.
+
+    The verification report must reference the Unit Verification Plan,
+    which describes the verification environment, the verification
+    tools defined in this document, including the particular version
+    of this document that was used. It must identify any other tools
+    or equipment used as part of verifying the software unit
+    (:ref:`step-develop-verification-report`).
+  '''
+}
+
+Tracing p8_c9_4_3_3_d {
+  ref = 8 @ 9:4:3:3
+  subref = "d"
+  text = '''
+    d) the level of compliance of the verification results with the
+       expected results;
+  '''
+
+  steps = [Steps.ID.Unit_Test_Run_And_Coverage,
+	   Steps.ID.Develop_Unit_Verification_Plan]
+
+  just = '''
+    The process requires that the dynamic verification results are
+    evaluated in accordance with ISO 26262:2018 Part 8 9.4.3.3.
+
+    Verification Plan identifies the actions to be taken if anomalies
+    are detected during verification and the incremental
+    re-verification required after changes to the software unit design
+    and/or implementation.
+  '''
+}
+
+Tracing p8_c9_4_3_3_e {
+  ref = 8 @ 9:4:3:3
+  subref = "e"
+  text = '''
+    e) an unambiguous statement of whether the verification passed
+       or failed; if the verification failed the statement shall
+       include the rationale for failure and suggestions for changes
+       in the verified work product; and
+
+       NOTE: The verification is evaluated according to the criteria
+       for completion and termination of the verification (see 9.4.1.1 d))
+       and to the expected verification results.
+  '''
+
+  steps = [Steps.ID.Unit_Test_Run_And_Coverage,
+	   Steps.ID.Develop_Verification_Report]
+
+  just = '''
+    The process requires that the dynamic verification results are
+    evaluated in accordance with ISO 26262:2018 Part 8 9.4.3.3.
+
+    The verification report contain an unambiguous statement of
+    whether unit verification passed or failed
+    (:ref:`step-develop-verification-report`).
+  '''
+}
+
+Tracing p8_c9_4_3_3_f {
+  ref = 8 @ 9:4:3:3
+  subref = "f"
+  text = '''
+    f) the reasons for any verification steps not executed.
+  '''
+
+  steps = [Steps.ID.Develop_Unit_Verification_Plan,
+	   Steps.ID.Unit_Test_Run_And_Coverage,
+	   Steps.ID.Develop_Verification_Report]
+
+  just = '''
+    The process requires that the dynamic verification results are
+    evaluated in accordance with ISO 26262:2018 Part 8 9.4.3.3.
+
+    The verification report must reference the Unit Verification Plan,
+    which must identify the actions to be taken if anomalies are
+    detected during verification.
+  '''
+}
+
+Tracing p8_c9_4_3_4 {
+  ref = 8 @ 9:4:3:4
+  text = '''
+    The test equipment used for verification shall be able
+    to deliver valid and reproducible results and shall be
+    controlled in accordance with the applied quality
+    management system.
+  '''
+
+  steps = [Steps.ID.Unit_Test_Run_And_Coverage]
+
+  just = '''
+    The process requires that the dynamic verification results are
+    evaluated in accordance with ISO 26262:2018 Part 8 9.4.3.4
+  '''
+}
+
+Tracing p8_c9_5_1 {
+  ref = 8 @ 9:5:1
+  text = '''
+    **Verification plan** resulting from
+    requirements 9.4.1.1 and 9.4.1.2.
+  '''
+
+  steps = [Steps.ID.Develop_Verification_Report]
+
+  just = '''
+    The process requires development of the verification plan to be
+    completed at step :ref:`step-develop-verification-report`.
+  '''
+}
+
+Tracing p8_c9_5_2 {
+  ref = 8 @ 9:5:2
+  text = '''
+    **Verification specification** resulting from
+    requirements 9.4.2.1 to 9.4.2.4.
+  '''
+
+  steps = [Steps.ID.Write_Tests]
+
+  just = '''
+    The process requires development of Software Unit Verification
+    Specification to be completed at step :ref:`step-write-tests`.
+  '''
+}
+
+Tracing p8_c9_5_3 {
+  ref = 8 @ 9:5:3
+  text = '''
+    **Verification report** resulting from
+    requirements 9.4.3.1 to 9.4.3.4.
+  '''
+
+  steps = [Steps.ID.Develop_Verification_Report]
+
+  just = '''
+    The process requires development of the Verification Report at
+    step :ref:`step-develop-verification-report`.
+  '''
+}

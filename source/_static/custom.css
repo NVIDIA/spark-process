@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'NVIDIA';
+    src: url('NVIDIASans_Rg.ttf') format('truetype');
+}
+
+.cl-all {
+    background-color: lightgreen;
+}
+
+.cl-not-platinum {
+    background-color: lightblue;
+}
+
+.cl-ada {
+    background-color: pink;
+}
+
+.cl-automated {
+    background-color: lightgrey;
+}

@@ -1,0 +1,6 @@
+--check-redefinition,Detects errors in rule set that could cause unexpected suppression of rules.
+"-rules -from=<rule_option_filename>","This options must be provided in the GPR file to enable the rules required in the Table of Required GNATcheck Rules.
+
+Note: Entries of the form -R<rule> must not exist in any rule option file specified via -from=<rule_option_filename>, whether specified on the command line or inside another rule option file."
+-P <project-file.gpr>,The use of -P ensures that switches passed via the Check package of the project file are effective.
+-U,"Without -U, GNATcheck will not necessarily analyze all the units that are part of the project."

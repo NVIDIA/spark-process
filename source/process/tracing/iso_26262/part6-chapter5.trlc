@@ -1,0 +1,611 @@
+/*
+ * Copyright (C) 2024 - 2025 NVIDIA CORPORATION & AFFILIATES
+ * Copyright (C) 2021 - 2024 AdaCore
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3 or
+ * any later version published by the Free Software Foundation; with the
+ * Invariant Sections being "Attribution", with no Front-Cover
+ * Texts, and no Back-Cover Texts.  A copy of the license is included in
+ * the section entitled "GNU Free Documentation License".
+ */
+
+/*
+ * The fields 'text', 'row', and 'applies' are all:
+ *   (C)ISO. This material is reproduced from ISO 26262, with permission of
+ *   the American National Standards Institute (ANSI) on behalf of the
+ *   International Organization for Standardization. All rights reserved.
+ */
+
+package ISO_26262_Tracing
+import Steps
+
+Tracing p6_c5_1 {
+  ref = 6 @ 5:1
+  text = """
+    The objectives of this clause are:
+
+    a) to ensure a suitable and consistent software development process; and
+
+    b) to  ensure a suitable software development environment.
+  """
+
+  just = """
+    These objectives are fully covered through the requirements and
+    recommendations in 6-5.4, all enumerated below. Note however that
+    not all of the requirements and recommendations are applicable to
+    software unit requirements, design, implementation, and
+    verification, and thus not all are applicable to this process.
+  """
+}
+
+Tracing p6_c5_4_1_a_methods {
+  ref = 6 @ 5:4:1
+  subref = "a"
+  text = """
+     When developing the software of an item, software
+     development processes and software development
+     environments shall be used which:
+
+     a) are suitable for developing safety-related embedded
+        software, including **methods**, ...
+  """
+
+  steps = [Steps.ID.ALL]
+
+  just = """
+    The software development methods prescribed by this process,
+    embodied in the process steps, are suitable for developing
+    safety-related embedded software because these methods were
+    developed based on a systematic consideration of the objectives,
+    requirements, and recommendations of ISO 26262.
+  """
+}
+
+Tracing p6_c5_4_1_a_guidelines {
+  ref = 6 @ 5:4:1
+  subref = "a"
+  text = """
+     ..., **guidelines**, ...
+  """
+
+  steps = [Steps.ID.VARIOUS]
+
+  just = """
+    Guidelines are used to improve the comprehensibility and
+    consistency of the work products and to identify and avoid known
+    pitfalls. Specific guidelines documents are cited along with their
+    corresponding process step IDs as needed. For a complete list of
+    guideline documents, see section entitled "Ada/SPARK Guidelines".
+  """
+}
+
+Tracing p6_c5_4_1_a_languages {
+  ref = 6 @ 5:4:1
+  subref = "a"
+  text = """
+     ..., **languages** ...
+  """
+
+  steps = [Steps.ID.ALL]
+
+  just = """
+    The Ada language is suitable for developing safety-related
+    embedded software.
+
+    The Ada language has been designed to be easily subsettable. In
+    its core definition, it defines a series of restrictions that can
+    be applied, deactivating certain features of the language. GNAT
+    run-times, such as the so-called light (no run-time component) or
+    light-tasking provide other natural subsets to the language, which
+    have direct implications in terms of portability, determinism or
+    even safety.
+
+    SPARK is an Ada language subset, constraining the language in a
+    more analyzable subset (for example, no aliasing, and no
+    exceptions).
+
+    SPARK is suitable to specify software requirements: it is a formal
+    notation with fully specified syntax and semantics, which enables
+    creation of unambiguous and verifiable requirements specifications
+
+    If software requirements are specified in SPARK and a unit is
+    implemented in SPARK, the consistency of implementation and
+    requirements is formally proven with GNATprove.
+  """
+}
+
+Tracing p6_c5_4_1_a_tools {
+  ref = 6 @ 5:4:1
+  subref = "a"
+  text = """
+     ... and **tools**;
+  """
+
+  steps = [Steps.ID.VARIOUS]
+
+  just = """
+    Tools are employed throughout this process. Each of the prescribed
+    Ada tools is analyzed to determine a TCL, and, for TCL2 and TCL3,
+    qualified by AdaCore for the development of ASIL D embedded
+    software. See section entitled "Software Tool Usage Analysis" for
+    the determination of TCLs.
+  """
+}
+
+Tracing p6_c5_4_1_b {
+  ref = 6 @ 5:4:1
+  subref = "b"
+  text = """
+    b) support consistency across the sub-phases of the software
+       development lifecycle and the respective work products; and
+  """
+
+  steps = [Steps.ID.Verify_Requirement_Correctness_And_Completeness,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Automated_Check_Against_Coding_Std,
+	   Steps.ID.Inspect_Implementation]
+
+  just = '''
+    Consistency of the software development life cycle is ensured
+    through the practices prescribed throughout this document.
+
+    Consistency of the respective work products is ensured
+    through the steps enumerated above.
+  '''
+}
+
+Tracing p6_c5_4_1_c {
+  ref = 6 @ 5:4:1
+  subref = "c"
+  text = """
+    c) are compatible with the system and hardware development
+       phases regarding required interaction and consistency of
+       exchange of information.
+  """
+
+  steps = [Steps.ID.Declare_Types_States_And_Subprograms]
+
+  just = '''
+    In Ada, it is possible to specify representation aspects in order
+    to interface with features that are outside the domain of the
+    language, typically the hardware.
+  '''
+}
+
+Tracing p6_c5_4_2_a {
+  ref = 6 @ 5:4:2
+  subref = "a"
+  text = """
+    The criteria that shall be considered when selecting a design,
+    modelling or programming language are:
+
+    a) an unambiguous and comprehensible definition;
+  """
+
+  just = '''
+    Ada is defined by its ISO standard, aka the Ada Reference Manual,
+    the latest version being ISO/IEC 8652:2012 defining version 2012
+    of the language.
+
+    SPARK is a software development technology specifically designed
+    for engineering high-reliability applications. It is defined
+    through a document called the SPARK Reference Manual which follows
+    the structure and style of the Ada Reference Manual.
+  '''
+}
+
+Tracing p6_c5_4_2_b {
+  ref = 6 @ 5:4:2
+  subref = "b"
+  text = """
+    b) suitability for specifying and managing safety requirements
+       according to ISO 26262-8:2018 Clause 6, if modelling is used
+       for requirements engineering and management;
+  """
+
+  steps = [Steps.ID.Capture_Requirements,
+	   Steps.ID.Assign_Requirement_Unique_IDs]
+
+  just = '''
+    SPARK contracts are used to specify safety requirements. See
+    section entitled "ISO 26262-8:2018, Clause 6: Specification and
+    management of safety requirements" for details
+  '''
+}
+
+Tracing p6_c5_4_2_c {
+  ref = 6 @ 5:4:2
+  subref = "c"
+  text = """
+    c) support the achievement of modularity, abstraction
+       and encapsulation; and
+  """
+
+  steps = [Steps.ID.Identify_Activity_Scope,
+	   Steps.ID.Capture_Requirements,
+	   Steps.ID.Implement_SPARK_Package,
+	   Steps.ID.Verify_Project]
+
+  just = '''
+    By following the process above, a module is represented as an Ada
+    package, with a well-defined functionality, a clear software
+    interface in the package specification, a private part to limit
+    the visibility only to child packages, and a body containing the
+    implementation which is not visible to any other module.
+
+    Since Ada 83, Ada has been object-based, allowing the partitioning
+    of a system into modules corresponding to abstract data types or
+    abstract objects.
+
+    Ada provides the necessary features to separate the software
+    interface of a module from its implementation, and enforce respect
+    of this separation.
+
+    A package in SPARK is fully responsible for modifications of its
+    internal data (including data of local packages or private child
+    packages) that it only exposes to client packages through abstract
+    names (called "abstract state"). In particular, package
+    elaboration code executed at program startup only directly
+    initializes the data of the package itself.
+
+    Type invariants in SPARK are suitably restricted so that a package
+    ensures that all objects of the type respect their invariant
+    outside of the package boundary.
+
+    Formal verification in SPARK is performed modularly on each
+    package separately.
+  '''
+}
+
+Tracing p6_c5_4_2_d {
+  ref = 6 @ 5:4:2
+  subref = "d"
+  text = """
+    d) support the use of structured constructs.
+  """
+
+  steps = [Steps.ID.Automated_Check_Against_Coding_Std]
+
+  just = '''
+    Ada supports all the usual paradigms of structured programming. In
+    addition to these, GNATcheck controls additional design
+    properties, such as explicit control flows, where subprograms have
+    single entry and single exit points, and if structural complexity
+    is too high.
+  '''
+}
+
+Tracing p6_c5_4_3_t1_1a {
+  ref = 6 @ 5:4:3
+  subref = "Table 1, 1a"
+  text = """
+    Criteria for suitable modelling, design or programming languages
+    (see 5.4.2) that are not sufficiently addressed by the language
+    itself shall be covered by the corresponding guidelines, or by the
+    development environment, considering the topics listed in Table 1.
+  """
+  row = """
+    Enforcement of low complexity
+
+    An appropriate compromise of this topic with other requirements of
+    this document may be required
+  """
+  applies = "ABCD"
+
+  steps = [Steps.ID.Verify_Project,
+	   Steps.ID.Automated_Check_Against_Coding_Std,
+	   Steps.ID.Fix_Coding_Std_Issues,
+	   Steps.ID.Review_Diagnostic_Justifications]
+
+  just = '''
+    The :ref:`step-automated-check-against-coding-std` step requires the use of
+    GNATcheck in accordance with the Requirements Concerning GNATcheck
+    Switches and Rules section. One of the rules required by this
+    process for non-proven Ada code is
+    ``Metrics_Cyclomatic_Complexity:10``, which (when restricted to
+    non-proven code via GNATcheck) results in a GNATcheck diagnostic
+    for each non-proven subprogram whose McCabe cyclomatic complexity
+    exceeds 10.
+
+    The :ref:`step-fix-coding-std-issues` step requires for each
+    excessively-complex non-proven subprogram that either the
+    subprogram is simplified or (where an appropriate compromise is
+    necessary, as allowed by ISO 26262) a rationale is provided for
+    the complexity via a diagnostic justification that is later review
+    din the :ref:`step-review-diagnostic-justifications` step.
+
+    Proven subprograms are exempted from this evaluation because the
+    risk associated with excessive complexity is sufficiently
+    mitigated by the use of GNATprove in the :ref:`step-verify-project` step,
+    which always verifies the absence of run-time errors in proven
+    code.
+  '''
+}
+
+Tracing p6_c5_4_3_t1_1b {
+  ref = 6 @ 5:4:3
+  subref = "Table 1, 1b"
+  row = """
+    Use of language subsets
+
+    The objectives of topic 1b include:
+
+    * Exclusion of ambiguously-defined language constructs
+      which may be interpreted differently by different
+      modellers programmers, code generators or compilers.
+
+    * Exclusion of language constructs which from experience
+      easily lead to mistakes, for example assignments i
+      conditions or identical naming of local and global
+      variables.
+
+    * Exclusion of language constructs which could result in
+      unhandled run-time errors.
+  """
+  applies = "ABCD"
+
+  steps = [Steps.ID.Implement_SPARK_Package,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Review_Deactivated_SPARK,
+	   Steps.ID.Create_Project_File,
+	   Steps.ID.Automated_Check_Against_Coding_Std,
+	   Steps.ID.Fix_Coding_Std_Issues,
+	   Steps.ID.Automated_Check_Against_Coding_Std_Integration]
+
+  just = """
+    The Ada language was designed to mitigate the kinds of threats
+    identified in the footnote for 1b). For example, statements and
+    expressions are linguistically separate, and consequently an
+    assignment (a kind of statement) cannot appear within a condition
+    (a kind of expression). Furthermore, assignments employ a symbol
+    (``:=``) that is not easily confused with a comparison
+    operator. These sorts of language design features permeate Ada
+    making language subsetting less critical than with more
+    general-purpose languages like C and C++.
+
+    The language SPARK *is a language subset of Ada* designed to
+    facilitate sound static verification by restricting use of access
+    types, function side effects, aliasing, goto's, controlled types,
+    and exceptions. This subsetting is enabled with ``SPARK_Mode =>
+    On`` (see :ref:`step-implement-spark-package` step). When enabled, GNATprove
+    verifies the absence of run-time errors (see :ref:`step-verify-project`
+    step). When not enabled, additional global peer review is
+    triggered (see :ref:`step-review-deactivated-spark` step).
+
+    Finally, automated enforcement of language subsetting for both Ada
+    and SPARK is achieved using GNATcheck (see :ref:`step-create-project-file`,
+    :ref:`step-automated-check-against-coding-std`, :ref:`step-fix-coding-std-issues`, and
+    :ref:`step-automated-check-against-coding-std-integration` steps).
+  """
+}
+
+Tracing p6_c5_4_3_t1_1c {
+  ref = 6 @ 5:4:3
+  subref = "Table 1, 1c"
+  row = """
+    Enforcement of strong typing
+
+    The objective of topic 1c is to impose principles of strong typing
+    where these are not inherent in the language.
+  """
+  applies = "ABCD"
+
+  just = """
+    Strong typing is a native feature of the Ada language.
+  """
+}
+
+Tracing p6_c5_4_3_t1_1d {
+  ref = 6 @ 5:4:3
+  subref = "Table 1, 1d"
+  row = """
+    Use of defensive implementation techniques
+
+    Examples of defensive implementation techniques
+
+    * Verify the divisor before a division operation (different from
+      zero or in a specific range).
+
+    * Check an identifier passed by parameter to verify that the
+      calling function is the intended caller.
+
+    * Use the "default" in switch cases to detect an error.
+  """
+  applies = "abCD"
+
+  steps = [Steps.ID.Implement_SPARK_Package,
+	   Steps.ID.Verify_Project,
+	   Steps.ID.Review_Deactivated_SPARK]
+
+  just = """
+    In most cases, defensive techniques are not required because
+    Ada/SPARK has built in support for them.
+
+    For example, Ada requires the use of others in a case statement
+    when all possible inputs are not otherwise covered (C calls these
+    default and switch, respectively).
+
+    For SPARK code, GNATprove verifies the Absence of Run-time Errors
+    (AoRTE), as well as correctness of SPARK contracts.
+
+    For deactivated SPARK code, the process requires the presence of
+    language-defined runtime checks to dynamically ensure that SPARK
+    contracts are fulfilled.
+
+    If it is necessary to disable such runtime checks, then the
+    process asks for using defensive implementation techniques to
+    mitigate the risk associated with absence of the contract checks.
+  """
+}
+
+Tracing p6_c5_4_3_t1_1e {
+  ref = 6 @ 5:4:3
+  subref = "Table 1, 1e"
+  row = """
+    Use of well-trusted design principles
+
+    Verification of the validity of the underlying assumptions,
+    boundaries and conditions of application may be required.
+  """
+  applies = "abCD"
+
+  steps = [Steps.ID.Identify_Activity_Scope,
+	   Steps.ID.Capture_Requirements,
+	   Steps.ID.Implement_SPARK_Package]
+
+  just = """
+    Ada and SPARK support well-trusted design principles:
+
+    * structured control statements;
+
+    * flexible data composition facilities, with strong type checking;
+
+    * traditional features for code modularization ("subprograms");
+
+    * standard support for "programming in the large" and module reuse
+      (packages, Object-Oriented Programming, child libraries, generic
+      templates);
+
+    * a mechanism for detecting and responding to exceptional run-time
+      conditions ("exception handling");
+
+    * high-level concurrency support ("tasking") along with a
+      deterministic subset (the Ravenscar profile) appropriate in
+      applications that need to meet high-assurance certification
+      requirements.
+
+    The Ada/SPARK Guidelines identify well-trusted design principles,
+    and the process requires that these guidelines be considered when
+    reviewing Ada/SPARK code.
+  """
+}
+
+Tracing p6_c5_4_3_t1_1f {
+  ref = 6 @ 5:4:3
+  subref = "Table 1, 1f"
+  row = """
+    Use of unambiguous graphical representation
+  """
+  applies = "aBCD"
+
+  just = """
+    Not covered.
+  """
+}
+
+Tracing p6_c5_4_3_t1_1g {
+  ref = 6 @ 5:4:3
+  subref = "Table 1, 1g"
+  row = """
+    Use of style guides
+  """
+  applies = "aBCD"
+
+  steps = [Steps.ID.Verify_Requirement_Correctness_And_Completeness,
+	   Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Automated_Check_Against_Coding_Std,
+	   Steps.ID.Inspect_Implementation]
+
+  just = """
+    GNATcheck is used to automate enforcement of the Ada/SPARK
+    Guidelines employed by this process.
+
+    Aspects of the Ada/SPARK Guidelines that are not enforced by
+    GNATcheck are verified by manual inspection.
+  """
+}
+
+Tracing p6_c5_4_3_t1_1h {
+  ref = 6 @ 5:4:3
+  subref = "Table 1, 1h"
+  row = """
+    Use of naming conventions
+  """
+  applies = "ABCD"
+
+  steps = [Steps.ID.Automated_Check_Against_Coding_Std,
+	   Steps.ID.Fix_Coding_Std_Issues,
+	   Steps.ID.Create_Project_File]
+
+  just = """
+    GNATcheck is used to automate enforcement of the Ada/SPARK
+    Guidelines employed by this process.
+
+    Naming conventions are the purview of these guidelines.
+
+    Also, the GNAT naming conventions for files are adopted. The
+    :ref:`step-create-project-file` forbids project files from including Naming
+    packages.
+  """
+}
+
+Tracing p6_c5_4_3_t1_1i {
+  ref = 6 @ 5:4:3
+  subref = "Table 1, 1i"
+  row = """
+    Concurrency aspects
+
+    Concurrency of processes or tasks is not limited to executing
+    software in a multi-core or multi-processor runtime environment.
+  """
+  applies = "abcd"
+
+  steps = [Steps.ID.Inspect_Unit_Design,
+	   Steps.ID.Automated_Check_Against_Coding_Std,
+	   Steps.ID.Inspect_Implementation]
+
+  just = """
+    Assurance of the suitability and consistency of the software
+    development process with respect to concurrency is the purview of
+    the Ada/SPARK Guidelines. These guidelines are enforced through
+    automation via GNATcheck and through manual inspections.
+
+    Assurance of the suitability of the software development
+    environment is addressed by Ada/SPARK and is not limited to any
+    set of process steps.
+
+    Ada supplies a structured, high-level facility for
+    concurrency. The unit of concurrency is a program entity known as
+    a "task." Tasks typically communicate implicitly via shared data
+    or explicitly via a synchronous control mechanism known as the
+    rendezvous. A shared data item is defined abstractly as a
+    "protected object" (a feature introduced in Ada 95), with
+    operations executed under mutual exclusion when invoked from
+    multiple tasks. Asynchronous task interactions are also supported,
+    specifically timeouts and task termination. Such asynchronous
+    behavior is deferred during certain operations, to prevent the
+    possibility of leaving shared data in an inconsistent
+    state. Mechanisms designed to help take advantage of multi-core
+    architectures that were introduced in Ada 2012. In Ada,
+    light-tasking runtime supports this concurrency mode.
+
+    SPARK also supports light-tasking runtime.
+  """
+}
+
+Tracing p6_c5_5_1 {
+  ref = 6 @ 5:5:1
+  text = """
+    Work products
+
+    Documentation of the software development environment resulting
+    from requirements 5.4.1 to 5.4.3 and C.4.1 to C.4.11.
+  """
+
+  alt_steps = '''
+    See this section and sections entitled: "Ada/SPARK Guidelines",
+    "Software Tool Usage Analysis"
+  '''
+
+  just = """
+    * Ada/SPARK Guidelines are described in a separate document. See
+      section entitled "Ada/SPARK Guidelines"
+
+    * Tools are documented in section "Software Tool Usage Analysis"
+
+    * Configuration and calibration data are outside the scope of this
+      process.
+  """
+}

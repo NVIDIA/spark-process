@@ -1,0 +1,731 @@
+/*
+ * Copyright (C) 2024 - 2025 NVIDIA CORPORATION & AFFILIATES
+ * Copyright (C) 2021 - 2024 AdaCore
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3 or
+ * any later version published by the Free Software Foundation; with the
+ * Invariant Sections being "Attribution", with no Front-Cover
+ * Texts, and no Back-Cover Texts.  A copy of the license is included in
+ * the section entitled "GNU Free Documentation License".
+ */
+
+package Checklist
+import Steps
+
+Item item_3_1_1 {
+  automatable = true
+  step        = Steps.ID.Create_ADB
+  scope       = Scope.All
+
+  text = '''
+    For each non-nested package implemented by the unit, does the
+    Software Unit Verification Plan correctly indicate whether the
+    package requires a package body and, if so, the corresponding ADB
+    file name per the GNAT default file naming scheme?
+  '''
+}
+
+Item item_3_1_2 {
+  automatable = true
+  step        = Steps.ID.Create_ADB
+  scope       = Scope.All
+
+  text = '''
+    For each non-nested package implemented by the unit which requires
+    a package body, is the corresponding ADB file included in at least
+    one of the unit GPR files (whether it is included directly or via
+    the containing directory)?
+  '''
+}
+
+Item item_3_2_1 {
+  step        = Steps.ID.Define_SPARK_Package
+  scope       = Scope.Automated
+
+  text = '''
+    During the :ref:`step-compile-project` step, the compiler will verify that the
+    correct package body is declared in each ADB file.
+  '''
+}
+
+Item item_3_3_1 {
+  step        = Steps.ID.Implement_SPARK_Package
+  scope       = Scope.Automated
+
+  text = '''
+    During the :ref:`step-compile-project` step, the compiler will verify that
+    each ADB file completes all the declarations left incomplete by
+    the corresponding ADS file, and you will verify that the project
+    compiles without errors or warnings.
+  '''
+}
+
+Item item_3_3_2 {
+  step        = Steps.ID.Implement_SPARK_Package
+  scope       = Scope.Automated
+
+  text = '''
+    During the :ref:`step-verify-project` step, GNATprove will formally verify the
+    project.
+  '''
+}
+
+Item item_3_3_3 {
+  step        = Steps.ID.Implement_SPARK_Package
+  scope       = Scope.Automated
+
+  text = '''
+    During the :ref:`step-review-deactivated-spark` step, reviewers will verify
+    compliance with all the requirements of the Non-SPARK Ada
+    subsection.
+  '''
+}
+
+Item item_3_3_4 {
+  step        = Steps.ID.Implement_SPARK_Package
+  scope       = Scope.Automated
+
+  text = '''
+    During the :ref:`step-review-diagnostic-justifications` step, reviewers will
+    verify the compliance with all the requirements of the Diagnostic
+    Justifications subsection.
+  '''
+}
+
+Item item_3_4_1 {
+  automatable = true
+  step        = Steps.ID.Compile_Project
+  scope       = Scope.All
+
+  text = '''
+    Was the software unit compiled using the gprbuild command
+    specified in the :ref:`step-compile-project` step?
+  '''
+}
+
+Item item_3_4_2 {
+  automatable = true
+  step        = Steps.ID.Compile_Project
+  scope       = Scope.All
+
+  text = '''
+    Did the software unit compile without errors, warnings, or style
+    messages? (Alternatively, did gprbuild exit with a zero exit
+    status?)
+  '''
+}
+
+Item item_4_1_1 {
+  automatable = true
+  step        = Steps.ID.Develop_Unit_Verification_Plan
+  scope       = Scope.All
+
+  text = '''
+    Does the Software Unit Verification Plan indicate (whether
+    directly or indirectly) the versions of the ADS and ADB files that
+    are being verified as suitable for release?
+
+    Note: The ADS and ADB files to be verified were already recorded
+    in the :ref:`step-identify-activity-scope`, :ref:`step-identify-internal-packages`, and
+    :ref:`step-create-adb` steps.
+  '''
+}
+
+Item item_4_1_2 {
+  manual      = true
+  step        = Steps.ID.Develop_Unit_Verification_Plan
+  scope       = Scope.All
+
+  text = """
+    Does the Software Unit Verification Plan specify the objectives of
+    verification, and do these objectives include the four objectives
+    from ISO 26262-6:2018, 9.1 (duplicated below for the reviewer's
+    convenience)?
+
+    #. to provide evidence that the software unit design satisfies the
+       allocated software requirements and is suitable for the
+       implementation;
+
+    #. to verify that the defined safety measures resulting from
+       safety-oriented analyses in accordance with 7.4.10 and 7.4.11
+       are properly implemented;
+
+    #. to provide evidence that the implemented software unit complies
+       with the unit design and fulfills the allocated software
+       requirements with the required ASIL; and
+
+    #. to provide sufficient evidence that the software unit contains
+       neither undesired functionalities nor undesired properties
+       regarding functional safety.
+  """
+}
+
+Item item_4_1_3 {
+  manual      = true
+  step        = Steps.ID.Develop_Unit_Verification_Plan
+  scope       = Scope.All
+
+  text = '''
+    Does the Software Unit Verification Plan indicate that the
+    verification methods, the verification pass/fail criteria, the
+    verification environment, and some of the verification tools are
+    defined in this document (the SPARK-Based ISO 26262 Safety Process
+    for Vehicle Software), including the particular version of this
+    document that was used?
+  '''
+}
+
+Item item_4_1_4 {
+  manual      = true
+  step        = Steps.ID.Develop_Unit_Verification_Plan
+  scope       = Scope.All
+
+  text = '''
+    Does the Software Unit Verification Plan identify the tools and
+    equipment that will be used to automate verification checklist
+    rows marked automatable (A), for those rows (if any) that will be
+    automated?
+
+    Note: This process does not require the automation of verification
+    checklist rows marked automatable (A).
+  '''
+}
+
+Item item_4_1_5 {
+  manual      = true
+  step        = Steps.ID.Develop_Unit_Verification_Plan
+  scope       = Scope.All
+
+  text = '''
+    Does the Software Unit Verification Plan identify the resources
+    (person-days of people with various skills, time slots on shared
+    equipment...) required for verification, and to the best of the
+    knowledge of the reviewer, are those resources sufficient to
+    complete all the verification activities specified in the Software
+    Unit Verification Plan?
+  '''
+}
+
+Item item_4_1_6 {
+  manual      = true
+  step        = Steps.ID.Develop_Unit_Verification_Plan
+  scope       = Scope.All
+
+  text = '''
+    Does the Software Unit Verification Plan identify the actions to
+    be taken if anomalies are detected during verification and the
+    incremental re-verification required after changes to the software
+    unit design and/or implementation?
+  '''
+}
+
+Item item_4_2_1 {
+  automatable = true
+  step        = Steps.ID.Verify_Project
+  scope       = Scope.All
+
+  text = '''
+    Was GNATprove invoked with the gnatprove command line described in
+    the :ref:`step-verify-project` step?
+  '''
+}
+
+Item item_4_2_2 {
+  automatable = true
+  step        = Steps.ID.Verify_Project
+  scope       = Scope.All
+
+  text = '''
+    Did GNATprove report zero warnings, zero errors, and zero
+    high/medium/low check messages? (Alternatively, did gnatprove exit
+    with a zero exit status?)
+  '''
+}
+
+Item item_4_2_3 {
+  automatable = true
+  step        = Steps.ID.Verify_Project
+  scope       = Scope.All
+
+  text = '''
+    Do the switches on the gnatprove command line refrain from using
+    any switches prohibited by the Requirements Concerning GNATprove
+    Switches section?
+  '''
+}
+
+Item item_4_2_4 {
+  automatable = true
+  step        = Steps.ID.Verify_Project
+  scope       = Scope.All
+
+  text = '''
+    Does the combination of switches in the Prove package in the unit
+    GPR file and the switches on the gnatprove command line
+    collectively include all the switches required by the Requirements
+    Concerning GNATprove Switches section?
+  '''
+}
+
+Item item_4_3_1 {
+  automatable = true
+  step        = Steps.ID.Automated_Check_Against_Coding_Std
+  scope       = Scope.All
+
+  text = '''
+    Was GNATcheck invoked with the gnatcheck command line described in
+    the :ref:`step-automated-check-against-coding-std` step?
+  '''
+}
+
+Item item_4_3_2 {
+  automatable = true
+  step        = Steps.ID.Automated_Check_Against_Coding_Std
+  scope       = Scope.All
+
+  text = '''
+    Do the switches on the gnatcheck command line refrain from using
+    any switches prohibited by the Requirements Concerning GNATcheck
+    Switches and Rules section?
+  '''
+}
+
+Item item_4_3_3 {
+  automatable = true
+  step        = Steps.ID.Automated_Check_Against_Coding_Std
+  scope       = Scope.All
+
+  text = '''
+    Does the combination of switches in the Check package in the unit
+    GPR file and the switches on the gnatcheck command line
+    collectively include all the switches and enable all the rules
+    required by the Requirements Concerning GNATcheck Switches and
+    Rules section?
+  '''
+}
+
+Item item_4_3_4 {
+  automatable = true
+  step        = Steps.ID.Automated_Check_Against_Coding_Std
+  scope       = Scope.All
+
+  text = '''
+    Does the combination of switches in the Check package in the unit
+    GPR file and the switches on the gnatcheck command line
+    collectively enable all the rules required by the Ada/SPARK
+    Guidelines?
+  '''
+}
+
+Item item_4_3_5 {
+  automatable = true
+  step        = Steps.ID.Automated_Check_Against_Coding_Std
+  scope       = Scope.All
+
+  text = '''
+    Was GNATkp invoked with the gnatkp command line described in the
+    :ref:`step-automated-check-against-coding-std` step and with the ``--kp-version``
+    switch set to the correct GNAT tools version?
+  '''
+}
+
+Item item_4_4_1 {
+  automatable = true
+  step        = Steps.ID.Fix_Coding_Std_Issues
+  scope       = Scope.All
+
+  text = '''
+    Did GNATcheck and GNATkp collectively report no warnings, no
+    coding standard violations, and no safety manual violations?
+  '''
+}
+
+Item item_4_5_1 {
+  manual      = true
+  step        = Steps.ID.Static_Analysis_Unit
+  scope       = Scope.Ada
+
+  text = '''
+    Does the CodePeer command line enable medium/high messages for all
+    non-proven code in the software unit?
+  '''
+}
+
+Item item_4_5_2 {
+  automatable = true
+  step        = Steps.ID.Static_Analysis_Unit
+  scope       = Scope.Ada
+
+  text = '''
+    Did CodePeer output zero diagnostics?
+  '''
+}
+
+Item item_4_6_1 {
+  automatable = true
+  step        = Steps.ID.Check_Stack_Usage_Unit
+  scope       = Scope.All
+
+  text = '''
+    Was GNATstack invoked using the gnatstack command line specified
+    in the :ref:`step-check-stack-usage-unit` step?
+  '''
+}
+
+Item item_4_6_2 {
+  automatable = true
+  step        = Steps.ID.Check_Stack_Usage_Unit
+  scope       = Scope.All
+
+  text = """
+    For each subprogram whose stack frame size is greater than five
+    times the median subprogram stack frame size, does the software
+    unit design identify the subprogram by name as potentially
+    requiring a large amount of stack space, does the software unit
+    design specify a numerical upper bound for the subprogram's stack
+    frame size, and is the subprogram's actual stack frame size less
+    than or equal to that threshold?
+  """
+}
+
+Item item_4_6_3 {
+  automatable = true
+  step        = Steps.ID.Check_Stack_Usage_Unit
+  scope       = Scope.All
+
+  text = '''
+    For each subprogram whose stack frame size is variable, does the
+    software unit design identify the subprogram by name as
+    potentially requiring a variable-length stack frame?
+  '''
+}
+
+Item item_4_7_1 {
+  manual      = true
+  step        = Steps.ID.Review_Diagnostic_Justifications
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Was the Diagnostic Justifications Verification Worksheet completed
+    with a global peer review, and were zero issues identified in it?
+  '''
+}
+
+Item item_4_8_1 {
+  manual      = true
+  step        = Steps.ID.Review_Deactivated_SPARK
+  scope       = Scope.Ada
+
+  text = '''
+    Was the Non-Proven Ada Worksheet completed, and were zero issues
+    identified in it?
+  '''
+}
+
+Item item_4_9_1 {
+  manual      = true
+  step        = Steps.ID.Manual_Check_Against_Safety_Manuals
+  scope       = Scope.All
+
+  text = '''
+    Review all the safety manuals identified in the
+    :ref:`step-manual-check-against-safety-manuals` step. For each usage
+    constraint in each of the safety manuals, if the usage constraint
+    is not checked by gnatkp and not checked by GNATcheck rule
+    Ada_2022_Outside_Of_Contracts, does the software unit and the
+    usage of the GNAT tools for this process comply with the usage
+    constraint?
+  '''
+}
+
+Item item_4_10_1 {
+  manual      = true
+  step        = Steps.ID.Inspect_Implementation
+  scope       = Scope.All
+
+  text = '''
+    Was the Code Inspection Worksheet completed, and were zero issues
+    identified in it?
+  '''
+}
+
+Item item_4_11_1 {
+  automatable = true
+  step        = Steps.ID.Write_Tests
+  scope       = Scope.All
+
+  text = '''
+    Does each test case in an ADS or ADB file have its own unique ID
+    as described in the Traceability Model section?
+  '''
+}
+
+Item item_4_11_2 {
+  manual      = true
+  step        = Steps.ID.Write_Tests
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Aside from test cases that merely instantiate generic test cases,
+    does each test case trace to one or more unit specification
+    fragments that collectively justify all the PASS/FAIL criteria of
+    the test case?
+
+    Rationale: Aside from test cases that merely instantiate generic
+    test cases, test cases must not be derived from unit
+    implementation.
+  '''
+}
+
+Item item_4_11_3 {
+  manual      = true
+  step        = Steps.ID.Write_Tests
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Does each test case include documentation of the equivalence
+    classes and boundary values covered by the test case?
+  '''
+}
+
+Item item_4_11_4 {
+  automatable = true
+  step        = Steps.ID.Write_Tests
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Are test cases for generic packages and subprograms themselves
+    generic, and do the generic test cases have the exact same
+    sequence of generic formal parameters as the generic packages and
+    subprograms they test?
+  '''
+}
+
+Item item_4_11_5 {
+  automatable = true
+  step        = Steps.ID.Write_Tests
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Do the test cases collectively instantiate all the generic test
+    cases for the software unit?
+  '''
+}
+
+Item item_4_11_6 {
+  automatable = true
+  step        = Steps.ID.Write_Tests
+  scope       = Scope.All
+
+  text = '''
+    Do the test cases collectively instantiate and invoke all the
+    generic test cases corresponding to generic packages and
+    subprogram instantiations in the software unit, with the same
+    generic actual parameters?
+  '''
+}
+
+Item item_4_11_7 {
+  automatable = true
+  step        = Steps.ID.Write_Tests
+  scope       = Scope.Ada
+
+  text = '''
+    For each generic instantiation in the software unit, if any part
+    of the generic package or subprogram uses a higher level of SPARK
+    than the instantiation site in the software unit, is there a
+    ``SPARK_Mode => On`` non-proof-skipping test case that
+    instantiates the generic package or subprogram with the same
+    generic actual parameters, and does the test case documentation
+    clearly indicate that this test case must be proven during
+    verification?
+  '''
+}
+
+Item item_4_12_1 {
+  manual      = true
+  step        = Steps.ID.Review_Tests
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Does each non-formally-verified unit requirement, each
+    non-formally-verified unit design constraint, and each
+    non-formally-verified unit design documentation fragment trace to
+    test cases that collectively verify all the specified properties
+    and behaviors and collectively cover all the equivalence classes
+    and boundary values evident from the specification?
+  '''
+}
+
+Item item_4_12_2 {
+  manual      = true
+  step        = Steps.ID.Review_Tests
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Does each diagnostic justification and each uniquely-identified
+    check suppression trace to test cases that collectively verify
+    that the diagnostic justification or check suppression is correct
+    (not masking a bug) and collectively cover all the equivalence
+    classes and boundary values evident in the supplied justification?
+  '''
+}
+
+Item item_4_12_3 {
+  step        = Steps.ID.Review_Tests
+  scope       = Scope.Automated
+
+  text = '''
+    The other bullets of :ref:`step-review-tests` are covered by the checklist
+    items for :ref:`step-write-tests`.
+  '''
+}
+
+Item item_4_13_1 {
+  automatable = true
+  step        = Steps.ID.Formally_Verify_Test_Cases
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    If any test cases are documented as requiring proof, then was
+    GNATprove GNATprove invoked with the gnatprove command line
+    described in the :ref:`step-formally-verify-test-cases` step?
+  '''
+}
+
+Item item_4_13_2 {
+  automatable = true
+  step        = Steps.ID.Formally_Verify_Test_Cases
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Did GNATprove report zero warnings, zero errors, and zero
+    high/medium/low check messages? (Alternatively, did gnatprove exit
+    with a zero exit status?)
+  '''
+}
+
+Item item_4_13_3 {
+  automatable = true
+  step        = Steps.ID.Formally_Verify_Test_Cases
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Do the switches on the gnatprove command line refrain from using
+    any switches prohibited by the Requirements Concerning GNATprove
+    Switches section?
+  '''
+}
+
+Item item_4_13_4 {
+  automatable = true
+  step        = Steps.ID.Formally_Verify_Test_Cases
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    Does the combination of switches in the Prove package in the test
+    GPR file and the switches on the gnatprove command line
+    collectively include all the switches required by the Requirements
+    Concerning GNATprove Switches section?
+  '''
+}
+
+Item item_4_14_1 {
+  automatable = true
+  step        = Steps.ID.Unit_Test_Run_And_Coverage
+  scope       = Scope.All
+
+  text = '''
+    Were all the unit tests run, and did all the unit tests pass?
+  '''
+}
+
+Item item_4_14_2 {
+  automatable = true
+  step        = Steps.ID.Unit_Test_Run_And_Coverage
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    If the cleanliness-adjusted ASIL of the unit is not QM, was a tool
+    such as GNATcoverage used to measure the structural coverage of
+    the software unit achieved by the passing unit tests, using the
+    metric corresponding to the cleanliness-adjusted ASIL of the
+    software unit?
+
+    * MC/DC coverage for ASIL D
+    * Decision coverage for ASILs B and C
+    * Statement coverage for ASIL A
+  '''
+}
+
+Item item_4_15_1 {
+  automatable = true
+  step        = Steps.ID.Handle_Coverage_Deviations
+  scope       = Scope.Not_Platinum
+
+  text = '''
+    If the cleanliness-adjusted ASIL of the unit is not QM, is each
+    coverage gap identified in the :ref:`step-unit-test-run-and-coverage` step
+    justified by one of the three justification methods listed in the
+    :ref:`step-handle-coverage-deviations` step?
+  '''
+}
+
+Item item_4_16_1 {
+  automatable = true
+  step        = Steps.ID.Verify_Dynamic_Assumptions
+  scope       = Scope.All
+
+  text = '''
+    Was the software unit rebuilt with the GPR and ADC file
+    modifications specified in the :ref:`step-verify-dynamic-assumptions` step?
+  '''
+}
+
+Item item_4_16_2 {
+  automatable = true
+  step        = Steps.ID.Verify_Dynamic_Assumptions
+  scope       = Scope.All
+
+  text = '''
+    Were all the rebuilt unit tests run, and did all the rebuilt unit
+    tests pass, without exceptions being raised during test execution?
+  '''
+}
+
+Item item_4_17_1 {
+  automatable = true
+  step        = Steps.ID.Develop_Verification_Report
+  scope       = Scope.All
+
+  text = '''
+    Does the Software Unit Verification Report refer to the Software
+    Unit Verification Plan and Software Unit Verification
+    Specification (or to this process)?
+  '''
+}
+
+Item item_4_17_2 {
+  automatable = true
+  step        = Steps.ID.Develop_Verification_Report
+  scope       = Scope.All
+
+  text = '''
+    Does the Software Unit Verification Report identify the specific
+    versions of the files of the software unit that were verified?
+  '''
+}
+
+Item item_4_17_3 {
+  automatable = true
+  step        = Steps.ID.Develop_Verification_Report
+  scope       = Scope.All
+
+  text = '''
+    What is the PASS/FAIL outcome of unit verification?
+
+    Note: Only enter PASS if the answers to all earlier questions is
+    "Yes".
+ '''
+}
