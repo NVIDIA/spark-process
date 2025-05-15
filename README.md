@@ -1,7 +1,8 @@
 # Spark Process
 
 This is the repository for the reST sources of the NVIDIA SPARK
-Process, the ISO Tracing document, and their common sections.
+Process. A pre-built version is [available
+here](https://nvidia.github.io/spark-process/).
 
 ## Disclaimer
 
