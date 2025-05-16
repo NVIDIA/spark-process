@@ -92,3 +92,17 @@ v1.3](https://www.gnu.org/licenses/fdl-1.3.en.html#license-text).
 
 Any supporting tools and scripts are licensed under the [GPL
 v3](https://www.gnu.org/licenses/gpl-3.0.html#license-text).
+
+## Acknowledgements
+
+We would like to thank the following people for their contributions to
+this process (in lexicographic order):
+
+* Brian Gaeke (NVIDIA)
+* Dan Hettena (NVIDIA)
+* Dmitry Kulagin (NVIDIA)
+* Duane McInerney (NVIDIA)
+* Erwan Le Guillou (AdaCore)
+* Florian Schanda (NVIDIA)
+* Vasiliy Fofanov (AdaCore)
+* Yannick Moy (AdaCore)
