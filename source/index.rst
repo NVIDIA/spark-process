@@ -15,7 +15,8 @@ Preamble
 This is a collection of several related documents:
 
 * The :ref:`doc-process` (GFDL v1.3) describing a software process
-  using SPARK to meet ISO 26262.
+  using `Ada/SPARK <https://www.adacore.com/sparkpro>`_ to meet `ISO
+  26262 <https://www.iso.org/publication/PUB200262.html>`_.
 
 * The :ref:`doc-common` document which contains the licenses and
   bibliography.
