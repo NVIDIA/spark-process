@@ -16,6 +16,4 @@ Note: The Ada/SPARK Guidelines document is expected to provide guidance on how t
 -gnatw.s,Record representation clauses should not contradict the associated record type definitions.
 -gnatwt,It is expected that every code path within a compilation unit will be reachable without modification of the compilation unit so that every code path can be tested using the same object code as what ships to customers
 -gnatw.w,Enables useful warnings about misuse of Warnings Off pragmas.
--gnatw.X,"Necessary when using
-pragma Restrictions (No_Exception_Propagation)
-to avoid spurious warnings compiling SPARK code (see :gt:`V223-002`)"
+-gnatw.X,"Necessary when using ``pragma Restrictions (No_Exception_Propagation)`` to avoid spurious warnings compiling SPARK code."
