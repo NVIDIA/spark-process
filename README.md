@@ -57,18 +57,19 @@ make html
 
 ## Source organisation
 
-* `pygments/` -- this contains syntax highlighting for SPARK
-* `util/` -- this contains various document generation scripts
-* `source/process/` -- this is where the main document tree lives,
-  start at index.rst
-* `source/process/process/` -- this is where the actual process
-  document lives
-* `source/process/checklist/` -- this is where the TRLC files live
-  that generate the checklist
-* `source/process/tracing/spark_assumptions/` -- this is where the
-  TRLC files live that generate the assumption tracing chapter
-* `source/process/tracing/iso_26262/` -- this is where iso tracing
-  lives
+* [pygments/](pygments) -- this contains syntax highlighting for SPARK
+* [util/](util) -- this contains various document generation scripts
+* [source/process/](source/process) -- this is where the main document
+  tree lives, start at [index.rst](source/process/index.rst).
+* [source/process/process/](source/process/process) -- this is where
+  the actual process document lives
+* [source/process/checklist/](source/process/checklist) -- this is
+  where the TRLC files live that generate the checklist
+* [source/process/tracing/spark_assumptions/](source/process/tracing/spark_assumptions)
+  -- this is where the TRLC files live that generate the SPARK
+  assumption tracing chapter
+* [source/process/tracing/iso_26262/](source/process/tracing/iso_26262)
+  -- this is where ISO 26262 tracing lives
 
 A large part of the process is generated from TRLC files. TRLC is a
 [language](https://bmw-software-engineering.github.io/trlc/lrm.html)
