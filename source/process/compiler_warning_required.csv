@@ -8,7 +8,7 @@ Note: The use of -Werror includes all the effects of -gnatwe, but this process r
 -gnatwh,"Implicitly-hidden declarations are a potential source of confusion when reading code.
 Note: The Ada/SPARK Guidelines document is expected to provide guidance on how to mitigate the risk that adding a declaration to a package will cause another package to fail to compile due to warnings enabled by -gnatwh."
 -gnatw.h,"Record representation clauses should be complete and fully specify the layout, and that a hole might be an indication of an error."
--gnatw.j,"Per AdaCore (see :gt:`V413-003`), the chief designer of Ada 95 believes that Ada ""should have disallowed ... adding visible operations to a tagged type after deriving a private extension from it"" due to the confusion created. The capability also does not appear to add value to the language."
+-gnatw.j,"Tucker Taft, the chief designer of Ada 95, states that Ada ""should have disallowed ... adding visible operations to a tagged type after deriving a private extension from it"" due to the confusion created. The capability also does not appear to add value to the language."
 -gnatw.k,"As warned by AdaCore, redefining names in package Standard could lead to confusion."
 -gnatwl,This warning appears to prevent elaboration problems that could lead to exceptions
 -gnatw.o,"This switch enables warnings that are a straightforward extension of warnings enabled by -gnatwu/-gnatwa. For consistency, enable these warnings."
