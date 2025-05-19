@@ -36,8 +36,6 @@ extensions = ["sphinx.ext.extlinks"]
 templates_path = ['_templates']
 exclude_patterns = []
 extlinks = {
-    "gt" : ("https://support.adacore.com/csm?id=case&case=%s",
-            "AdaCore Ticket %s"),
     "lrm" : ("http://www.ada-auth.org/standards/22rm/html/RM-%s.html",
              "Ada 2022 LRM (%s)"),
     "gnatattr" : (GNAT_RM +
