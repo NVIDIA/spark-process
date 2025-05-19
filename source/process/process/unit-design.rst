@@ -307,14 +307,6 @@ following user aspect definition:
       Local_Restrictions (No_Secondary_Stack, No_Heap_Allocations),
       Always_Terminates);
 
-.. note::
-
-  The 24.1 tools do not correctly support this. It's been fixed in
-  :gt:`CS0038331` and will be in 24.2.
-
-  As a workaround you can specify the local restriction and
-  termination aspects directly on each subprogram.
-
 Step ID: Create_Configuration_Pragmas
 
 .. _step-identify-internal-packages:
