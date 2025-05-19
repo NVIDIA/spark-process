@@ -21,6 +21,18 @@ the initial authors.
 Several sections and checklists of the process have been identified to
 be too heavy. We are working on significant streamlining.
 
+## Development and Contributions
+
+We intend to maintain this document through
+[issues](https://github.com/NVIDIA/spark-process/issues) and [pull
+requests](https://github.com/NVIDIA/spark-process/pulls).
+
+Suggestions and contributions are welcome and encouraged, but please
+note that we can't incorporate modifications that deviate from our
+needs. In this case you should create a fork if your project has
+specific goals - but please tell us since we might want to link to
+them.
+
 ## How to build
 
 You can build the HTML or PDF document locally, this is especially
