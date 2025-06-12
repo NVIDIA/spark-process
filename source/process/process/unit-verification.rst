@@ -1353,17 +1353,22 @@ Verify Dynamic Assumptions
 Recompile and run unit tests with the project file modified as follows:
 
 * Ensure that the ``-gnata`` and ``-gnatVa`` compiler switches are
-  present in Default_Switches ("Ada") in the ``Compiler`` package
+  present in ``Default_Switches ("Ada")`` in the ``Compiler`` package
 
 * Ensure that the ``-gnatp`` and ``-gnato0`` compiler switches are not
   present in ``Default_Switches ("Ada")`` in the ``Compiler`` package
 
 * Ensure that the file specified by ``Global_Configuration_Pragmas``
   in the ``Builder`` package includes ``pragma Initialize_Scalars``
+  (if the Ada runtime used support it)
 
 These modifications help ensure that in the presence of software units
 that mix Ada with SPARK, all assumptions hold at the unit-internal
 boundaries between Ada and SPARK.
+
+If the Ada runtime does not support ``Initialize_Scalars``, then it is
+necessary to rely on code inspection and static analysis to detect
+uses of uninitialized variables in non-flow-analyzed code.
 
 Pass Criteria: All tests were run and passed, without any exceptions
 being raised during test execution.

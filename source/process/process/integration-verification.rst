@@ -252,15 +252,22 @@ follows:
 
 * Ensure that the ``-gnata`` and ``-gnatVa`` compiler switches are
   present in ``Default_Switches ("Ada")`` in the ``Compiler`` package
+
 * Ensure that the ``-gnatp`` and ``-gnato0`` compiler switches are not
   present in ``Default_Switches ("Ada")`` in the ``Compiler`` package
+
 * Ensure that the file specified by ``Global_Configuration_Pragmas``
   in the ``Builder`` package includes ``pragma Initialize_Scalars``
+  (if the Ada runtime used support it)
 
 These modifications help ensure that in the presence of software units
 not developed according to this process, all formal assumptions hold
 at the boundaries between software units developed according to this
 process and other software units.
+
+If the Ada runtime does not support ``Initialize_Scalars``, then it is
+necessary to rely on code inspection and static analysis to detect
+uses of uninitialized variables in non-flow-analyzed code.
 
 Note: See the note in the :ref:`step-verify-dynamic-assumptions` step concerning
 the potential impact of ``-gnata`` and ``pragma Initialize_Scalars``
