@@ -350,7 +350,7 @@ subprogram, and package SPARK annotations, such as:
 * Restrictions on callee accesses to global state, e.g., through the
   Global aspect. The Global aspect must be specified for all
   procedures (whether SPARK or not; enforced by GNATcheck rule
-  Procedures_Without_Globals) and for all non-SPARK Ada functions (not
+  SPARK_Procedures_Without_Globals) and for all non-SPARK Ada functions (not
   automatically enforced). This is necessary for verifying the absence
   of unintended functionality because it ensures reviewers see the
   specific global variables being accessed by the unit-internal

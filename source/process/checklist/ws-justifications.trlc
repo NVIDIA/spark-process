@@ -332,7 +332,7 @@ section "GNATcheck rule exemptions" {
     scope = Checklist.Scope.Not_Platinum
     text = '''
       For each GNATcheck rule exemption that disables the
-      Procedures_Without_Globals rule in SPARK code, does the supplied
+      SPARK_Procedures_Without_Globals rule in SPARK code, does the supplied
       justification explain why the absence of Global contracts does
       not mask unintended behavior?
     '''
