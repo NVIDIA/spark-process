@@ -1,9 +1,5 @@
-Ada_2022_In_Ghost_Code,"Required to flag Ada 2022 code used outside of contracts, which would violate the GNAT safety manual (see step Manual_Check_Against_Safety_Manuals)"
 Forbidden_Attributes:Initialized,Needed to identify cases where manual review is required for GNATprove assumption [SPARK_INITIALIZED_ATTRIBUTE]
 Forbidden_Pragmas:Validity_Checks,Required because pragma Validity_Checks is not safety-certified
-Forbidden_Pragmas:Assertion_Policy,"Required to avoid inclusion of Ada 2022 code in contracts into the production build, which would violate the GNAT safety manual (see step Manual_Check_Against_Safety_Manuals)
-
-Note: With a GNATcheck diagnostic justification annotation, pragma Assertion_Policy can still be used with the Ignore parameter as long as additional tests are specified; see the Write_Tests step). However, pragma Assertion_Policy with the Check parameter is only valid if it is known that all applicable contracts entirely refrain from using Ada 2022 features."
 Forbidden_Pragmas:Ignore_Pragma,Required because pragma Ignore_Pragma can cause SPARK to be silently disabled.
 Metrics_Cyclomatic_Complexity:10 (to be enforced on non-proven code only),"Required for non-proven code (code that is not SPARK_Mode => On and code that is annotated with Skip_Proof or Skip_Flow_And_Proof) for compliance with ISO 26262-6:2018, Table 1 row 1a ""Enforcement of low complexity"" and 8.4.5d ""simplicity"".
 

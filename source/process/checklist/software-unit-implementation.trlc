@@ -432,10 +432,9 @@ Item item_4_9_1 {
     Review all the safety manuals identified in the
     :ref:`step-manual-check-against-safety-manuals` step. For each usage
     constraint in each of the safety manuals, if the usage constraint
-    is not checked by gnatkp and not checked by GNATcheck rule
-    Ada_2022_Outside_Of_Contracts, does the software unit and the
-    usage of the GNAT tools for this process comply with the usage
-    constraint?
+    is not checked by gnatkp and not checked by GNATcheck, does the
+    software unit and the usage of the GNAT tools for this process
+    comply with the usage constraint?
   '''
 }
 

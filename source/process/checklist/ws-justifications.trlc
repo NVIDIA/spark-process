@@ -294,18 +294,6 @@ section "GNATcheck rule exemptions" {
     '''
   }
 
-  Item justified_gnatcheck_ada2022 {
-    scope = Checklist.Scope.Not_Platinum
-    text = '''
-      For each GNATcheck rule exemption that disables the
-      Ada_2022_Outside_Of_Contracts rule, does the supplied
-      justification explain why the violation will not result in
-      unsafe compiler behavior?
-
-      Rationale: Ada 2022 compiler features are not qualified for safety.
-    '''
-  }
-
   Item justified_gnatcheck_validity_checks {
     scope = Checklist.Scope.Not_Platinum
     text = '''
@@ -315,20 +303,6 @@ section "GNATcheck rule exemptions" {
       unsafe compiler behavior?
 
       Rationale: pragma Validity_Checks is not qualified for safety.
-    '''
-  }
-
-  Item justified_gnatcheck_assertion_policy {
-    scope = Checklist.Scope.Not_Platinum
-    text = '''
-      For each GNATcheck rule exemption that disables the
-      Forbidden_Pragmas:Assertion_Policy rule, does the supplied
-      justification explain why the violation will not result in
-      unsafe compiler behavior?
-
-      Rationale: This pragma could be used to enable assertions in
-      production code, assertions can use Ada 2022 features, and Ada
-      2022 compiler features are not qualified for safety.
     '''
   }
 

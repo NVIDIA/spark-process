@@ -1,4 +1,3 @@
--gnata (except for non-production builds),"This switch causes contracts to be executed at runtime, and contracts and ghost code are permitted to use Ada 2022, but Ada 2022 is not safety qualified for production use."
 --RTS,The runtime should be set at project level.
 "-c
 -o <file>

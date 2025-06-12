@@ -1,3 +1,5 @@
+"-gnat2022","It is permitted to use Ada 2022 constructs with GNAT 24.2 or later, but there is no reason to require it."
+"-gnata","Compiling with assertions is permitted, but unnecessary if SPARK proof is completed."
 "-gnato
 -gnaton
 -gnatomn","The -gnato family of switches is permitted but not recommended.

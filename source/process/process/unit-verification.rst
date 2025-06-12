@@ -779,13 +779,6 @@ not checked by gnatkp are observed:
 * GNATcoverage
 * GNATcheck
 
-Note: The Ada Compiler safety manual prohibition against using Ada
-2022 code in safety products is addressed by following this process,
-except to the extent that violations of GNATcheck rules are justified
-via annotations. Specifically, this process requires that the
-``Ada_2022_Outside_Of_Contracts`` and
-``Forbidden_Pragmas:Assertion_Policy`` GNATcheck rules be enabled.
-
 Step ID: Manual_Check_Against_Safety_Manuals
 
 .. _step-inspect-implementation:
