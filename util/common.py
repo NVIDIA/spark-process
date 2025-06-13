@@ -20,6 +20,16 @@
 # along with the NVIDIA SPARK ISO 26262 Process Tools. If not, see
 # <https://www.gnu.org/licenses/>.
 
+
+PRIO_TO_NUMBER = {
+    "All"    : 0,
+    None     : 0,
+    "Low"    : 1,
+    "Medium" : 2,
+    "High"   : 3,
+}
+
+
 def fmt_step_link(step):
     assert isinstance(step, str)
 
@@ -28,3 +38,19 @@ def fmt_step_link(step):
     else:
         return ":ref:`%s <step-%s>`" % (step,
                                         step.lower().replace("_", "-"))
+
+
+def pp_scope(scope):
+    assert isinstance(scope, str)
+
+    scope_map = {
+        "All"          : "Up to and including SPARK Platinum",
+        "Not_Platinum" : "Up to and including SPARK Gold",
+        "Ada"          : "Interfaces and units containing Ada",
+        "Automated"    : "N/A - Fully automated",
+    }
+
+    if scope in scope_map:
+        return scope_map[scope]
+    else:
+        assert False, "unexpected scope: %s" % data["scope"]

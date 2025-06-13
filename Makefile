@@ -12,6 +12,8 @@ SPARK_SOURCE  ?= ~/open_source/spark2014
 html:
 	make -C source
 	@$(SPHINXBUILD) -M html "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	cp source/process/checklist/Checklist_Template_*.md \
+	   build/html/process/checklist
 
 pdf:
 	make -C source

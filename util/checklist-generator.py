@@ -29,30 +29,6 @@ from trlc.errors import Message_Handler
 
 import common
 
-def pp_scope(scope):
-    assert isinstance(scope, str)
-
-    scope_map = {
-        "All"          : "Up to and including SPARK Platinum",
-        "Not_Platinum" : "Up to and including SPARK Gold",
-        "Ada"          : "Interfaces and units containing Ada",
-        "Automated"    : "N/A - Fully automated",
-    }
-
-    if scope in scope_map:
-        return scope_map[scope]
-    else:
-        assert False, "unexpected scope: %s" % data["scope"]
-
-
-PRIO_TO_NUMBER = {
-    "All"    : 0,
-    None     : 0,
-    "Low"    : 1,
-    "Medium" : 2,
-    "High"   : 3,
-}
-
 
 def process_checklist_item(fd, obj, min_priority):
     assert min_priority in ("All", "Low", "Medium", "High")
@@ -66,7 +42,8 @@ def process_checklist_item(fd, obj, min_priority):
                  "name needs to start with item_",
                  fatal=False)
 
-    if PRIO_TO_NUMBER[data["priority"]] < PRIO_TO_NUMBER[min_priority]:
+    if (common.PRIO_TO_NUMBER[data["priority"]] <
+        common.PRIO_TO_NUMBER[min_priority]):
         return ok
 
     fd.write(".. rubric:: :cl_%s:`Checklist item %s`" %
@@ -98,7 +75,7 @@ def process_checklist_item(fd, obj, min_priority):
     fd.write("\n")
 
     fd.write("   * - Scope\n")
-    fd.write("     - %s\n\n" % pp_scope(data["scope"]))
+    fd.write("     - %s\n\n" % common.pp_scope(data["scope"]))
 
     fd.write(data["text"])
     fd.write("\n\n")
@@ -126,7 +103,7 @@ def process_worklist_item(fd, obj, context):
               context["item"][1],
               context["section"]))
 
-    fd.write("Applies to: %s\n\n" % pp_scope(data["scope"]))
+    fd.write("Applies to: %s\n\n" % common.pp_scope(data["scope"]))
 
     fd.write(data["text"])
     fd.write("\n\n")

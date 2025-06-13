@@ -21,6 +21,16 @@ software unit. The two verification checklists are:
 .. contents:: Checklists and worksheets
    :backlinks: none
 
+Each checklist item is prioritised from Low to High. Convenient
+templates (in Markdown format) can be downloaded to make reviews
+easier:
+
+  * `Checklist_Template_High.md <checklist/Checklist_Template_High.md>`_
+    (only high priority items)
+  * `Checklist_Template_Medium.md <checklist/Checklist_Template_Medium.md>`_
+    (only high and medium priority items)
+  * `Checklist_Template_Low.md <checklist/Checklist_Template_Low.md>`_
+    (all items, except automated items)
 
 The Verification Checklist for Software Unit Requirements is expected
 to be incorporated (e.g., by reference) into the corresponding
