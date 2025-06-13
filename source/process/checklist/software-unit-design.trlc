@@ -248,7 +248,7 @@ Item item_2_6_1 {
   step        = Steps.ID.Declare_Internal_Types_States_And_Subprograms
   scope       = Scope.Not_Platinum
 
-  text = '''
+  text = """
     For each software interface the software unit provides or
     uses, for each code fragment of the software interface
     specification that is not part of an ADS file but expresses
@@ -259,7 +259,56 @@ Item item_2_6_1 {
     software interfaces, this checklist item can be satisfied
     with automation. For other software units, manual
     verification is required.
-  '''
+
+    Below are several properties of an Ada declaration that
+    is consistent with a declaration in another programming
+    language:
+
+    * It must have the ``Import`` aspect or the ``Export``
+      aspect, depending on whether it is implemented outside
+      the software unit or inside the software unit.
+
+    * It must have the ``Convention`` aspect and the
+      aspect's value must be ``C``.
+
+    * It must have the ``External_Name`` aspect, and the
+      value of the ``External_Name`` aspect must be the
+      symbol name corresponding to the non-Ada declaration.
+
+    * Each type among the parameter and return types must
+      have the ``Convention`` aspect and the aspect's value
+      must be ``C``.
+
+    * The parameters must be in the same order as in the
+      non-Ada declaration and there must be the same number
+      of parameters.
+
+    * Each input parameter must have a type corresponding to
+      the type of the parameter in the same position in the
+      non-Ada declaration.
+
+    * Each ``in out`` or ``out`` parameter must have a type
+      corresponding to a pointer to the type of the
+      parameter in the same position in the non-Ada
+      declaration.
+
+    * The return type, if any, must correspond to the return
+      type in the non-Ada declaration.
+
+    * It must have a ``No_Return`` aspect if and only if the
+      non-Ada declaration has the ``noreturn`` attribute or
+      is declared ``[[noreturn]]``.
+
+    * The precondition, postcondition, any type invariants
+      or predicates, and termination contracts must not
+      impose any obligation on non-Ada code that is not
+      promised by the non-formal specification of the
+      non-Ada code.
+
+    For further guidance consult :lrm:`B-3` and
+    `Complete List of Assumptions <https://docs.adacore.com/R/docs/gnat-25.1/spark2014/html/spark2014_ug/en/source/how_to_use_gnatprove_in_a_team.html#complete-list-of-assumptions>`_
+    in the SPARK user guide.
+  """
 }
 
 Item item_2_6_2 {
