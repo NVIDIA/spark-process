@@ -78,10 +78,14 @@ section "Correctness" {
   Item only_allowed_dependencies  {
     scope = Checklist.Scope.Not_Platinum
     text = '''
-      Does the code limit its use of with to package specifications
+      Does the code limit its use of ``with`` to package specifications
       that are within the scope of the unit (external packages of
       interface specifications provided/used by the software unit and
       internal packages of the unit itself)?
+
+      (This question exists to catch Ada code in a software
+      unit that erroneously uses an interface that the
+      software unit is not permitted to use.)
     '''
   }
 
@@ -100,9 +104,16 @@ section "Correctness" {
   Item guilty_until_proven_innocent  {
     scope = Checklist.Scope.Not_Platinum
     text = '''
-      Has the reviewer approached the code from the perspective of
-      assuming the code has bugs until the reviewer confirms
-      otherwise?
+      Has the reviewer approached the code from the
+      perspective of assuming the code has bugs until the
+      reviewer confirms otherwise?
+
+      This question exists to remind engineers reviewing
+      code that they are not to make any assumptions about
+      the correctness of the code, e.g. based on the skill
+      of the authors of the code. Regardless of where code
+      comes from, code reviewers are to assume the code is
+      incorrect until shown otherwise.
     '''
   }
 
