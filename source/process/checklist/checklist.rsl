@@ -20,6 +20,12 @@ enum Scope {
   Automated
 }
 
+enum Priority {
+  High
+  Medium
+  Low
+}
+
 type Item {
   automatable optional Boolean
   manual      optional Boolean
@@ -28,6 +34,8 @@ type Item {
   step_to     optional Steps.ID
   step_also   optional Steps.ID
   text                 String
+  ext_review  optional Boolean
+  priority    optional Priority
 }
 
 checks Item {
@@ -37,4 +45,16 @@ checks Item {
 
   not (step_to != null and step_also != null),
     error "either use step_to, or step_also, but not both"
+
+  scope == Scope.Automated implies
+    (ext_review == null and priority == null),
+    error "automated items should not carry the priority / review flags"
+
+  scope != Scope.Automated implies
+    (ext_review != null and priority != null),
+    error "non-automated items should carry the priority / review flags"
+
+  priority != Priority.High implies
+    ext_review != true,
+    error "only High priority items may require an external review"
 }

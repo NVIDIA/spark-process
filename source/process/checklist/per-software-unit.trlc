@@ -17,6 +17,8 @@ Item item_1_1_1 {
   automatable = true
   step        = Steps.ID.Identify_External_Packages
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     For each software interface provided or used by the Ada
@@ -36,6 +38,8 @@ Item item_1_1_2 {
   step        = Steps.ID.Identify_External_Packages
   step_to     = Steps.ID.Verify_Requirement_Necessity
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     For each software interface identified in

@@ -17,6 +17,8 @@ Item item_3_1_1 {
   automatable = true
   step        = Steps.ID.Create_ADB
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     For each non-nested package implemented by the unit, does the
@@ -30,6 +32,8 @@ Item item_3_1_2 {
   automatable = true
   step        = Steps.ID.Create_ADB
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     For each non-nested package implemented by the unit which requires
@@ -97,6 +101,8 @@ Item item_3_4_1 {
   automatable = true
   step        = Steps.ID.Compile_Project
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Was the software unit compiled using the gprbuild command
@@ -108,6 +114,8 @@ Item item_3_4_2 {
   automatable = true
   step        = Steps.ID.Compile_Project
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Did the software unit compile without errors, warnings, or style
@@ -120,6 +128,8 @@ Item item_4_1_1 {
   automatable = true
   step        = Steps.ID.Develop_Unit_Verification_Plan
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Does the Software Unit Verification Plan indicate (whether
@@ -136,6 +146,8 @@ Item item_4_1_2 {
   manual      = true
   step        = Steps.ID.Develop_Unit_Verification_Plan
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = """
     Does the Software Unit Verification Plan specify the objectives of
@@ -165,6 +177,8 @@ Item item_4_1_3 {
   manual      = true
   step        = Steps.ID.Develop_Unit_Verification_Plan
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Does the Software Unit Verification Plan indicate that the
@@ -180,6 +194,8 @@ Item item_4_1_4 {
   manual      = true
   step        = Steps.ID.Develop_Unit_Verification_Plan
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Does the Software Unit Verification Plan identify the tools and
@@ -196,6 +212,8 @@ Item item_4_1_5 {
   manual      = true
   step        = Steps.ID.Develop_Unit_Verification_Plan
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Does the Software Unit Verification Plan identify the resources
@@ -211,6 +229,8 @@ Item item_4_1_6 {
   manual      = true
   step        = Steps.ID.Develop_Unit_Verification_Plan
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Does the Software Unit Verification Plan identify the actions to
@@ -224,6 +244,8 @@ Item item_4_2_1 {
   automatable = true
   step        = Steps.ID.Verify_Project
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Was GNATprove invoked with the gnatprove command line described in
@@ -235,6 +257,8 @@ Item item_4_2_2 {
   automatable = true
   step        = Steps.ID.Verify_Project
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Did GNATprove report zero warnings, zero errors, and zero
@@ -247,6 +271,8 @@ Item item_4_2_3 {
   automatable = true
   step        = Steps.ID.Verify_Project
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Do the switches on the gnatprove command line refrain from using
@@ -259,6 +285,8 @@ Item item_4_2_4 {
   automatable = true
   step        = Steps.ID.Verify_Project
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does the combination of switches in the Prove package in the unit
@@ -272,6 +300,8 @@ Item item_4_3_1 {
   automatable = true
   step        = Steps.ID.Automated_Check_Against_Coding_Std
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Was GNATcheck invoked with the gnatcheck command line described in
@@ -283,6 +313,8 @@ Item item_4_3_2 {
   automatable = true
   step        = Steps.ID.Automated_Check_Against_Coding_Std
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Do the switches on the gnatcheck command line refrain from using
@@ -295,6 +327,8 @@ Item item_4_3_3 {
   automatable = true
   step        = Steps.ID.Automated_Check_Against_Coding_Std
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does the combination of switches in the Check package in the unit
@@ -309,6 +343,8 @@ Item item_4_3_4 {
   automatable = true
   step        = Steps.ID.Automated_Check_Against_Coding_Std
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does the combination of switches in the Check package in the unit
@@ -322,6 +358,8 @@ Item item_4_3_5 {
   automatable = true
   step        = Steps.ID.Automated_Check_Against_Coding_Std
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Was GNATkp invoked with the gnatkp command line described in the
@@ -334,6 +372,8 @@ Item item_4_4_1 {
   automatable = true
   step        = Steps.ID.Fix_Coding_Std_Issues
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Did GNATcheck and GNATkp collectively report no warnings, no
@@ -345,6 +385,8 @@ Item item_4_5_1 {
   manual      = true
   step        = Steps.ID.Static_Analysis_Unit
   scope       = Scope.Ada
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Does the CodePeer command line enable medium/high messages for all
@@ -356,6 +398,8 @@ Item item_4_5_2 {
   automatable = true
   step        = Steps.ID.Static_Analysis_Unit
   scope       = Scope.Ada
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Did CodePeer output zero diagnostics?
@@ -366,6 +410,8 @@ Item item_4_6_1 {
   automatable = true
   step        = Steps.ID.Check_Stack_Usage_Unit
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Was GNATstack invoked using the gnatstack command line specified
@@ -377,6 +423,8 @@ Item item_4_6_2 {
   automatable = true
   step        = Steps.ID.Check_Stack_Usage_Unit
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = """
     For each subprogram whose stack frame size is greater than five
@@ -393,6 +441,8 @@ Item item_4_6_3 {
   automatable = true
   step        = Steps.ID.Check_Stack_Usage_Unit
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     For each subprogram whose stack frame size is variable, does the
@@ -405,6 +455,8 @@ Item item_4_7_1 {
   manual      = true
   step        = Steps.ID.Review_Diagnostic_Justifications
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Was the Diagnostic Justifications Verification Worksheet completed
@@ -416,6 +468,8 @@ Item item_4_8_1 {
   manual      = true
   step        = Steps.ID.Review_Deactivated_SPARK
   scope       = Scope.Ada
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Was the Non-Proven Ada Worksheet completed, and were zero issues
@@ -427,6 +481,8 @@ Item item_4_9_1 {
   manual      = true
   step        = Steps.ID.Manual_Check_Against_Safety_Manuals
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Review all the safety manuals identified in the
@@ -442,6 +498,8 @@ Item item_4_10_1 {
   manual      = true
   step        = Steps.ID.Inspect_Implementation
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Was the Code Inspection Worksheet completed, and were zero issues
@@ -453,6 +511,8 @@ Item item_4_11_1 {
   automatable = true
   step        = Steps.ID.Write_Tests
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Does each test case in an ADS or ADB file have its own unique ID
@@ -464,6 +524,8 @@ Item item_4_11_2 {
   manual      = true
   step        = Steps.ID.Write_Tests
   scope       = Scope.Not_Platinum
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Aside from test cases that merely instantiate generic test cases,
@@ -481,6 +543,8 @@ Item item_4_11_3 {
   manual      = true
   step        = Steps.ID.Write_Tests
   scope       = Scope.Not_Platinum
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Does each test case include documentation of the equivalence
@@ -492,6 +556,8 @@ Item item_4_11_4 {
   automatable = true
   step        = Steps.ID.Write_Tests
   scope       = Scope.Not_Platinum
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Are test cases for generic packages and subprograms themselves
@@ -505,6 +571,8 @@ Item item_4_11_5 {
   automatable = true
   step        = Steps.ID.Write_Tests
   scope       = Scope.Not_Platinum
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Do the test cases collectively instantiate all the generic test
@@ -516,6 +584,8 @@ Item item_4_11_6 {
   automatable = true
   step        = Steps.ID.Write_Tests
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Do the test cases collectively instantiate and invoke all the
@@ -529,6 +599,8 @@ Item item_4_11_7 {
   automatable = true
   step        = Steps.ID.Write_Tests
   scope       = Scope.Ada
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     For each generic instantiation in the software unit, if any part
@@ -546,6 +618,8 @@ Item item_4_12_1 {
   manual      = true
   step        = Steps.ID.Review_Tests
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does each non-formally-verified unit requirement, each
@@ -561,6 +635,8 @@ Item item_4_12_2 {
   manual      = true
   step        = Steps.ID.Review_Tests
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does each diagnostic justification and each uniquely-identified
@@ -585,6 +661,8 @@ Item item_4_13_1 {
   automatable = true
   step        = Steps.ID.Formally_Verify_Test_Cases
   scope       = Scope.Not_Platinum
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     If any test cases are documented as requiring proof, then was
@@ -597,6 +675,8 @@ Item item_4_13_2 {
   automatable = true
   step        = Steps.ID.Formally_Verify_Test_Cases
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Did GNATprove report zero warnings, zero errors, and zero
@@ -609,6 +689,8 @@ Item item_4_13_3 {
   automatable = true
   step        = Steps.ID.Formally_Verify_Test_Cases
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Do the switches on the gnatprove command line refrain from using
@@ -621,6 +703,8 @@ Item item_4_13_4 {
   automatable = true
   step        = Steps.ID.Formally_Verify_Test_Cases
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does the combination of switches in the Prove package in the test
@@ -634,6 +718,8 @@ Item item_4_14_1 {
   automatable = true
   step        = Steps.ID.Unit_Test_Run_And_Coverage
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = true
 
   text = '''
     Were all the unit tests run, and did all the unit tests pass?
@@ -644,6 +730,8 @@ Item item_4_14_2 {
   automatable = true
   step        = Steps.ID.Unit_Test_Run_And_Coverage
   scope       = Scope.Not_Platinum
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     If the cleanliness-adjusted ASIL of the unit is not QM, was a tool
@@ -662,6 +750,8 @@ Item item_4_15_1 {
   automatable = true
   step        = Steps.ID.Handle_Coverage_Deviations
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = true
 
   text = '''
     If the cleanliness-adjusted ASIL of the unit is not QM, is each
@@ -675,6 +765,8 @@ Item item_4_16_1 {
   automatable = true
   step        = Steps.ID.Verify_Dynamic_Assumptions
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Was the software unit rebuilt with the GPR and ADC file
@@ -686,6 +778,8 @@ Item item_4_16_2 {
   automatable = true
   step        = Steps.ID.Verify_Dynamic_Assumptions
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Were all the rebuilt unit tests run, and did all the rebuilt unit
@@ -697,6 +791,8 @@ Item item_4_17_1 {
   automatable = true
   step        = Steps.ID.Develop_Verification_Report
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Does the Software Unit Verification Report refer to the Software
@@ -709,6 +805,8 @@ Item item_4_17_2 {
   automatable = true
   step        = Steps.ID.Develop_Verification_Report
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Does the Software Unit Verification Report identify the specific
@@ -720,11 +818,15 @@ Item item_4_17_3 {
   automatable = true
   step        = Steps.ID.Develop_Verification_Report
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = true
 
   text = '''
     What is the PASS/FAIL outcome of unit verification?
 
-    Note: Only enter PASS if the answers to all earlier questions is
+    Note: Only enter PASS if the answers to all earlier
+    questions is "Yes", or if valid justifications are
+    provided for all earlier questions that are not answered
     "Yes".
  '''
 }

@@ -45,7 +45,18 @@ def pp_scope(scope):
         assert False, "unexpected scope: %s" % data["scope"]
 
 
-def process_checklist_item(fd, obj):
+PRIO_TO_NUMBER = {
+    "All"    : 0,
+    None     : 0,
+    "Low"    : 1,
+    "Medium" : 2,
+    "High"   : 3,
+}
+
+
+def process_checklist_item(fd, obj, min_priority):
+    assert min_priority in ("All", "Low", "Medium", "High")
+
     ok   = True
     data = obj.to_python_dict()
 
@@ -54,6 +65,9 @@ def process_checklist_item(fd, obj):
         mh.error(obj.loc,
                  "name needs to start with item_",
                  fatal=False)
+
+    if PRIO_TO_NUMBER[data["priority"]] < PRIO_TO_NUMBER[min_priority]:
+        return ok
 
     fd.write(".. rubric:: :cl_%s:`Checklist item %s`" %
              (data["scope"].lower(),
@@ -67,15 +81,23 @@ def process_checklist_item(fd, obj):
     fd.write("\n\n")
 
     fd.write(".. list-table::\n")
-    fd.write("   :widths: 1 1\n")
+    fd.write("   :widths: 1 3\n")
     fd.write("\n")
-    fd.write("   * - %s" % common.fmt_step_link(data["step"]))
+    if data["scope"] != "Automated":
+        fd.write("   * - Priority\n")
+        fd.write("     - %s\n" % data["priority"])
+        fd.write("   * - External Review\n")
+        fd.write("     - %s\n" % data["ext_review"])
+
+    fd.write("   * - Step\n")
+    fd.write("     - %s" % common.fmt_step_link(data["step"]))
     if data["step_to"]:
         fd.write(" .. %s" % common.fmt_step_link(data["step_to"]))
     elif data["step_also"]:
         fd.write(", %s" % common.fmt_step_link(data["step_also"]))
     fd.write("\n")
 
+    fd.write("   * - Scope\n")
     fd.write("     - %s\n\n" % pp_scope(data["scope"]))
 
     fd.write(data["text"])
@@ -116,7 +138,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("filename")
 
+    ap.add_argument("--min-priority", default="all",
+                    help=("emit only checklist items with at least this"
+                          "priority ([all]/low/medium/high)"))
+
     options = ap.parse_args()
+
+    if options.min_priority.lower() not in ("all", "low", "medium", "high"):
+        ap.error("minimum priority must be all, low, medium, or high")
 
     mh = Message_Handler()
     sm = Source_Manager(mh)
@@ -142,7 +171,8 @@ def main():
             if is_worksheet:
                 ok &= process_worklist_item(fd, obj, context)
             else:
-                ok &= process_checklist_item(fd, obj)
+                ok &= process_checklist_item(fd, obj,
+                                             options.min_priority.capitalize())
 
     sys.exit(0 if ok else 1)
 

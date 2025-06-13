@@ -17,6 +17,8 @@ Item item_2_1_1 {
   automatable = true
   step        = Steps.ID.Identify_Activity_Scope
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Does the software unit have a corresponding Software Unit
@@ -32,6 +34,8 @@ Item item_2_1_2 {
   automatable = true
   step        = Steps.ID.Identify_Activity_Scope
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = """
     Consult the software architectural design's list of software
@@ -48,6 +52,8 @@ Item item_2_1_3 {
   automatable = true
   step        = Steps.ID.Identify_Activity_Scope
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = """
     If the software unit has a corresponding Software Unit
@@ -64,6 +70,8 @@ Item item_2_1_4 {
   manual      = true
   step        = Steps.ID.Identify_Activity_Scope
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     If the software unit interacts with third-party safety-related
@@ -76,6 +84,8 @@ Item item_2_1_5 {
   manual      = true
   step        = Steps.ID.Identify_Activity_Scope
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     If the software unit interacts with hardware, are all
@@ -88,6 +98,8 @@ Item item_2_1_6 {
   manual      = true
   step        = Steps.ID.Identify_Activity_Scope
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     If the software unit is safety-related, are the safety
@@ -100,6 +112,8 @@ Item item_2_2_1 {
   automatable = true
   step        = Steps.ID.Create_Project_File
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Is the set of unit GPR files, and the GPR files they directly
@@ -112,6 +126,8 @@ Item item_2_2_2 {
   automatable = true
   step        = Steps.ID.Create_Project_File
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = """
     Does each unit GPR file (combined with any other GPR files
@@ -129,6 +145,8 @@ Item item_2_2_3 {
   automatable = true
   step        = Steps.ID.Create_Project_File
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does each unit GPR file (combined with any other GPR
@@ -148,6 +166,8 @@ Item item_2_2_4 {
   automatable = true
   step        = Steps.ID.Create_Project_File
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does each unit GPR file (combined with any other GPR files
@@ -161,6 +181,8 @@ Item item_2_2_5 {
   automatable = true
   step        = Steps.ID.Create_Project_File
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does each unit GPR file (combined with any other GPR files
@@ -174,6 +196,8 @@ Item item_2_2_6 {
   automatable = true
   step        = Steps.ID.Create_Project_File
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does each unit GPR file (combined with any other GPR files
@@ -187,6 +211,8 @@ Item item_2_3_1 {
   automatable = true
   step        = Steps.ID.Create_Configuration_Pragmas
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = """
     For each unit GPR file (combined with any other GPR files
@@ -204,6 +230,8 @@ Item item_2_4_1 {
   automatable = true
   step        = Steps.ID.Identify_Internal_Packages
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Does the Software Unit Verification Plan clearly identify
@@ -217,6 +245,8 @@ Item item_2_4_2 {
   automatable = true
   step        = Steps.ID.Identify_Internal_Packages
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     For each external interface package that is an ancestor of any
@@ -232,6 +262,8 @@ Item item_2_5_1 {
   automatable = true
   step        = Steps.ID.Create_Internal_ADS
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     For each internal package identified in the Software
@@ -247,6 +279,8 @@ Item item_2_6_1 {
   manual      = true
   step        = Steps.ID.Declare_Internal_Types_States_And_Subprograms
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = true
 
   text = """
     For each software interface the software unit provides or
@@ -337,6 +371,8 @@ Item item_2_7_2 {
   manual      = true
   step        = Steps.ID.Capture_Unit_Design_Constraints
   scope       = Scope.Not_Platinum
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Does each non-formally-verified unit design constraint
@@ -352,6 +388,8 @@ Item item_2_7_3 {
   manual      = true
   step        = Steps.ID.Capture_Unit_Design_Constraints
   scope       = Scope.Not_Platinum
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     For each formally-verified unit design constraint that
@@ -369,6 +407,8 @@ Item item_2_8_1 {
   manual      = true
   step        = Steps.ID.Document_Design_Solutions
   scope       = Scope.Not_Platinum
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Does each design documentation fragment in an ADS or ADB
@@ -381,6 +421,8 @@ Item item_2_8_2 {
   manual      = true
   step        = Steps.ID.Document_Design_Solutions
   scope       = Scope.Not_Platinum
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Is each design documentation fragment not in an ADS or
@@ -393,6 +435,8 @@ Item item_2_8_3 {
   manual      = true
   step        = Steps.ID.Document_Design_Solutions
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     If the cleanliness-adjusted ASIL of the software unit
@@ -409,6 +453,8 @@ Item item_2_8_4 {
   step        = Steps.ID.Capture_Unit_Design_Constraints
   step_also   = Steps.ID.Document_Design_Solutions
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does each software unit design fragment trace to each
@@ -421,6 +467,8 @@ Item item_2_8_5 {
   manual      = true
   step        = Steps.ID.Document_Design_Solutions
   scope       = Scope.Not_Platinum
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Does each software unit design documentation fragment
@@ -445,6 +493,8 @@ Item item_2_9_1 {
   manual      = true
   step        = Steps.ID.Inspect_Unit_Design
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Is the unit design (including internal types, states,
@@ -465,6 +515,8 @@ Item item_2_9_2 {
   manual      = true
   step        = Steps.ID.Inspect_Unit_Design
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     For each non-formally-verified unit specification fragment, is the
@@ -488,6 +540,8 @@ Item item_2_9_3 {
   manual      = true
   step        = Steps.ID.Inspect_Unit_Design
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Is each non-formally-verified unit design constraint and
@@ -506,6 +560,8 @@ Item item_2_9_4 {
   manual      = true
   step        = Steps.ID.Inspect_Unit_Design
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Is each unit design constraint and each unit design documentation
@@ -518,6 +574,8 @@ Item item_2_9_5 {
   manual      = true
   step        = Steps.ID.Inspect_Unit_Design
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does the entirety of the unit design fully observe the fragments
@@ -530,6 +588,8 @@ Item item_2_9_6 {
   manual      = true
   step        = Steps.ID.Inspect_Unit_Design
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Is the unit design in-context-comprehensible (see the Terminology
@@ -541,6 +601,8 @@ Item item_2_9_7 {
   manual      = true
   step        = Steps.ID.Inspect_Unit_Design
   scope       = Scope.Not_Platinum
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     If the cleanliness-adjusted ASIL of the unit is ASIL C or ASIL D,
@@ -555,6 +617,8 @@ Item item_2_9_8 {
   manual      = true
   step        = Steps.ID.Inspect_Unit_Design
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = """
     For each with clause in the unit's internal ADS files, is the
@@ -568,6 +632,8 @@ Item item_2_9_9 {
   manual      = true
   step        = Steps.ID.Inspect_Unit_Design
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     If the unit supports different states, do the unit requirements,
@@ -580,6 +646,8 @@ Item item_2_9_10 {
   manual      = true
   step        = Steps.ID.Inspect_Unit_Design
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Do the unit requirements, unit design constraints, and unit design
@@ -592,6 +660,8 @@ Item item_2_9_11 {
   manual      = true
   step        = Steps.ID.Inspect_Unit_Design
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Do the unit requirements, unit design constraints, and unit design
@@ -615,10 +685,15 @@ Item item_2_11_1 {
   manual      = true
   step        = Steps.ID.ALL
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = true
 
   text = '''
     What is the PASS/FAIL outcome of unit design verification?
 
-    Note: Only enter PASS if the answers to all earlier questions is "Yes".
+    Note: Only enter PASS if the answers to all earlier
+    questions is "Yes", or if valid justifications are
+    provided for all earlier questions that are not answered
+    "Yes".
   '''
 }

@@ -7,4 +7,4 @@ all: $(RST_TARGETS)
 	trlc --verify ../steps.rsl .
 
 %.rst: %.trlc
-	$(TOP)/util/checklist-generator.py $<
+	$(TOP)/util/checklist-generator.py --min-priority Medium $<

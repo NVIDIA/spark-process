@@ -17,6 +17,8 @@ Item item_1_1_3 {
   automatable = true
   step        = Steps.ID.Identify_External_Packages
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Is this instance of this checklist clearly associated
@@ -29,6 +31,8 @@ Item item_1_1_4 {
   automatable = true
   step        = Steps.ID.Identify_External_Packages
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     Does the software interface specification clearly indicate
@@ -41,6 +45,8 @@ Item item_1_1_5 {
   automatable = true
   step        = Steps.ID.Identify_External_Packages
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     For each non-nested package identified in response to checklist
@@ -66,6 +72,8 @@ Item item_1_1_6 {
   automatable = true
   step        = Steps.ID.Identify_External_Packages
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     For each child package that must be implemented by the provider
@@ -82,6 +90,8 @@ Item item_1_2_1 {
   automatable = true
   step        = Steps.ID.Create_External_ADS
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = '''
     For each non-nested package identified in response to checklist
@@ -94,6 +104,8 @@ Item item_1_2_2 {
   automatable = true
   step        = Steps.ID.Create_External_ADS
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     For each non-nested package identified in response to checklist
@@ -128,6 +140,8 @@ Item item_1_5_1 {
   manual      = true
   step        = Steps.ID.Declare_Types_States_And_Subprograms
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Is each type, constant, variable, and subprogram
@@ -165,6 +179,8 @@ Item item_1_6_2 {
   manual      = true
   step        = Steps.ID.Capture_Requirements
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Is each formal requirement preceded by a comment that explains
@@ -179,6 +195,8 @@ Item item_1_6_3 {
   automatable = true
   step        = Steps.ID.Capture_Requirements
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does each declaration in an external ADS file have the Ghost
@@ -190,6 +208,8 @@ Item item_1_6_4 {
   manual      = true
   step        = Steps.ID.Capture_Requirements
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Is each ASIL C and ASIL D non-formal requirement in the
@@ -202,6 +222,8 @@ Item item_1_6_5 {
   manual      = true
   step        = Steps.ID.Capture_Requirements
   scope       = Scope.Not_Platinum
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Is each non-formal requirement in the software interface
@@ -214,6 +236,8 @@ Item item_1_6_6 {
   manual      = true
   step        = Steps.ID.Capture_Requirements
   scope       = Scope.Not_Platinum
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     Is each non-formal requirement in the software interface
@@ -225,6 +249,8 @@ Item item_1_6_7 {
   manual      = true
   step        = Steps.ID.Capture_Requirements
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Is each non-formal safety requirement in the software
@@ -238,6 +264,8 @@ Item item_1_7_1 {
   automatable = true
   step        = Steps.ID.Assign_Requirement_Unique_IDs
   scope       = Scope.All
+  priority    = Priority.Low
+  ext_review  = false
 
   text = """
     Does each of the following requirements in the public
@@ -297,6 +325,8 @@ Item item_1_7_2 {
   manual      = true
   step        = Steps.ID.Assign_Requirement_Unique_IDs
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     For each requirement in the software interface
@@ -328,6 +358,8 @@ Item item_1_9_1 {
   manual      = true
   step        = Steps.ID.Verify_Non_Formal_Requirement_Consistency
   scope       = Scope.Not_Platinum
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does each of the non-formal requirements in the software
@@ -345,6 +377,8 @@ Item item_1_10_1 {
   manual      = true
   step        = Steps.ID.Verify_Requirement_Correctness_And_Completeness
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Is the entirety of the software interface specification
@@ -357,6 +391,8 @@ Item item_1_10_2 {
   manual      = true
   step        = Steps.ID.Verify_Requirement_Correctness_And_Completeness
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Does the entirety of the public parts of the ADS files
@@ -370,6 +406,8 @@ Item item_1_10_3 {
   manual      = true
   step        = Steps.ID.Verify_Requirement_Correctness_And_Completeness
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = false
 
   text = '''
     Are the requirements in the software interface correct and
@@ -390,6 +428,8 @@ Item item_1_11_1 {
   automatable = true
   step        = Steps.ID.Verify_Requirement_Necessity
   scope       = Scope.All
+  priority    = Priority.Medium
+  ext_review  = false
 
   text = '''
     For each requirement in the software interface
@@ -414,10 +454,15 @@ Item item_1_12_1 {
   manual      = true
   step        = Steps.ID.ALL
   scope       = Scope.All
+  priority    = Priority.High
+  ext_review  = true
 
   text = '''
     What is the PASS/FAIL outcome of software interface verification?
 
-    Note: Only enter PASS if the answers to all earlier questions is "Yes".
+    Note: Only enter PASS if the answers to all earlier
+    questions is "Yes", or if valid justifications are
+    provided for all earlier questions that are not answered
+    "Yes".
   '''
 }
