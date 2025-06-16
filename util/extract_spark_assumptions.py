@@ -48,6 +48,10 @@ def process(fd, lines):
         for line in assumption_body:
             text_body += "    " + line.rstrip() + "\n"
 
+        # Fix unicode curly open and close tick
+        text_body = text_body.replace(chr(0x2018), "'")
+        text_body = text_body.replace(chr(0x2019), "'")
+
         # TODO: Replace with links to the SPARK UG, if possible
         text_body = re.sub(r":ref:`(.*?)`",
                            r"\1",
