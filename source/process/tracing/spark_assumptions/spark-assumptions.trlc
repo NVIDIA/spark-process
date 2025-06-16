@@ -377,7 +377,7 @@ Gnatprove_Assumption ADA_SUBPROGRAMS {
     * parameter modes - in particular, parameters of
       mode *in* which are not considered to be variable should not be modified,
       including the values designated by their potential access-to-variable
-      subcomponents, and parameters of mode *out* which are not subjected to
+      subcomponents, and parameters of mode *out* which are not subject to
       relaxed initialization (see Aspect Relaxed_Initialization) should be
       entirely initialized.
 
@@ -408,7 +408,7 @@ Gnatprove_Assumption ADA_CALLS {
 
     * the initialization of inputs (implicit) - parameters of mode *in* or *in
       out* and global variables of mode *Input* or *In_Out* which are not
-      subjected to relaxed initialization (see Aspect
+      subject to relaxed initialization (see Aspect
       Relaxed_Initialization) should be entirely initialized
   '''
 }
