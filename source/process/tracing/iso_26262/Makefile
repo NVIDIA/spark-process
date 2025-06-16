@@ -8,4 +8,4 @@ all: $(INC_TARGETS)
 	cat *.sections | sort | uniq > all_sections.txt
 
 %.inc: %.trlc $(RSL_FILES)
-	$(TOP)/util/iso-tracing.py $^ --out $@
+	$(TOP)/util/iso_tracing.py $^ --out $@

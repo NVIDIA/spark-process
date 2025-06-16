@@ -11,7 +11,7 @@ all: $(RST_TARGETS) $(CHECKLIST)
 	trlc --verify ../steps.rsl .
 
 %.rst: %.trlc
-	$(TOP)/util/checklist-generator.py --min-priority ALL $<
+	$(TOP)/util/checklist_generator.py --min-priority ALL $<
 
 Checklist_Template_%.md: $(wildcard *.trlc) $(wildcard *.rsl)
-	$(TOP)/util/checklist-template-generator.py --min-priority $*
+	$(TOP)/util/checklist_template_generator.py --min-priority $*

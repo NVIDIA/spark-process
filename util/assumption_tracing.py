@@ -31,6 +31,7 @@ from trlc.errors import Message_Handler
 
 import common
 
+
 def oxford_comma_and(strings):
     assert isinstance(strings, typing.Iterable)
     str_list = list(strings)

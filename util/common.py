@@ -21,6 +21,9 @@
 # <https://www.gnu.org/licenses/>.
 
 
+GH_PAGES_BASE_URL = "https://nvidia.github.io/spark-process"
+LRM_BASE_URL = "http://www.ada-auth.org/standards/22rm/html"
+
 PRIO_TO_NUMBER = {
     "All"    : 0,
     None     : 0,

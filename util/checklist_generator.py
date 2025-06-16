@@ -42,8 +42,8 @@ def process_checklist_item(fd, obj, min_priority):
                  "name needs to start with item_",
                  fatal=False)
 
-    if (common.PRIO_TO_NUMBER[data["priority"]] <
-        common.PRIO_TO_NUMBER[min_priority]):
+    if common.PRIO_TO_NUMBER[data["priority"]] < \
+       common.PRIO_TO_NUMBER[min_priority]:
         return ok
 
     fd.write(".. rubric:: :cl_%s:`Checklist item %s`" %

@@ -30,6 +30,7 @@ from trlc.errors import Location, Message_Handler
 
 import common
 
+
 def process_checklist_item(mh, fd, refs, loc, name, data):
     assert isinstance(mh, Message_Handler)
     assert isinstance(refs, dict)
@@ -43,8 +44,9 @@ def process_checklist_item(mh, fd, refs, loc, name, data):
         step = m.group(1)
         if step.startswith("step-") and step[5:] in refs:
             step = step[5:]
-            return ("Step [%s](https://nvidia.github.io/spark-process/process/process/%s#%s)" %
-                    (step.replace("-", " ").capitalize(),
+            return ("Step [%s](%s/process/process/%s#%s)" %
+                    (common.GH_PAGES_BASE_URL,
+                     step.replace("-", " ").capitalize(),
                      refs[step],
                      step))
         else:
@@ -71,7 +73,9 @@ def process_checklist_item(mh, fd, refs, loc, name, data):
 
     text = data["text"]
     text = re.sub(r":ref:`(.*?)`", resolve_reference, text)
-    text = re.sub(r":lrm:`(.*?)`", r"[Ada 2022 LRM (\1)](http://www.ada-auth.org/standards/22rm/html/RM-\1.html)", text)
+    text = re.sub(r":lrm:`(.*?)`",
+                  r"[Ada 2022 LRM (\1)](%s/RM-\1.html)" % common.LRM_BASE_URL,
+                  text)
     text = re.sub(r"`(.*?) *<(.*?)>`_", r"[\1](\2)", text)
     text = re.sub(r"``(.*?)``", r"`\1`", text)
 
@@ -79,6 +83,7 @@ def process_checklist_item(mh, fd, refs, loc, name, data):
         fd.write("> %s\n" % line)
 
     return ok[0]
+
 
 def main():
     ap = argparse.ArgumentParser()
@@ -100,7 +105,9 @@ def main():
             if not file_name.endswith(".rst"):
                 continue
             base_file = os.path.basename(file_name).replace(".rst", ".html")
-            with open(os.path.join(path, file_name), "r", encoding="UTF-8") as fd:
+            with open(os.path.join(path, file_name),
+                      "r",
+                      encoding="UTF-8") as fd:
                 for raw_line in fd:
                     if m := re.match("^Step ID: (.+)$", raw_line.strip()):
                         step_id = m.group(1).lower().replace("_", "-")
@@ -110,7 +117,9 @@ def main():
     last_line = None
     in_section = None
     sections = []
-    with open(os.path.join("..", "checklist.rst"), "r", encoding="UTF-8") as fd:
+    with open(os.path.join("..", "checklist.rst"),
+              "r",
+              encoding="UTF-8") as fd:
         for raw_line in fd:
             line = raw_line.strip()
 
@@ -164,7 +173,6 @@ def main():
                 ok &= process_checklist_item(mh, fd,
                                              steps,
                                              obj.location, obj.name, data)
-
 
     sys.exit(0 if ok else 1)
 

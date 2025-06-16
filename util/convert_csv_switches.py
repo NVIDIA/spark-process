@@ -29,6 +29,7 @@ import re
 from trlc.errors import Message_Handler
 from trlc.trlc import Source_Manager
 
+
 def mk_context(filename):
     base = os.path.splitext(os.path.basename(filename))[0]
     context = {
@@ -148,7 +149,7 @@ def fmt_switches(context, mixed_switches, justification, steps):
             else:
                 rv[-1] += ","
             if note:
-                rv.append("     // %s"  %note)
+                rv.append("     // %s"  % note)
             rv.append("     Pattern.Prefix: \"%s\"" % switch)
         rv.append("   ]")
     else:
@@ -159,7 +160,9 @@ def fmt_switches(context, mixed_switches, justification, steps):
         rv.append("   rule = \"%s\"" % switch)
 
     rv.append("   rationale    = '''")
-    justification = re.sub(r"(-gn[a-z0-9_.]*[a-z0-9])", r"``\1``", justification)
+    justification = re.sub(r"(-gn[a-z0-9_.]*[a-z0-9])",
+                           r"``\1``",
+                           justification)
     tmp = []
     for word in justification.split():
         if word.lower() in steps:
@@ -172,9 +175,9 @@ def fmt_switches(context, mixed_switches, justification, steps):
     justification = " ".join(tmp)
 
     rv += textwrap.wrap(justification,
-                        initial_indent=" "*5,
-                        subsequent_indent=" "*5,
-                        break_on_hyphens=False)
+                        initial_indent    = " " * 5,
+                        subsequent_indent = " " * 5,
+                        break_on_hyphens  = False)
     rv.append("   '''")
 
     rv.append("}")

@@ -24,6 +24,7 @@ import os
 import re
 import difflib
 
+
 def process(filename, all_steps):
     with open(filename, "r", encoding="UTF-8") as fd:
         content = fd.read()

@@ -30,6 +30,7 @@ from trlc import ast
 
 import common
 
+
 def pp_iso_section(n_obj):
     assert isinstance(n_obj, ast.Record_Object)
     assert n_obj.n_typ.name == "Tracing"
@@ -177,6 +178,7 @@ def process(mh, fd, n_obj, emit_steps):
         fd.write("\n")
 
     return True
+
 
 def main():
     ap = argparse.ArgumentParser()

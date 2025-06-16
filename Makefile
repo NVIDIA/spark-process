@@ -24,7 +24,7 @@ linkcheck:
 	@$(SPHINXBUILD) -M linkcheck "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 extract_assumptions:
-	util/extract-spark-assumptions.py $(SPARK_SOURCE)
+	util/extract_spark_assumptions.py $(SPARK_SOURCE)
 
 fix_unicode:
 	find . -type f -name "*.md" -exec util/unicode_fix.py '{}' ';'

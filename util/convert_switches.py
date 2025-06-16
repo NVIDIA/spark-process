@@ -31,6 +31,7 @@ constraint_id = {
     "SPARK"         : 0,
 }
 
+
 def process(fd, row, tool, status, is_warning_related, is_rule):
     fields = {
         "tool"      : "Tool.%s" % tool,

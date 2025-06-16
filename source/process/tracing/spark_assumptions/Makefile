@@ -2,4 +2,4 @@ TOP := ../../../..
 
 all:
 	trlc --verify ../../steps.rsl .
-	$(TOP)/util/assumption-tracing.py --source-dir=../../
+	$(TOP)/util/assumption_tracing.py --source-dir=../../
