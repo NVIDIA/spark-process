@@ -56,4 +56,4 @@ def pp_scope(scope):
     if scope in scope_map:
         return scope_map[scope]
     else:
-        assert False, "unexpected scope: %s" % data["scope"]
+        assert False, "unexpected scope: %s" % scope

@@ -54,6 +54,7 @@ def process_checklist_item(mh, fd, refs, loc, name, data):
                      "unresolved reference %s in description" % step,
                      fatal=False)
             ok[0] = False
+            return step
 
     if not name.startswith("item_"):
         mh.error(loc,
@@ -95,12 +96,13 @@ def main():
 
     if options.min_priority.lower() not in ("all", "low", "medium", "high"):
         ap.error("minimum priority must be all, low, medium, or high")
+        return 1
     else:
         min_prio = common.PRIO_TO_NUMBER[options.min_priority.capitalize()]
 
     # Figure out process steps
     steps = {}
-    for path, dirs, files in os.walk(os.path.join("..", "process")):
+    for path, _, files in os.walk(os.path.join("..", "process")):
         for file_name in files:
             if not file_name.endswith(".rst"):
                 continue

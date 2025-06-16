@@ -74,7 +74,6 @@ def process(filename, all_steps):
 
     for start, end in reversed(fixlist):
         word = content[start:end].lower()
-        fixed_word = all_steps[word]
         content = (content[:start] +
                    ":ref:`step-%s`" % word.lower().replace("_", "-") +
                    content[end:])

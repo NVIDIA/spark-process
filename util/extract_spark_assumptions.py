@@ -21,11 +21,8 @@
 # <https://www.gnu.org/licenses/>.
 
 import os
-import sys
 import re
 import argparse
-
-from pprint import pprint
 
 MARKER_ALL = "when using SPARK on all or part of a program"
 MARKER_PART = "when using SPARK on only part of a program"
@@ -35,11 +32,10 @@ MARKER_COMPILER = "when compiling the program with another compiler"
 
 
 def process(fd, lines):
-    assumptions = []
     assumption_body = None
     assumption_name = None
     assumption_kind = None
-    skip_until = None
+    skip_until      = None
 
     fd.write("package Gnatprove_Assumptions\n\n")
 
@@ -89,6 +85,7 @@ def process(fd, lines):
             assumption_body = []
 
         elif not line.startswith("  ") and len(line.strip()):
+            # pylint: disable=unnecessary-list-index-lookup
             if assumption_name is not None:
                 emit_assumption()
                 assumption_name = None
@@ -142,10 +139,6 @@ def main():
 
     if not os.path.isfile(assumption_file):
         ap.error("cannot open %s" % assumption_file)
-
-    du_cfg = {
-        "report_level": 4,
-    }
 
     in_relevant_section = False
     relevant_lines = []

@@ -30,7 +30,7 @@ from trlc.errors import Message_Handler
 import common
 
 
-def process_checklist_item(fd, obj, min_priority):
+def process_checklist_item(mh, fd, obj, min_priority):
     assert min_priority in ("All", "Low", "Medium", "High")
 
     ok   = True
@@ -148,7 +148,7 @@ def main():
             if is_worksheet:
                 ok &= process_worklist_item(fd, obj, context)
             else:
-                ok &= process_checklist_item(fd, obj,
+                ok &= process_checklist_item(mh, fd, obj,
                                              options.min_priority.capitalize())
 
     sys.exit(0 if ok else 1)

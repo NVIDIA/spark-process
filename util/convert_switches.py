@@ -21,7 +21,6 @@
 # <https://www.gnu.org/licenses/>.
 
 import csv
-import os
 import glob
 import textwrap
 
@@ -87,42 +86,54 @@ def process(fd, row, tool, status, is_warning_related, is_rule):
     fd.write("}\n\n")
 
 
-out_file = {
-    "GNAT_Compiler" : open("switches/compiler.trlc", "w", encoding="UTF-8"),
-    "GNAT_Check"    : open("switches/gnatcheck.trlc", "w", encoding="UTF-8"),
-    "SPARK"         : open("switches/gnatprove.trlc", "w", encoding="UTF-8"),
-}
+def main():
+    # pylint: disable=consider-using-with
+    out_file = {
+        "GNAT_Compiler" : open("switches/compiler.trlc",
+                               "w",
+                               encoding="UTF-8"),
+        "GNAT_Check"    : open("switches/gnatcheck.trlc",
+                               "w",
+                               encoding="UTF-8"),
+        "SPARK"         : open("switches/gnatprove.trlc",
+                               "w",
+                               encoding="UTF-8"),
+    }
 
-for fd in out_file.values():
-    fd.write("package Switches\n\n")
+    for fd in out_file.values():
+        fd.write("package Switches\n\n")
 
-for file_name in sorted(glob.glob("*.csv")):
-    tool = None
-    warn = None
-    stat = None
-    rule = False
+    for file_name in sorted(glob.glob("*.csv")):
+        tool = None
+        warn = None
+        stat = None
+        rule = False
 
-    if file_name.startswith("compiler_warning_"):
-        tool = "GNAT_Compiler"
-        warn = True
-    elif file_name.startswith("compiler_"):
-        tool = "GNAT_Compiler"
-        warn = False
-    elif file_name.startswith("gnatprove_"):
-        tool = "SPARK"
-    else:
-        assert file_name.startswith("gnatcheck_")
-        tool = "GNAT_Check"
-        rule = "_rules" in file_name
+        if file_name.startswith("compiler_warning_"):
+            tool = "GNAT_Compiler"
+            warn = True
+        elif file_name.startswith("compiler_"):
+            tool = "GNAT_Compiler"
+            warn = False
+        elif file_name.startswith("gnatprove_"):
+            tool = "SPARK"
+        else:
+            assert file_name.startswith("gnatcheck_")
+            tool = "GNAT_Check"
+            rule = "_rules" in file_name
 
-    if "required" in file_name:
-        stat = "Required"
-    elif "optional" in file_name:
-        stat = "Allowed"
-    else:
-        assert "banned" in file_name
-        stat = "Banned"
+        if "required" in file_name:
+            stat = "Required"
+        elif "optional" in file_name:
+            stat = "Allowed"
+        else:
+            assert "banned" in file_name
+            stat = "Banned"
 
-    with open(file_name, "r", encoding="UTF-8") as fd:
-        for row in csv.reader(fd):
-            process(out_file[tool], row, tool, stat, warn, rule)
+        with open(file_name, "r", encoding="UTF-8") as fd:
+            for row in csv.reader(fd):
+                process(out_file[tool], row, tool, stat, warn, rule)
+
+
+if __name__ == "__main__":
+    main()

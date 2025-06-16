@@ -20,7 +20,6 @@
 # along with the NVIDIA SPARK ISO 26262 Process Tools. If not, see
 # <https://www.gnu.org/licenses/>.
 
-import difflib
 import textwrap
 import csv
 import os
@@ -188,7 +187,7 @@ def fmt_switches(context, mixed_switches, justification, steps):
 def process(filename, steps):
     context = mk_context(filename)
     row_id = 0
-    with open(filename, "r") as fd_in:
+    with open(filename, "r", encoding="UTF-8") as fd_in:
         for switches, justification in csv.reader(fd_in):
             row_id += 1
             rv = fmt_switches(context, switches, justification, steps)

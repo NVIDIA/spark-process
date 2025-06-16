@@ -103,7 +103,7 @@ def main():
     with open(options.input_file, "r", encoding="UTF-8") as fd:
         if options.csv:
             reader = csv.reader(fd)
-            content = [row for row in reader]
+            content = list(reader)
         else:
             content = fd.read()
 
