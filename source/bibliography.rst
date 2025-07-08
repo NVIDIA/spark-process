@@ -12,8 +12,7 @@
 
    \cleardoublepage
    \begingroup
-   \renewcommand\chapter[1]{\endgro
-   up}
+   \renewcommand\chapter[1]{\endgroup}
    \phantomsection
 
 .. _sec-bibliography:
