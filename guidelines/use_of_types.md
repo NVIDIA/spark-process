@@ -297,7 +297,7 @@ end Types;
 
 You can create more type packages that build on these generic types:
 
-```
+```ada
 package Types.Command_Line_Parameters
 is
 
