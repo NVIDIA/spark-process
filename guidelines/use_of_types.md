@@ -32,6 +32,11 @@ built-in Ada types, except in a few circumstances:
 * When writing a thin binding for interfacing with C - but make sure
   that the SPARK facing interface does not use these types.
 
+> [!TIP]
+> Relevant GNAT Check rules:
+> [Predefined_Numeric_Types](https://docs.adacore.com/live/wave/lkql/html/gnatcheck_rm/generated/predefined_rules.html#predefined-numeric-types)
+> (although this rule can be too strict at times).
+
 ## Don't re-create the built-in types
 
 Sometimes these rules are side-stepped by projects creating their own
@@ -361,6 +366,10 @@ avoid writing rep-clauses whenever possible.
 This is especially tricky when porting, or interfacing with, a C
 application. It is very tempting to "just do the same", but then you
 lose a lot of the benefits of Ada.
+
+> [!TIP]
+> Relevant GNAT Check rules:
+> [Integer_Types_As_Enum](https://docs.adacore.com/live/wave/lkql/html/gnatcheck_rm/generated/predefined_rules.html#integer-types-as-enum)
 
 ## Porting and binding
 
