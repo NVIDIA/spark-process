@@ -415,7 +415,7 @@ function To_C (Day : Weekday) return C_Weekday;
 
 procedure To_SPARK (C_Day   : in     C_Weekday;
                     Day     :    out Weekday;
-				    Success :    out Boolean);
+                    Success :    out Boolean);
 ```
 
 Note that when converting from C to Ada/SPARK we can't just assume the
