@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION &
+                        AFFILIATES. All rights reserved.
+-->
+
 # Bindings guidlines
 
 Creating good bindings is an _art_, and can be __the most tricky
