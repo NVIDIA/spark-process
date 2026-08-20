@@ -426,8 +426,8 @@ For example we might have in SPARK:
 ```ada
 procedure Add_One (N : in out Integer)
 with Global => null,
-     Pre => N < 1000,
-     Post => N > N'Old;
+     Pre    => N < 1000,
+     Post   => N > N'Old;
 ```
 
 And this is our C function that we bind to:
