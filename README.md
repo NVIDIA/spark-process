@@ -16,6 +16,15 @@ be applied over time to reflect evolution of the technology, state of
 the art, or feedback, and may not receive systematic review from all
 the initial authors.
 
+## Guidelines
+
+The SPARK process is intended as a binding document to follow. However
+there are several non-binding guidlines that are "best practice" that
+we publish here as well:
+
+* [Use of Types](guidelines/use_of_types.md)
+* [Writing good bindings](guidelines/bindings.md)
+
 ## Roadmap
 
 Several sections and checklists of the process have been identified to
