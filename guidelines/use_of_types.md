@@ -28,7 +28,7 @@ built-in Ada types, except in a few circumstances:
 * When creating maths functions (e.g. a square root function)
 * `Unsigned_8` (or a user-defined type like `Byte`) can be used to
   describe opaque buffer contents where we don't actually care what is
-  inside (e.g. crypto or compression) *
+  inside (e.g. crypto or compression)
 * When writing a thin binding for interfacing with C - but make sure
   that the SPARK facing interface does not use these types.
 
@@ -468,11 +468,12 @@ this doesn't matter. You can (and should) deal with this in the
 binding. Do not create modular types unless you actually need bit-wise
 operations.
 
-Note: there is a [GNAT
-extension](https://docs.adacore.com/live/wave/gnat_rm/html/gnat_rm/gnat_rm/gnat_language_extensions.html#unsigned-base-range-aspect)
-that will allow you to make "unsigned" base types. If you require
-exactly 32-bits for a unsigned 32 value, then this is what you should
-use.
+> [!TIP]
+> There is a
+> [GNAT extension](https://docs.adacore.com/live/wave/gnat_rm/html/gnat_rm/gnat_rm/gnat_language_extensions.html#unsigned-base-range-aspect)
+> that will allow you to make "unsigned" base types. If you require
+> exactly 32-bits for a unsigned 32 value, then this is what you should
+> use.
 
 ## Avoid access types (i.e. pointers)
 
@@ -522,8 +523,9 @@ clauses; and we double check them to the actual values for the actual
 struct in the C. If somebody changes either the Ada/SPARK or the C,
 then this file has a chance to catch the problem.
 
-(Right now this is manual work, but we are working on a little tool
-that will generate this kind of C file automatically.)
+> [!NOTE]
+> Right now this is manual work, but we are working on a little tool
+> that will generate this kind of C file automatically.
 
 # Technical considerations
 
