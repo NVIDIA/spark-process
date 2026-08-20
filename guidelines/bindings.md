@@ -120,8 +120,8 @@ package foo_c is
    with Import => True,
         Convention => C,
         External_Name => "do_something",
-		Global => null,
-		Always_Terminates;
+        Global => null,
+        Always_Terminates;
 
 end foo_c;
 ```
@@ -282,7 +282,7 @@ If you C function looks like this:
 ```c
 typedef enum {OK, FAIL, FILE_NOT_FOUND} status_t;
 
-status_t do_something;
+status_t do_something();
 ```
 
 Then your Ada thin binding interface might look like this:
@@ -293,7 +293,7 @@ type C_Status_T is (Ok, Fail, File_Not_Found);
 function C_Do_Something return C_Status_T
 with Import,
      Convention_C,
-	 External_Name => "do_something";
+     External_Name => "do_something";
 ```
 
 But your thick binding needs to take care of the invalid values. You
@@ -318,7 +318,7 @@ Or you could model the error explicitly:
 
 ```ada
 procedure Do_Something (Status                : out C_Status_T;
-	                    Data_Validation_Error : out Boolean);
+                        Data_Validation_Error : out Boolean);
 with Global => (In_Out => Something);
 ```
 
